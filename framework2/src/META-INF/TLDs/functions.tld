@@ -1,0 +1,429 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
+	version="2.0">
+
+	<tlib-version>1.1</tlib-version>
+
+	<short-name>functions</short-name>
+
+	<uri>framework.functions</uri>
+
+	<function>
+		<name>tokenFn</name>
+		<function-class>framework.util.StringUtil</function-class>
+		<function-signature>
+			java.lang.String[] tokenFn(java.lang.String, java.lang.String)
+		</function-signature>
+	</function>
+
+	<function>
+		<name>limitString</name>
+		<function-class>framework.util.StringUtil</function-class>
+		<function-signature>
+			java.lang.String limitString(java.lang.String, int)
+		</function-signature>
+	</function>
+
+	<function>
+		<name>nalDesign</name>
+		<function-class>framework.util.StringUtil</function-class>
+		<function-signature>
+			java.lang.String nalDesign(java.lang.String, int)
+		</function-signature>
+	</function>
+
+	<function>
+		<name>replaceStr</name>
+		<function-class>framework.util.StringUtil</function-class>
+		<function-signature>
+			java.lang.String replaceStr(java.lang.String, java.lang.String, java.lang.String)
+		</function-signature>
+	</function>
+
+	<function>
+		<name>stringByteToHumanReadable</name>
+		<function-class>framework.util.StringUtil</function-class>
+		<function-signature>
+			java.lang.String byteToHumanReadable(java.lang.String)
+		</function-signature>
+	</function>
+
+	<function>
+		<name>longByteToHumanReadable</name>
+		<function-class>framework.util.StringUtil</function-class>
+		<function-signature>
+			java.lang.String byteToHumanReadable(long)
+		</function-signature>
+	</function>
+
+	<function>
+		<name>convertKorean</name>
+		<function-class>framework.util.StringUtil</function-class>
+		<function-signature>
+			java.lang.String convertKorean(java.lang.String)
+		</function-signature>
+	</function>
+
+	<function>
+		<name>convertUTF8</name>
+		<function-class>framework.util.StringUtil</function-class>
+		<function-signature>
+			java.lang.String convertUTF8(java.lang.String)
+		</function-signature>
+	</function>
+
+	<function>
+		<name>numberFormat</name>
+		<function-class>framework.util.StringUtil</function-class>
+		<function-signature>
+			java.lang.String numberFormat(java.lang.String)
+		</function-signature>
+	</function>
+
+	<function>
+		<name>nullToBlankString</name>
+		<function-class>framework.util.StringUtil</function-class>
+		<function-signature>
+			java.lang.String nullToBlankString(java.lang.String)
+		</function-signature>
+	</function>
+
+	<function>
+		<name>null2Str</name>
+		<function-class>framework.util.StringUtil</function-class>
+		<function-signature>
+			java.lang.String null2Str(java.lang.String, java.lang.String)
+		</function-signature>
+	</function>
+
+	<function>
+		<name>makeToday</name>
+		<function-class>framework.util.StringUtil</function-class>
+		<function-signature>
+			java.lang.String makeToday(int)
+		</function-signature>
+	</function>
+
+	<function>
+		<name>moveDate</name>
+		<function-class>framework.util.StringUtil</function-class>
+		<function-signature>
+			java.lang.String moveDate(java.lang.String, int, int)
+		</function-signature>
+	</function>
+
+	<function>
+		<name>isNew</name>
+		<function-class>framework.util.StringUtil</function-class>
+		<function-signature>
+			boolean isNew(java.lang.String, int)
+		</function-signature>
+	</function>
+
+	<function>
+		<name>stripTag</name>
+		<function-class>framework.util.StringUtil</function-class>
+		<function-signature>
+			java.lang.String stripTag(java.lang.String)
+		</function-signature>
+	</function>
+
+	<function>
+		<name>stripScriptTag</name>
+		<function-class>framework.util.StringUtil</function-class>
+		<function-signature>
+			java.lang.String stripScriptTag(java.lang.String)
+		</function-signature>
+	</function>
+	
+	<function>
+		<name>setRecordSetGauce</name>
+		<function-class>framework.util.GauceUtil</function-class>
+		<function-signature>
+			int setRecordSet(javax.servlet.http.HttpServletResponse, com.gauce.GauceDataSet, framework.db.RecordSet)
+		</function-signature>
+	</function>
+
+	<function>
+		<name>setResultSetGauce</name>
+		<function-class>framework.util.GauceUtil</function-class>
+		<function-signature>
+			int setResultSet(javax.servlet.http.HttpServletResponse, com.gauce.GauceDataSet, java.sql.ResultSet)
+		</function-signature>
+	</function>
+
+	<function>
+		<name>getGIS</name>
+		<function-class>framework.util.GauceUtil</function-class>
+		<function-signature>
+			com.gauce.io.GauceInputStream getGIS(javax.servlet.http.HttpServletRequest)
+		</function-signature>
+	</function>
+
+	<function>
+		<name>getGOS</name>
+		<function-class>framework.util.GauceUtil</function-class>
+		<function-signature>
+			com.gauce.io.GauceOutputStream getGOS(javax.servlet.http.HttpServletResponse)
+		</function-signature>
+	</function>
+
+	<function>
+		<name>setGauceSessionException</name>
+		<function-class>framework.util.GauceUtil</function-class>
+		<function-signature>
+			void setSessionException(javax.servlet.http.HttpServletResponse)
+		</function-signature>
+	</function>
+
+	<function>
+		<name>setGauceException</name>
+		<function-class>framework.util.GauceUtil</function-class>
+		<function-signature>
+			void setException(com.gauce.GauceException, javax.servlet.http.HttpServletResponse)
+		</function-signature>
+	</function>
+
+	<function>
+		<name>getGauceBox</name>
+		<function-class>framework.util.GauceUtil</function-class>
+		<function-signature>
+			framework.action.Box getBox(com.gauce.GauceDataSet)
+		</function-signature>
+	</function>
+
+	<function>
+		<name>setRecordSetJson</name>
+		<function-class>framework.util.JsonUtil</function-class>
+		<function-signature>
+			int setRecordSet(java.io.PrintWriter, framework.db.RecordSet)
+		</function-signature>
+	</function>
+
+	<function>
+		<name>formatRecordSet2Json</name>
+		<function-class>framework.util.JsonUtil</function-class>
+		<function-signature>
+			java.lang.String format(framework.db.RecordSet)
+		</function-signature>
+	</function>
+
+	<function>
+		<name>setResultSetJson</name>
+		<function-class>framework.util.JsonUtil</function-class>
+		<function-signature>
+			int setResultSet(java.io.PrintWriter, java.sql.ResultSet)
+		</function-signature>
+	</function>
+
+	<function>
+		<name>formatResultSet2Json</name>
+		<function-class>framework.util.JsonUtil</function-class>
+		<function-signature>
+			java.lang.String format(java.sql.ResultSet)
+		</function-signature>
+	</function>
+
+	<function>
+		<name>formatMap2Json</name>
+		<function-class>framework.util.JsonUtil</function-class>
+		<function-signature>
+			java.lang.String format(java.util.Map)
+		</function-signature>
+	</function>
+
+	<function>
+		<name>formatList2Json</name>
+		<function-class>framework.util.JsonUtil</function-class>
+		<function-signature>
+			java.lang.String format(java.util.List)
+		</function-signature>
+	</function>
+
+	<function>
+		<name>escapeJS</name>
+		<function-class>framework.util.JsonUtil</function-class>
+		<function-signature>
+			java.lang.String escapeJS(java.lang.String)
+		</function-signature>
+	</function>
+
+	<function>
+		<name>setRecordSetXml</name>
+		<function-class>framework.util.XmlUtil</function-class>
+		<function-signature>
+			int setRecordSet(java.io.PrintWriter, framework.db.RecordSet, java.lang.String)
+		</function-signature>
+	</function>
+
+	<function>
+		<name>formatRecordSet2Xml</name>
+		<function-class>framework.util.XmlUtil</function-class>
+		<function-signature>
+			java.lang.String format(framework.db.RecordSet, java.lang.String)
+		</function-signature>
+	</function>
+
+	<function>
+		<name>setResultSetXml</name>
+		<function-class>framework.util.XmlUtil</function-class>
+		<function-signature>
+			int setResultSet(java.io.PrintWriter, java.sql.ResultSet, java.lang.String)
+		</function-signature>
+	</function>
+
+	<function>
+		<name>formatResultSet2Xml</name>
+		<function-class>framework.util.XmlUtil</function-class>
+		<function-signature>
+			java.lang.String format(java.sql.ResultSet, java.lang.String)
+		</function-signature>
+	</function>
+
+	<function>
+		<name>formatMap2Xml</name>
+		<function-class>framework.util.XmlUtil</function-class>
+		<function-signature>
+			java.lang.String format(java.util.Map, java.lang.String)
+		</function-signature>
+	</function>
+
+	<function>
+		<name>formatList2Xml</name>
+		<function-class>framework.util.XmlUtil</function-class>
+		<function-signature>
+			java.lang.String format(java.util.List, java.lang.String)
+		</function-signature>
+	</function>
+
+	<function>
+		<name>setRecordSetRD</name>
+		<function-class>framework.util.RDUtil</function-class>
+		<function-signature>
+			int setRecordSet(java.io.PrintWriter, framework.db.RecordSet)
+		</function-signature>
+	</function>
+
+	<function>
+		<name>formatRecordSet2RD</name>
+		<function-class>framework.util.RDUtil</function-class>
+		<function-signature>
+			java.lang.String format(framework.db.RecordSet)
+		</function-signature>
+	</function>
+
+	<function>
+		<name>setResultSetRD</name>
+		<function-class>framework.util.RDUtil</function-class>
+		<function-signature>
+			int setResultSet(java.io.PrintWriter, java.sql.ResultSet)
+		</function-signature>
+	</function>
+
+	<function>
+		<name>formatResultSet2RD</name>
+		<function-class>framework.util.RDUtil</function-class>
+		<function-signature>
+			java.lang.String format(java.sql.ResultSet)
+		</function-signature>
+	</function>
+
+	<function>
+		<name>formatMap2RD</name>
+		<function-class>framework.util.RDUtil</function-class>
+		<function-signature>
+			java.lang.String format(java.util.Map)
+		</function-signature>
+	</function>
+
+	<function>
+		<name>formatList2RD</name>
+		<function-class>framework.util.RDUtil</function-class>
+		<function-signature>
+			java.lang.String format(java.util.List)
+		</function-signature>
+	</function>
+
+	<function>
+		<name>setRecordSetExcel</name>
+		<function-class>framework.util.ExcelUtil</function-class>
+		<function-signature>
+			int setRecordSet(java.io.PrintWriter, framework.db.RecordSet, framework.util.ExcelUtil.FileType)
+		</function-signature>
+	</function>
+
+	<function>
+		<name>formatSepRecordSet2Excel</name>
+		<function-class>framework.util.ExcelUtil</function-class>
+		<function-signature>
+			java.lang.String formatSep(framework.db.RecordSet, java.lang.String)
+		</function-signature>
+	</function>
+
+	<function>
+		<name>formatXmlRecordSet2Excel</name>
+		<function-class>framework.util.ExcelUtil</function-class>
+		<function-signature>
+			java.lang.String formatXml(framework.db.RecordSet, boolean)
+		</function-signature>
+	</function>
+
+	<function>
+		<name>setResultSetExcel</name>
+		<function-class>framework.util.ExcelUtil</function-class>
+		<function-signature>
+			int setResultSet(java.io.PrintWriter, java.sql.ResultSet, framework.util.ExcelUtil.FileType)
+		</function-signature>
+	</function>
+
+	<function>
+		<name>formatSepResultSet2Excel</name>
+		<function-class>framework.util.ExcelUtil</function-class>
+		<function-signature>
+			java.lang.String formatSep(java.sql.ResultSet, java.lang.String)
+		</function-signature>
+	</function>
+
+	<function>
+		<name>formatXmlResultSet2Excel</name>
+		<function-class>framework.util.ExcelUtil</function-class>
+		<function-signature>
+			java.lang.String formatXml(java.sql.ResultSet, boolean)
+		</function-signature>
+	</function>
+
+	<function>
+		<name>formatSepMap2Excel</name>
+		<function-class>framework.util.ExcelUtil</function-class>
+		<function-signature>
+			java.lang.String formatSep(java.util.Map)
+		</function-signature>
+	</function>
+
+	<function>
+		<name>formatSepList2Excel</name>
+		<function-class>framework.util.ExcelUtil</function-class>
+		<function-signature>
+			java.lang.String formatSep(java.util.List)
+		</function-signature>
+	</function>
+
+	<function>
+		<name>formatXmlMap2Excel</name>
+		<function-class>framework.util.ExcelUtil</function-class>
+		<function-signature>
+			java.lang.String formatXml(java.util.Map, boolean)
+		</function-signature>
+	</function>
+
+	<function>
+		<name>formatXmlList2Excel</name>
+		<function-class>framework.util.ExcelUtil</function-class>
+		<function-signature>
+			java.lang.String formatXml(java.util.List, boolean)
+		</function-signature>
+	</function>
+
+</taglib>
