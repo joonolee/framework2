@@ -125,7 +125,7 @@ public class ExcelUtil {
 	 * RecordSet을 엑셀2003 형식으로 변환하여 파일로 저장한다.
 	 * @param file
 	 * @param rs
-	 * @return
+	 * @return 처리건수
 	 * @throws ColumnNotFoundException
 	 * @throws IOException
 	 */
@@ -185,7 +185,7 @@ public class ExcelUtil {
 	 * RecordSet을 엑셀2007 형식으로 변환하여 파일로 저장한다.
 	 * @param file
 	 * @param rs
-	 * @return
+	 * @return 처리건수
 	 * @throws ColumnNotFoundException
 	 * @throws IOException
 	 */
@@ -226,7 +226,7 @@ public class ExcelUtil {
 	 * RecordSet을 CSV 형식으로 변환하여 파일로 저장한다.
 	 * @param file
 	 * @param rs
-	 * @return
+	 * @return 처리건수
 	 * @throws IOException
 	 * @throws ColumnNotFoundException
 	 */
@@ -251,7 +251,7 @@ public class ExcelUtil {
 	 * RecordSet을 TSV 형식으로 변환하여 파일로 저장한다.
 	 * @param file
 	 * @param rs
-	 * @return
+	 * @return 처리건수
 	 * @throws IOException
 	 * @throws ColumnNotFoundException
 	 */
@@ -298,7 +298,7 @@ public class ExcelUtil {
 	 * @param file
 	 * @param rs
 	 * @param sep
-	 * @return
+	 * @return 처리건수
 	 * @throws IOException
 	 * @throws ColumnNotFoundException
 	 */
@@ -399,7 +399,7 @@ public class ExcelUtil {
 	 * ResultSet을 엑셀2003 형식으로 변환하여 파일로 저장한다.
 	 * @param file
 	 * @param rs
-	 * @return
+	 * @return 처리건수
 	 * @throws SQLException
 	 * @throws IOException
 	 */
@@ -486,7 +486,7 @@ public class ExcelUtil {
 	 * ResultSet을 엑셀2007 형식으로 변환하여 파일로 저장한다.
 	 * @param file
 	 * @param rs
-	 * @return
+	 * @return 처리건수
 	 * @throws SQLException
 	 * @throws IOException
 	 */
@@ -541,7 +541,7 @@ public class ExcelUtil {
 	 * ResultSet을 CSV 형식으로 변환하여 파일로 저장한다.
 	 * @param file
 	 * @param rs
-	 * @return
+	 * @return 처리건수
 	 * @throws IOException
 	 * @throws SQLException
 	 */
@@ -566,7 +566,7 @@ public class ExcelUtil {
 	 * ResultSet을 TSV 형식으로 변환하여 파일로 저장한다.
 	 * @param file
 	 * @param rs
-	 * @return
+	 * @return 처리건수
 	 * @throws IOException
 	 * @throws SQLException
 	 */
@@ -626,7 +626,7 @@ public class ExcelUtil {
 	 * @param file
 	 * @param rs
 	 * @param sep
-	 * @return
+	 * @return 처리건수
 	 * @throws IOException
 	 * @throws SQLException
 	 */
