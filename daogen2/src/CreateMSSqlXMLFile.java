@@ -1,6 +1,6 @@
 /*
  * @(#)CreateXMLFile.java
- * DAO, VO »ý¼º¿¡ ÇÊ¿äÇÑ ¸ÞÅ¸Á¤º¸ xml ÆÄÀÏÀ» ÃßÃâ
+ * DAO, VO ï¿½ï¿½ ï¿½Ê¿ï¿½ï¿½ï¿½ ï¿½ï¿½Å¸ï¿½ï¿½ï¿½ï¿½ xml ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
  */
 import java.io.BufferedWriter;
 import java.io.File;
@@ -18,16 +18,10 @@ import java.util.List;
 
 public class CreateMSSqlXMLFile {
 	private static final String _jdbcDriver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
-	private static final String _jdbcUrl = "jdbc:sqlserver://JHLEE-PC2\\SQL2005:49342;databaseName=SKI";
-	private static final String _jdbcUid = "sa";
-	private static final String _jdbcPw = "chlgPwjd";
+	private static final String _jdbcUrl = "jdbc:sqlserver://instancename:port;databaseName=";
+	private static final String _jdbcUid = "";
+	private static final String _jdbcPw = "";
 	private static List<String> _tableNameList = Arrays.asList(
-			"DUTY_CODE",
-			"MEETING_CODE",
-			"MEMBER",
-			"ORGAN_CODE",
-			"POST_CODE",
-			"GYOGU_CODE"
 	);
 	private static String _filePath = "xml";
 
@@ -130,7 +124,7 @@ public class CreateMSSqlXMLFile {
 			if (meta.getColumnName(c).equals("ENTERID") || meta.getColumnName(c).equals("ENTERNAME") || meta.getColumnName(c).equals("ENTERPGM")) {
 				str.append(" update=\"none\"");
 			}
-			// ÀÔ·ÂÀÏ, ¼öÁ¤ÀÏ¿¡ ´ëÇÑ º°µµ Ã³¸®
+			// ï¿½Ô·ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½
 			if (meta.getColumnName(c).equals("ENTERDATE")) {
 				str.append(" insert=\"GETDATE()\" update=\"none\"");
 			}

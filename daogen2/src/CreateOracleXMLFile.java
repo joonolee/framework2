@@ -1,6 +1,6 @@
 /*
  * @(#)CreateXMLFile.java
- * DAO, VO »ý¼º¿¡ ÇÊ¿äÇÑ ¸ÞÅ¸Á¤º¸ xml ÆÄÀÏÀ» ÃßÃâ
+ * DAO, VO ï¿½ï¿½ ï¿½Ê¿ï¿½ï¿½ï¿½ ï¿½ï¿½Å¸ï¿½ï¿½ï¿½ï¿½ xml ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
  */
 import java.io.BufferedWriter;
 import java.io.File;
@@ -18,50 +18,10 @@ import java.util.List;
 
 public class CreateOracleXMLFile {
 	private static final String _jdbcDriver = "oracle.jdbc.driver.OracleDriver";
-	private static final String _jdbcUrl = "jdbc:oracle:thin:@192.1.1.68:1521:TESTDB";
-	private static final String _jdbcUid = "socusr";
-	private static final String _jdbcPw = "socusr#testdb";
+	private static final String _jdbcUrl = "jdbc:oracle:thin:@ip:port:sid";
+	private static final String _jdbcUid = "";
+	private static final String _jdbcPw = "";
 	private static List<String> _tableNameList = Arrays.asList(
-			"TBL_SUBMIT_QUEUE",
-			"T_AUDITLOG",
-			"T_AUDITLOG_XML",
-			"T_AUDITTYPECODE",
-			"T_BATCHLOG",
-			"T_EMAILLOG",
-			"T_EMAILSEND",
-			"T_EMAILSENDDETAIL",
-			"T_JOBCODE",
-			"T_JOBLOG",
-			"T_KRC_DEPT",
-			"T_LOGIN_HIS",
-			"T_MENUCODE",
-			"T_MENUGROUP",
-			"T_MENUGROUPALLOC",
-			"T_MENUGROUPAUTH",
-			"T_MENUUSERAUTH",
-			"T_ORGCLSCODE",
-			"T_ORGCODE",
-			"T_PGLOG",
-			"T_PGLOG_XML",
-			"T_POSTCODE",
-			"T_POSTCODE_DORO",
-			"T_POSTCODE_SIDO",
-			"T_SMBIZADMIN",
-			"T_SMSSEND",
-			"T_SMSSENDDETAIL",
-			"T_SOC_AGREEMENT",
-			"T_SOC_AGREEMENTCODE",
-			"T_SOC_BANKACCOUNT",
-			"T_SOC_BIZTYPECODE",
-			"T_SOC_DONATION",
-			"T_SOC_DONATIONCODE",
-			"T_SOC_MEETING",
-			"T_SOC_MEMBER",
-			"T_SOC_MEMCLSCODE",
-			"T_SOC_VISIT",
-			"T_SOURCE_HIS",
-			"T_USER",
-			"T_USERSTATECODE"
 	);
 	private static String _filePath = "xml";
 
@@ -165,7 +125,7 @@ public class CreateOracleXMLFile {
 			if (meta.getColumnName(c).equals("ENTERID") || meta.getColumnName(c).equals("ENTERNAME") || meta.getColumnName(c).equals("ENTERPGM")) {
 				str.append(" update=\"none\"");
 			}
-			// ÀÔ·ÂÀÏ, ¼öÁ¤ÀÏ¿¡ ´ëÇÑ º°µµ Ã³¸®
+			// ï¿½Ô·ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½
 			if (meta.getColumnName(c).equals("ENTERDATE")) {
 				str.append(" insert=\"SYSDATE\" update=\"none\"");
 			}
