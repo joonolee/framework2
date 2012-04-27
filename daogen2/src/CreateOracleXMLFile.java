@@ -1,6 +1,6 @@
 /*
- * @(#)CreateXMLFile.java
- * DAO, VO ï¿½ï¿½ ï¿½Ê¿ï¿½ï¿½ï¿½ ï¿½ï¿½Å¸ï¿½ï¿½ï¿½ï¿½ xml ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+ * @(#)CreateOracleXMLFile.java
+ * DAO, VO »ý¼º¿¡ ÇÊ¿äÇÑ ¸ÞÅ¸Á¤º¸ xml ÆÄÀÏÀ» ÃßÃâ
  */
 import java.io.BufferedWriter;
 import java.io.File;
@@ -125,7 +125,7 @@ public class CreateOracleXMLFile {
 			if (meta.getColumnName(c).equals("ENTERID") || meta.getColumnName(c).equals("ENTERNAME") || meta.getColumnName(c).equals("ENTERPGM")) {
 				str.append(" update=\"none\"");
 			}
-			// ï¿½Ô·ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½
+			// ÀÔ·ÂÀÏ, ¼öÁ¤ÀÏ¿¡ ´ëÇÑ º°µµ Ã³¸®
 			if (meta.getColumnName(c).equals("ENTERDATE")) {
 				str.append(" insert=\"SYSDATE\" update=\"none\"");
 			}
