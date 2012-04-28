@@ -39,6 +39,22 @@ public class Cache {
 		cache.replace(key, value, seconds);
 	}
 
+	public static long incr(String key) {
+		return cache.incr(key, 1);
+	}
+
+	public static long incr(String key, int by) {
+		return cache.incr(key, by);
+	}
+
+	public static long decr(String key) {
+		return cache.decr(key, 1);
+	}
+
+	public static long decr(String key, int by) {
+		return cache.decr(key, by);
+	}
+
 	public static Object get(String key) {
 		return cache.get(key);
 	}

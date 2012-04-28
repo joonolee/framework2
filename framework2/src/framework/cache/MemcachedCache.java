@@ -32,6 +32,16 @@ public class MemcachedCache extends AbstractCache {
 	}
 
 	@Override
+	public long incr(String key, int by) {
+		return 0;
+	}
+
+	@Override
+	public long decr(String key, int by) {
+		return 0;
+	}
+
+	@Override
 	public void delete(String key) {
 
 	}

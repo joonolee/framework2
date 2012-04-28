@@ -13,6 +13,10 @@ public abstract class AbstractCache {
 	public abstract Object get(String key);
 
 	public abstract Map<String, Object> get(String[] keys);
+	
+	public abstract long incr(String key, int by);
+	
+	public abstract long decr(String key, int by);
 
 	public abstract void delete(String key);
 
