@@ -35,6 +35,7 @@ public class SQLStatement extends DBStatement {
 		return _stmt;
 	}
 
+	@Override
 	public void close() throws SQLException {
 		if (_stmt != null) {
 			try {

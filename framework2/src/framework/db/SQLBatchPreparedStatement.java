@@ -52,6 +52,7 @@ public class SQLBatchPreparedStatement extends DBStatement {
 		return _pstmt;
 	}
 
+	@Override
 	public void close() throws SQLException {
 		try {
 			if (_pstmt != null) {

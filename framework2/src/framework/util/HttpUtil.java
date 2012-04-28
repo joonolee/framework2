@@ -30,6 +30,14 @@ import org.apache.http.util.EntityUtils;
  */
 public class HttpUtil {
 
+	private HttpUtil() {
+	}
+	
+	/**
+	 * url 을 Get 방식으로 호출하고 결과를 리턴한다.
+	 * @param url
+	 * @return 괄과문자열
+	 */
 	public static String get(String url) {
 		try {
 			HttpClient client = new DefaultHttpClient();
@@ -45,6 +53,11 @@ public class HttpUtil {
 		return "";
 	}
 
+	/**
+	 * url 을 Post 방식으로 호출하고 결과를 리턴한다.
+	 * @param url
+	 * @return 괄과문자열
+	 */
 	public static String post(String url) {
 		return post(url, null);
 	}
@@ -72,6 +85,13 @@ public class HttpUtil {
 		return "";
 	}
 
+	/**
+	 * url 을 Post 방식으로 호출하고 결과를 리턴한다. (첨부파일 포함)
+	 * @param url
+	 * @param paramMap
+	 * @param fileList
+	 * @return 괄과문자열
+	 */
 	public static String post(String url, Map<String, String> paramMap, List<File> fileList) {
 		try {
 			HttpClient client = new DefaultHttpClient();

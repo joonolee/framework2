@@ -22,6 +22,9 @@ import framework.db.RecordSet;
  * XML을 이용하여 개발할 때 이용할 수 있는 유틸리티 클래스이다.
  */
 public class XmlUtil {
+	
+	private XmlUtil() {
+	}
 
 	////////////////////////////////////////////////////////////////////////////////////////// RecordSet 이용
 

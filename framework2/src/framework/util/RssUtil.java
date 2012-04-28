@@ -23,6 +23,9 @@ import framework.db.RecordSet;
  */
 public class RssUtil {
 
+	private RssUtil() {
+	}
+	
 	private static final String BR = System.getProperty("line.separator");
 	private static final SimpleDateFormat RFC822DATEFORMAT = new SimpleDateFormat("EEE', 'dd' 'MMM' 'yyyy' 'HH:mm:ss' 'Z", Locale.US);
 

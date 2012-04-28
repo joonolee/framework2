@@ -19,6 +19,9 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class FileUtil {
 
+	private FileUtil() {
+	}
+	
 	/**
 	 * 인자로 전달된 경로에 해당하는 디렉토리의 크기를 byte 단위로 반환하는 메소드
 	 * 

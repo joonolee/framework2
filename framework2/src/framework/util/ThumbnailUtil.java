@@ -20,6 +20,10 @@ import com.sun.image.codec.jpeg.JPEGEncodeParam;
 import com.sun.image.codec.jpeg.JPEGImageEncoder;
 
 public class ThumbnailUtil {
+	
+	private ThumbnailUtil() {
+	}
+	
 
 	/**
 	 * <b>섬네일 이미지를 생성한다.</b> 소스 이미지 파일의 width, height 중, <b>크기가 큰 쪽을 기준으로 하여 이미지를 생성</b>한다.

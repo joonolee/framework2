@@ -495,5 +495,4 @@ public class Box extends HashMap<String, String[]> {
 		}
 		return str.replaceAll("\\\\", "\\\\\\\\").replaceAll("\"", "\\\\").replaceAll("\r\n", "\\\\n").replaceAll("\n", "\\\\n");
 	}
-
 }

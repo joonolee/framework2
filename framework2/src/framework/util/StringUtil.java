@@ -12,6 +12,10 @@ import java.util.StringTokenizer;
 import java.util.TimeZone;
 
 public class StringUtil {
+	
+	private StringUtil() {
+	}
+	
 	/**
 	 * 특정 기호를 기준으로 스트링을 잘라서 배열로 반환하는 함수
 	 * <br>

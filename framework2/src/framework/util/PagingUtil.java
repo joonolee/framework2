@@ -10,6 +10,10 @@ import java.util.Map;
  * 네비게이션 관련 페이징 정보 추출 라이브러리
  */
 public class PagingUtil {
+	
+	private PagingUtil() {
+	}
+	
 	/**
 	 * 페이징을 위해 필요한 정보를 리턴한다.
 	 * 

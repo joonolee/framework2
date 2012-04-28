@@ -20,6 +20,9 @@ import framework.db.RecordSet;
  */
 public class JQGridUtil {
 
+	private JQGridUtil() {
+	}
+	
 	////////////////////////////////////////////////////////////////////////////////////////// RecordSet ÀÌ¿כ
 
 	/**

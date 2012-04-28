@@ -20,6 +20,9 @@ import framework.db.RecordSet;
  */
 public class DataTablesUtil {
 
+	private DataTablesUtil() {
+	}
+
 	////////////////////////////////////////////////////////////////////////////////////////// RecordSet ÀÌ¿כ
 
 	/**

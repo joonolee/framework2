@@ -42,6 +42,9 @@ import framework.db.RecordSet;
  */
 public class ExcelUtil {
 
+	private ExcelUtil() {
+	}
+	
 	//////////////////////////////////////////////////////////////////////////////////////////파싱
 	/**
 	 * 확장자에 의해서 엑셀파일을 파싱한다.

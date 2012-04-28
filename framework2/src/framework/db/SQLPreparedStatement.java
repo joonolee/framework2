@@ -29,6 +29,7 @@ public class SQLPreparedStatement extends DBStatement {
 		this._caller = caller;
 	}
 
+	@Override
 	public void close() throws SQLException {
 		try {
 			if (_pstmt != null) {

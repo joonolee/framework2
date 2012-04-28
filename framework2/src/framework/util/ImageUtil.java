@@ -8,4 +8,7 @@ package framework.util;
  */
 public class ImageUtil {
 
+	private ImageUtil() {
+	}
+	
 }

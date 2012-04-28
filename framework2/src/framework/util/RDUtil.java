@@ -23,6 +23,9 @@ import framework.db.RecordSet;
  */
 public class RDUtil {
 
+	private RDUtil() {
+	}
+	
 	/**
 	 * 디폴트 열 구분자
 	 */

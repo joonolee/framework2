@@ -29,6 +29,9 @@ import framework.db.RecordSet;
  */
 public class MiPlatformUtil {
 
+	private MiPlatformUtil() {
+	}
+
 	/**
 	 * 미압축 방식의 바이너리 송수신 형식
 	 */

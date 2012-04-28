@@ -15,6 +15,10 @@ import com.google.zxing.qrcode.QRCodeWriter;
  * QR Code 이미지를 생성할 때 이용할 수 있는 유틸리티 클래스이다.
  */
 public class QRCodeUtil {
+	
+	private QRCodeUtil() {
+	}
+	
 	/**
 	 * QRCode 이미지를 생성한다.
 	 * @param url					: QRCode 스캔 시 이동할 곳의 URL

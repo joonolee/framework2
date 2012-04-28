@@ -30,6 +30,9 @@ import framework.db.RecordSet;
  */
 public class GauceUtil {
 
+	private GauceUtil() {
+	}
+	
 	////////////////////////////////////////////////////////////////////////////////////////// RecordSet 이용
 	/**
 	 * RecordSet을 가우스 데이타셋으로 변환하여 응답객체로 전송한다.

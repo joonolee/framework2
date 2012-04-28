@@ -26,6 +26,9 @@ import javax.mail.internet.MimeMultipart;
  */
 public class EmailUtil {
 
+	private EmailUtil() {
+	}
+	
 	private static final String DEFAULT_CHARSET = "euc-kr";
 
 	//////////////////////////////////////////////////////////////////////////////////////////SMTP서버가 인증이 필요한 경우

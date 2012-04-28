@@ -21,6 +21,10 @@ import framework.action.Box;
  * Velocity를 이용한 템플릿 처리 라이브러리
  */
 public class VelocityUtil {
+	
+	private VelocityUtil() {
+	}
+	
 	/**
 	 * action.properties 파일에 설정된 key와 연결된 템플릿 파일에서 statement에 정의된 COMMAND의 문자열을 파라미터를 
 	 * 적용한 문자열을 생성한다.
@@ -38,7 +42,7 @@ public class VelocityUtil {
 		VelocityContext context = new VelocityContext();
 		context.put("COMMAND", statement);
 		context.put("PARAM", param);
-		context.put("UTIL", new StringUtil());
+		context.put("UTIL", StringUtil.class);
 
 		ResourceBundle bundle = (ResourceBundle) servlet.getServletContext().getAttribute("action-mapping");
 		String fileName = ((String) bundle.getObject(key)).trim();
