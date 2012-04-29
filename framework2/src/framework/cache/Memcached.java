@@ -1,3 +1,6 @@
+/** 
+ * @(#)Memcached.java
+ */
 package framework.cache;
 
 import java.io.IOException;
@@ -12,15 +15,22 @@ import framework.config.Configuration;
 import framework.config.ConfigurationException;
 
 /**
- * 
+ * Memcached 캐시 구현체 (http://memcached.org/)
  */
 public class Memcached extends AbstractCache {
 
+	/**
+	 * 싱글톤 객체
+	 */
 	private static Memcached _uniqueInstance;
+	
+	/**
+	 * 캐시 클라이언트
+	 */
 	private MemcachedClient _client;
 
 	/**
-	 * 
+	 * 생성자, 외부에서 객체를 인스턴스화 할 수 없도록 설정
 	 * @throws IOException
 	 */
 	private Memcached() throws IOException {
@@ -107,6 +117,11 @@ public class Memcached extends AbstractCache {
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////Private 메소드
+	
+	/**
+	 * 설정파일(config.properties)에서 값을 읽어오는 클래스를 리턴한다.
+	 * @return 설정객체
+	 */
 	private Configuration getConfig() {
 		return Configuration.getInstance();
 	}

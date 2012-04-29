@@ -1,3 +1,6 @@
+/** 
+ * @(#)EhCache.java
+ */
 package framework.cache;
 
 import java.util.HashMap;
@@ -6,30 +9,33 @@ import java.util.Map;
 import net.sf.ehcache.CacheManager;
 import net.sf.ehcache.Element;
 
+/**
+ * 기본 캐시 구현체 (http://ehcache.org/)
+ */
 public class EhCache extends AbstractCache {
 
 	/**
-	 * 
+	 * 싱글톤 객체
 	 */
 	private static EhCache _uniqueInstance;
 	
 	/**
-	 * 
+	 * 캐시 매니저
 	 */
 	private CacheManager _cacheManager;
 	
 	/**
-	 * 
+	 * 캐시 오브젝트
 	 */
 	private net.sf.ehcache.Cache _cache;
 
 	/**
-	 * 
+	 * 기본 캐시 이름
 	 */
 	private static final String _CACHE_NAME = "framework2";
 
 	/**
-	 * 
+	 * 생성자, 외부에서 객체를 인스턴스화 할 수 없도록 설정
 	 */
 	private EhCache() {
 		this._cacheManager = CacheManager.create();

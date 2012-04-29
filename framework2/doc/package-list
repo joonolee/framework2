@@ -1,4 +1,5 @@
 framework.action
+framework.cache
 framework.config
 framework.db
 framework.filter

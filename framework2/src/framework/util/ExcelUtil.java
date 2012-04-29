@@ -1,5 +1,5 @@
 /*
- * @(#)XmlUtil.java
+ * @(#)ExcelUtil.java
  */
 package framework.util;
 
@@ -42,6 +42,9 @@ import framework.db.RecordSet;
  */
 public class ExcelUtil {
 
+	/**
+	 * 생성자, 외부에서 객체를 인스턴스화 할 수 없도록 설정
+	 */
 	private ExcelUtil() {
 	}
 	
