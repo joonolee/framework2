@@ -7,12 +7,25 @@ import java.io.NotSerializableException;
 import java.io.Serializable;
 import java.util.Map;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 public class Cache {
+
+	/**
+	 * 로거객체 정의
+	 */
+	private static Log _logger = LogFactory.getLog(framework.cache.Cache.class);
 
 	/**
 	 * 캐시구현체
 	 */
 	public static AbstractCache cache;
+
+	/**
+	 * 캐시구현체 이름
+	 */
+	public static String cacheName;
 
 	/**
 	 * 기본 캐시 시간 (30일)
@@ -31,9 +44,12 @@ public class Cache {
 	public static void init() {
 		try {
 			cache = Memcached.getInstance();
+			cacheName = "EhCache";
 		} catch (Exception e) {
 			cache = EhCache.getInstance();
+			cacheName = "Memcached";
 		}
+		getLogger().info(String.format("Cache[%s] init : 초기화 성공", cacheName));
 	}
 
 	/**
@@ -45,6 +61,7 @@ public class Cache {
 	public static void add(String key, Object value) {
 		isSerializable(value);
 		cache.add(key, value, DEFAULT_DURATION);
+		getLogger().debug(String.format("Cache[%s] add : { key=%s, value=%s, seconds=%d }", cacheName, key, value, DEFAULT_DURATION));
 	}
 
 	/**
@@ -57,6 +74,7 @@ public class Cache {
 	public static void add(String key, Object value, int seconds) {
 		isSerializable(value);
 		cache.add(key, value, seconds);
+		getLogger().debug(String.format("Cache[%s] add : { key=%s, value=%s, seconds=%d }", cacheName, key, value, seconds));
 	}
 
 	/**
@@ -68,6 +86,7 @@ public class Cache {
 	public static void set(String key, Object value) {
 		isSerializable(value);
 		cache.set(key, value, DEFAULT_DURATION);
+		getLogger().debug(String.format("Cache[%s] set : { key=%s, value=%s, seconds=%d }", cacheName, key, value, DEFAULT_DURATION));
 	}
 
 	/**
@@ -80,6 +99,7 @@ public class Cache {
 	public static void set(String key, Object value, int seconds) {
 		isSerializable(value);
 		cache.set(key, value, seconds);
+		getLogger().debug(String.format("Cache[%s] set : { key=%s, value=%s, seconds=%d }", cacheName, key, value, seconds));
 	}
 
 	/**
@@ -91,6 +111,7 @@ public class Cache {
 	public static void replace(String key, Object value) {
 		isSerializable(value);
 		cache.replace(key, value, DEFAULT_DURATION);
+		getLogger().debug(String.format("Cache[%s] replace : { key=%s, value=%s, seconds=%d }", cacheName, key, value, DEFAULT_DURATION));
 	}
 
 	/**
@@ -103,6 +124,7 @@ public class Cache {
 	public static void replace(String key, Object value, int seconds) {
 		isSerializable(value);
 		cache.replace(key, value, seconds);
+		getLogger().debug(String.format("Cache[%s] replace : { key=%s, value=%s, seconds=%d }", cacheName, key, value, seconds));
 	}
 
 	/**
@@ -112,7 +134,9 @@ public class Cache {
 	 * @return 증가된 후 값
 	 */
 	public static long incr(String key) {
-		return cache.incr(key, 1);
+		long result = cache.incr(key, 1);
+		getLogger().debug(String.format("Cache[%s] incr : { key=%s, by=%d }", cacheName, key, 1));
+		return result;
 	}
 
 	/**
@@ -123,7 +147,9 @@ public class Cache {
 	 * @return 증가된 후 값
 	 */
 	public static long incr(String key, int by) {
-		return cache.incr(key, by);
+		long result = cache.incr(key, by);
+		getLogger().debug(String.format("Cache[%s] incr : { key=%s, by=%d }", cacheName, key, by));
+		return result;
 	}
 
 	/**
@@ -133,7 +159,9 @@ public class Cache {
 	 * @return 감소된 후 값
 	 */
 	public static long decr(String key) {
-		return cache.decr(key, 1);
+		long result = cache.decr(key, 1);
+		getLogger().debug(String.format("Cache[%s] decr : { key=%s, by=%d }", cacheName, key, 1));
+		return result;
 	}
 
 	/**키의 값을 by 만큼 감소시킨다.
@@ -143,7 +171,9 @@ public class Cache {
 	 * @return 감소된 후 값
 	 */
 	public static long decr(String key, int by) {
-		return cache.decr(key, by);
+		long result = cache.decr(key, by);
+		getLogger().debug(String.format("Cache[%s] decr : { key=%s, by=%d }", cacheName, key, by));
+		return result;
 	}
 
 	/**
@@ -153,7 +183,9 @@ public class Cache {
 	 * @return 값
 	 */
 	public static Object get(String key) {
-		return cache.get(key);
+		Object value = cache.get(key);
+		getLogger().debug(String.format("Cache[%s] get : { key=%s, value=%s }", cacheName, key, value));
+		return value;
 	}
 
 	/**
@@ -163,7 +195,9 @@ public class Cache {
 	 * @return 값
 	 */
 	public static Map<String, Object> get(String... keys) {
-		return cache.get(keys);
+		Map<String, Object> valueMap = cache.get(keys);
+		getLogger().debug(String.format("Cache[%s] get : { key=%s, value=%s }", cacheName, keys, valueMap));
+		return valueMap;
 	}
 
 	/**
@@ -173,6 +207,7 @@ public class Cache {
 	 */
 	public static void delete(String key) {
 		cache.delete(key);
+		getLogger().debug(String.format("Cache[%s] delete : { key=%s }", cacheName, key));
 	}
 
 	/**
@@ -180,6 +215,7 @@ public class Cache {
 	 */
 	public static void clear() {
 		cache.clear();
+		getLogger().debug(String.format("Cache[%s] clear : 캐시 클리어 성공", cacheName));
 	}
 
 	/**
@@ -187,6 +223,7 @@ public class Cache {
 	 */
 	public static void stop() {
 		cache.stop();
+		getLogger().debug(String.format("Cache[%s] stop : 캐시 종료 성공", cacheName));
 	}
 
 	//////////////////////////////////////////////////////////////////////////////////////////Private 메소드
@@ -199,5 +236,9 @@ public class Cache {
 		if (value != null && !(value instanceof Serializable)) {
 			throw new CacheException(new NotSerializableException(value.getClass().getName()));
 		}
+	}
+
+	private static Log getLogger() {
+		return Cache._logger;
 	}
 }
