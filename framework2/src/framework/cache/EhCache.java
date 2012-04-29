@@ -12,12 +12,12 @@ public class EhCache extends AbstractCache {
 	 * 
 	 */
 	private static EhCache _uniqueInstance;
-
+	
 	/**
 	 * 
 	 */
 	private CacheManager _cacheManager;
-
+	
 	/**
 	 * 
 	 */
