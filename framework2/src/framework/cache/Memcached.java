@@ -8,6 +8,8 @@ import java.net.InetSocketAddress;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 
 import net.spy.memcached.AddrUtil;
 import net.spy.memcached.MemcachedClient;
@@ -23,7 +25,7 @@ public class Memcached extends AbstractCache {
 	 * 싱글톤 객체
 	 */
 	private static Memcached _uniqueInstance;
-	
+
 	/**
 	 * 캐시 클라이언트
 	 */
@@ -82,13 +84,24 @@ public class Memcached extends AbstractCache {
 
 	@Override
 	public Object get(String key) {
-		return _client.get(key);
+		Future<Object> future = _client.asyncGet(key);
+		try {
+			return future.get(1, TimeUnit.SECONDS);
+		} catch (Exception e) {
+			future.cancel(false);
+		}
+		return null;
 	}
 
 	@Override
 	public Map<String, Object> get(String[] keys) {
-		Map<String, Object> valueMap = _client.getBulk();
-		return (valueMap == null) ? Collections.<String, Object> emptyMap() : valueMap;
+		Future<Map<String, Object>> future = _client.asyncGetBulk(keys);
+		try {
+			return future.get(1, TimeUnit.SECONDS);
+		} catch (Exception e) {
+			future.cancel(false);
+		}
+		return Collections.<String, Object> emptyMap();
 	}
 
 	@Override
@@ -117,7 +130,7 @@ public class Memcached extends AbstractCache {
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////Private 메소드
-	
+
 	/**
 	 * 설정파일(config.properties)에서 값을 읽어오는 클래스를 리턴한다.
 	 * @return 설정객체
