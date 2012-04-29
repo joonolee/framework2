@@ -94,4 +94,15 @@ public class Configuration {
 		}
 		return value;
 	}
+
+	/**
+	 * 키(key)가 포함되어있는지 여부를 리턴한다.
+	 * 
+	 * @param key 값을 찾기 위한 키 문자열
+	 * 
+	 * @return key의 포함여부
+	 */
+	public boolean containsKey(String key) {
+		return _bundle.containsKey(key);
+	}
 }

@@ -329,6 +329,7 @@ public abstract class Action {
 		getSession().setAttribute(key, value);
 	}
 
+	//////////////////////////////////////////////////////////////////////////////////////////Private ¸Þ¼Òµå
 	private void setServlet(HttpServlet servlet) {
 		this._servlet = servlet;
 	}

@@ -16,6 +16,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import framework.cache.Cache;
+
 /** 
  * 컨트롤러 역할을 하는 서블릿으로 모든 클라이언트의 요청을 받아 해당 액션을 실행한다.
  * 확장자가 (.do)로 실행되는 모든 요청을 이 서블릿이 처리하기 위하여 web.xml 파일에서 서블릿을 매핑하여야 하며
@@ -41,6 +43,8 @@ public class ActionServlet extends HttpServlet {
 			throw new ServletException(e);
 		}
 		getServletContext().setAttribute("action-mapping", bundle);
+		// Cache
+		Cache.init();
 	}
 
 	/**
@@ -99,6 +103,7 @@ public class ActionServlet extends HttpServlet {
 		processRequest(request, response);
 	}
 
+	//////////////////////////////////////////////////////////////////////////////////////////Private 메소드
 	private void processRequest(HttpServletRequest request, HttpServletResponse response) {
 		String actionKey = getActionKey(request);
 		if (actionKey == null) {

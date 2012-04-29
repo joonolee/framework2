@@ -101,6 +101,7 @@ public class MultipartBox extends Box {
 		return _fileItems;
 	}
 
+	//////////////////////////////////////////////////////////////////////////////////////////Private 메소드
 	/**
 	 * Multipart 파일업로드시 파일 아이템을 리스트에 추가한다.
 	 * 

@@ -27,7 +27,7 @@ public class ConnectionManager {
 	private Object _caller = null;
 	private Connection _connection = null;
 
-	public ConnectionManager(String dsName, Object caller) throws DBOpenException {
+	public ConnectionManager(String dsName, Object caller) {
 		this._dsName = dsName;
 		this._caller = caller;
 		if (_stmtList == null) {
