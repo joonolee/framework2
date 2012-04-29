@@ -5,6 +5,7 @@ package framework.cache;
 
 import java.io.NotSerializableException;
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.Map;
 
 import org.apache.commons.logging.Log;
@@ -196,7 +197,7 @@ public class Cache {
 	 */
 	public static Map<String, Object> get(String... keys) {
 		Map<String, Object> valueMap = cache.get(keys);
-		getLogger().debug(String.format("[ %s ] get : { key=%s, value=%s }", cacheName, keys, valueMap));
+		getLogger().debug(String.format("[ %s ] get : { key=%s, value=%s }", cacheName, Arrays.asList(keys), valueMap));
 		return valueMap;
 	}
 

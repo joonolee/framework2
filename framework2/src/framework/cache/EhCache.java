@@ -18,12 +18,12 @@ public class EhCache extends AbstractCache {
 	 * 싱글톤 객체
 	 */
 	private static EhCache _uniqueInstance;
-	
+
 	/**
 	 * 캐시 매니저
 	 */
 	private CacheManager _cacheManager;
-	
+
 	/**
 	 * 캐시 오브젝트
 	 */
@@ -48,7 +48,7 @@ public class EhCache extends AbstractCache {
 	 * 
 	 * @return EhCache 객체의 인스턴스
 	 */
-	public static EhCache getInstance() {
+	public synchronized static EhCache getInstance() {
 		if (_uniqueInstance == null) {
 			_uniqueInstance = new EhCache();
 		}

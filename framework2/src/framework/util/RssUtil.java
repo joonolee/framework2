@@ -30,7 +30,6 @@ public class RssUtil {
 	}
 	
 	private static final String BR = System.getProperty("line.separator");
-	private static final SimpleDateFormat RFC822DATEFORMAT = new SimpleDateFormat("EEE', 'dd' 'MMM' 'yyyy' 'HH:mm:ss' 'Z", Locale.US);
 
 	/**
 	 * RssItem 객체
@@ -460,6 +459,7 @@ public class RssUtil {
 	 * @return Rfc822 형식의 날짜 문자열
 	 */
 	private static String toRfc822DateFormat(Date date) {
-		return RFC822DATEFORMAT.format(date);
+		SimpleDateFormat rfc822DateFormat = new SimpleDateFormat("EEE', 'dd' 'MMM' 'yyyy' 'HH:mm:ss' 'Z", Locale.US);
+		return rfc822DateFormat.format(date);
 	}
 }

@@ -60,7 +60,7 @@ public class Memcached extends AbstractCache {
 	 * @return Memcached 객체의 인스턴스
 	 * @throws IOException 
 	 */
-	public static Memcached getInstance() throws IOException {
+	public synchronized static Memcached getInstance() throws IOException {
 		if (_uniqueInstance == null) {
 			_uniqueInstance = new Memcached();
 		}

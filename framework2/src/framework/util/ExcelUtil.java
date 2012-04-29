@@ -47,7 +47,7 @@ public class ExcelUtil {
 	 */
 	private ExcelUtil() {
 	}
-	
+
 	//////////////////////////////////////////////////////////////////////////////////////////파싱
 	/**
 	 * 확장자에 의해서 엑셀파일을 파싱한다.
@@ -971,7 +971,8 @@ public class ExcelUtil {
 				mapList.add(map);
 			}
 		} finally {
-			br.close();
+			if (br != null)
+				br.close();
 		}
 		return mapList;
 	}
