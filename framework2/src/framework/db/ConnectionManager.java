@@ -41,7 +41,7 @@ public class ConnectionManager {
 					_dsMap.put(dsName, ds);
 				}
 			} catch (Exception e) {
-				throw new DBOpenException(e.getMessage());
+				throw new RuntimeException(e.getMessage());
 			}
 		}
 	}
