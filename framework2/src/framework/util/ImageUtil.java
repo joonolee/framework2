@@ -84,6 +84,9 @@ public class ImageUtil {
 	 */
 	public static void resize(File srcFile, File destFile, int width, int height) throws IOException {
 		Image image = new ImageIcon(srcFile.getAbsolutePath()).getImage();
+		if (image.getWidth(null) < 1 || image.getHeight(null) < 1) {
+			throw new IllegalArgumentException("파일이 존재하지 않습니다.");
+		}
 		double scale = getScale(width, height, image.getWidth(null), image.getHeight(null));
 		int scaleWidth = (int) (scale * image.getWidth(null));
 		int scaleHeight = (int) (scale * image.getHeight(null));
