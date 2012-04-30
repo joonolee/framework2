@@ -11,10 +11,11 @@ import java.util.Map;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
+import javax.naming.ConfigurationException;
+
 import net.spy.memcached.AddrUtil;
 import net.spy.memcached.MemcachedClient;
 import framework.config.Configuration;
-import framework.config.ConfigurationException;
 
 /**
  * Memcached 캐시 구현체 (http://memcached.org/)
@@ -34,8 +35,9 @@ public class Memcached extends AbstractCache {
 	/**
 	 * 생성자, 외부에서 객체를 인스턴스화 할 수 없도록 설정
 	 * @throws IOException
+	 * @throws ConfigurationException 
 	 */
-	private Memcached() throws IOException {
+	private Memcached() throws Exception {
 		System.setProperty("net.spy.log.LoggerImpl", "net.spy.memcached.compat.log.Log4JLogger");
 		List<InetSocketAddress> addrList;
 		if (getConfig().containsKey("memcached.host")) {
@@ -49,7 +51,7 @@ public class Memcached extends AbstractCache {
 			}
 			addrList = AddrUtil.getAddresses(buffer.toString());
 		} else {
-			throw new ConfigurationException("memcached의 호스트설정이 누락되었습니다.");
+			throw new Exception("memcached의 호스트설정이 누락되었습니다.");
 		}
 		_client = new MemcachedClient(addrList);
 	}
@@ -60,7 +62,7 @@ public class Memcached extends AbstractCache {
 	 * @return Memcached 객체의 인스턴스
 	 * @throws IOException 
 	 */
-	public synchronized static Memcached getInstance() throws IOException {
+	public synchronized static Memcached getInstance() throws Exception {
 		if (_uniqueInstance == null) {
 			_uniqueInstance = new Memcached();
 		}
