@@ -235,7 +235,7 @@ public class Cache {
 	 */
 	private static void isSerializable(Object value) {
 		if (value != null && !(value instanceof Serializable)) {
-			throw new CacheException(new NotSerializableException(value.getClass().getName()));
+			throw new RuntimeException(new NotSerializableException(value.getClass().getName()));
 		}
 	}
 
