@@ -11,7 +11,12 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.servlet.http.HttpServletResponse;
 import javax.swing.ImageIcon;
+
+import nl.captcha.Captcha;
+import nl.captcha.gimpy.RippleGimpyRenderer;
+import nl.captcha.servlet.CaptchaServletUtil;
 
 /**
  * 이미지 포맷 변경, 크기 변경시 이용할 수 있는 유틸리티 클래스이다.
@@ -125,6 +130,31 @@ public class ImageUtil {
 		Graphics2D g2d = bufImg.createGraphics();
 		g2d.drawImage(image, 0, 0, null);
 		ImageIO.write(bufImg, "png", destFile);
+	}
+
+	/**
+	 * CAPTCHA 이미지를 응답객체로 전송하고, 생성된 문자열을 리턴한다.
+	 * 기본사이즈는 가로 200px, 세로 50px으로 한다.
+	 * 
+	 * @param response captcha 이미지를 전송할 응답객체
+	 * @return 생성된 문자열
+	 */
+	public static String captcha(HttpServletResponse response) {
+		return captcha(response, 200, 50);
+	}
+
+	/**
+	 * CAPTCHA 이미지를 응답객체로 전송하고, 생성된 문자열을 리턴한다.
+	 * 
+	 * @param response captcha 이미지를 전송할 응답객체
+	 * @param width 가로 사이즈 픽셀
+	 * @param height 세로 사이즈 픽셀
+	 * @return 생성된 문자열
+	 */
+	public static String captcha(HttpServletResponse response, int width, int height) {
+		Captcha captcha = new Captcha.Builder(width, height).addText().addBackground().addNoise().gimp(new RippleGimpyRenderer()).build();
+		CaptchaServletUtil.writeImage(response, captcha.getImage());
+		return captcha.getAnswer();
 	}
 
 	//////////////////////////////////////////////////////////////////////////////////////////Private 메소드
