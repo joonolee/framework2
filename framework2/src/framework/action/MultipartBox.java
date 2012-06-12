@@ -68,7 +68,7 @@ public class MultipartBox extends Box {
 				for (FileItem item : items) {
 					if (item.isFormField()) {
 						String fieldName = item.getFieldName();
-						String fieldValue = item.getString();
+						String fieldValue = item.getString(request.getCharacterEncoding());
 						String[] oldValue = multipartBox.getArray(fieldName);
 						if (oldValue == null) {
 							multipartBox.put(fieldName, new String[] { fieldValue });
