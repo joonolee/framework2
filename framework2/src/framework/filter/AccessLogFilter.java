@@ -21,6 +21,7 @@ import org.apache.commons.logging.LogFactory;
 public class AccessLogFilter implements Filter {
 	private static Log _logger = LogFactory.getLog(framework.filter.AccessLogFilter.class);
 
+	@Override
 	public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
 		HttpServletRequest httpReq = (HttpServletRequest) req;
 		if (getLogger().isDebugEnabled()) {
@@ -34,9 +35,11 @@ public class AccessLogFilter implements Filter {
 		}
 	}
 
+	@Override
 	public void init(FilterConfig config) throws ServletException {
 	}
 
+	@Override
 	public void destroy() {
 	}
 
@@ -84,7 +87,6 @@ public class AccessLogFilter implements Filter {
 		}
 		buf.append(" }");
 		return "Box[requestbox]=" + buf.toString();
-
 	}
 
 	private Log getLogger() {
