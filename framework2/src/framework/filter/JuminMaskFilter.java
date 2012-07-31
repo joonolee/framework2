@@ -32,19 +32,17 @@ public class JuminMaskFilter implements Filter {
 	}
 
 	public void doFilter(ServletRequest p_req, ServletResponse p_res, FilterChain p_chain) throws IOException, ServletException {
-		ByteArrayOutputStream l_baos = new ByteArrayOutputStream(8192);
-		MyResponseWrapper l_resWrapper = new MyResponseWrapper((HttpServletResponse) p_res, l_baos);
+		MyResponseWrapper l_resWrapper = new MyResponseWrapper((HttpServletResponse) p_res);
 		p_chain.doFilter(p_req, l_resWrapper);
 		String l_contentType = StringUtil.nullToBlankString(p_res.getContentType());
 		if (l_contentType.contains("text") || l_contentType.contains("json")) {
-			l_resWrapper.getWriter().flush();
-			String l_juminMaskData = _juminPattern.matcher(l_baos.toString()).replaceAll("$1******");
+			String l_juminMaskData = _juminPattern.matcher(l_resWrapper.toString()).replaceAll("$1******");
 			PrintWriter l_writer = p_res.getWriter();
 			l_writer.print(l_juminMaskData);
 			l_writer.flush();
 			l_writer.close();
 		} else {
-			l_baos.writeTo(p_res.getOutputStream());
+			l_resWrapper.writeTo(p_res.getOutputStream());
 		}
 	}
 
@@ -58,9 +56,9 @@ public class JuminMaskFilter implements Filter {
 		private ByteArrayOutputStream _bytes;
 		private PrintWriter _writer;
 
-		public MyResponseWrapper(HttpServletResponse p_res, ByteArrayOutputStream p_bytes) {
+		public MyResponseWrapper(HttpServletResponse p_res) {
 			super(p_res);
-			_bytes = p_bytes;
+			_bytes = new ByteArrayOutputStream(8192);
 			_writer = new PrintWriter(_bytes);
 		}
 
@@ -76,6 +74,7 @@ public class JuminMaskFilter implements Filter {
 
 		@Override
 		public String toString() {
+			_writer.flush();
 			return _bytes.toString();
 		}
 
