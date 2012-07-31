@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServletResponseWrapper;
 import framework.util.StringUtil;
 
 public class JuminMaskFilter implements Filter {
-	private static final String _JUMIN_PATTERN = "(\\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12][0-9]|3[01])(?:\\s|&nbsp;)*[-|~]?(?:\\s|&nbsp;)*)[1-8]\\d{6}";
+	private static final String _JUMIN_PATTERN = "\\b(\\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12][0-9]|3[01])(?:\\s|&nbsp;)*[-|~]?(?:\\s|&nbsp;)*)[1-8]\\d{6}\\b";
 
 	private static Pattern _juminPattern;
 
