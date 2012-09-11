@@ -78,18 +78,25 @@ public class ExcelUtil {
 	 * @throws Exception
 	 */
 	public static List<Map<String, String>> parse(File file) throws Exception {
-		String ext = FileUtil.getFileExtension(file);
-		FileInputStream fis = new FileInputStream(file);
-		if ("csv".equalsIgnoreCase(ext)) {
-			return parseCSV(fis);
-		} else if ("tsv".equalsIgnoreCase(ext)) {
-			return parseTSV(fis);
-		} else if ("xls".equalsIgnoreCase(ext)) {
-			return parseXLS(fis);
-		} else if ("xlsx".equalsIgnoreCase(ext)) {
-			return parseXLSX(fis);
-		} else {
-			throw new Exception("지원하지 않는 파일포맷입니다.");
+		FileInputStream fis = null;
+		try {
+			String ext = FileUtil.getFileExtension(file);
+			fis = new FileInputStream(file);
+			if ("csv".equalsIgnoreCase(ext)) {
+				return parseCSV(fis);
+			} else if ("tsv".equalsIgnoreCase(ext)) {
+				return parseTSV(fis);
+			} else if ("xls".equalsIgnoreCase(ext)) {
+				return parseXLS(fis);
+			} else if ("xlsx".equalsIgnoreCase(ext)) {
+				return parseXLSX(fis);
+			} else {
+				throw new Exception("지원하지 않는 파일포맷입니다.");
+			}
+		} finally {
+			if (fis != null) {
+				fis.close();
+			}
 		}
 	}
 
