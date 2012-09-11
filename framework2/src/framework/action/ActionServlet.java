@@ -139,6 +139,8 @@ public class ActionServlet extends HttpServlet {
 		try {
 			return ((String) bundle.getObject(actionKey)).trim();
 		} catch (MissingResourceException e) {
+			getLogger().error("error actionkey is " + actionKey);
+			getLogger().error(e.getMessage());
 			return null;
 		}
 	}
