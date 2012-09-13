@@ -4,6 +4,7 @@
 package framework.util;
 
 import java.security.MessageDigest;
+import java.security.SecureRandom;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
@@ -32,6 +33,10 @@ public class CryptUtil {
 		return hash(message, "MD5");
 	}
 
+	public static String hashMD5(String message, String salt) {
+		return hash(message, salt, "MD5");
+	}
+
 	/**
 	 * 메시지를 SHA-1 알고리즘으로 해쉬한다.
 	 * 
@@ -40,6 +45,10 @@ public class CryptUtil {
 	 */
 	public static String hashSHA1(String message) {
 		return hash(message, "SHA-1");
+	}
+
+	public static String hashSHA1(String message, String salt) {
+		return hash(message, salt, "SHA-1");
 	}
 
 	/**
@@ -52,6 +61,10 @@ public class CryptUtil {
 		return hash(message, "SHA-256");
 	}
 
+	public static String hashSHA256(String message, String salt) {
+		return hash(message, salt, "SHA-256");
+	}
+
 	/**
 	 * 메시지를 SHA-512 알고리즘으로 해쉬한다.
 	 * 
@@ -60,6 +73,10 @@ public class CryptUtil {
 	 */
 	public static String hashSHA512(String message) {
 		return hash(message, "SHA-512");
+	}
+
+	public static String hashSHA512(String message, String salt) {
+		return hash(message, salt, "SHA-512");
 	}
 
 	/**
@@ -154,10 +171,23 @@ public class CryptUtil {
 		}
 	}
 
+	/**
+	 * 해시알고리즘에서 사용하기 위한 솔트를 생성한다.
+	 * 
+	 * @return 랜덤으로 생성된 20자리 솔트 문자열
+	 */
+	public static String randomSalt() {
+		SecureRandom r = new SecureRandom();
+		byte[] salt = new byte[10];
+		r.nextBytes(salt);
+		return new String(Hex.encodeHex(salt)).toUpperCase();
+	}
+
 	//////////////////////////////////////////////////////////////////////////////////////////Private 메소드
 
 	/**
 	 * 메시지를 주어진 알고리즘으로 해쉬한다.
+	 * 
 	 * @param message 원본메시지
 	 * @param algorithm 해쉬 알고리즘
 	 * @return 해쉬된 문자열
@@ -165,6 +195,26 @@ public class CryptUtil {
 	private static String hash(String message, String algorithm) {
 		try {
 			MessageDigest md = MessageDigest.getInstance(algorithm);
+			md.reset();
+			return new String(Hex.encodeHex(md.digest(message.getBytes()))).toUpperCase();
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	/**
+	 * 메시지를 솔트를 사용하여 주어진 알고리즘으로 해쉬한다.
+	 * 
+	 * @param message 원본메시지
+	 * @param salt 솔트값 
+	 * @param algorithm 해쉬 알고리즘
+	 * @return 해쉬된 문자열
+	 */
+	private static String hash(String message, String salt, String algorithm) {
+		try {
+			MessageDigest md = MessageDigest.getInstance(algorithm);
+			md.reset();
+			md.update(salt.getBytes());
 			return new String(Hex.encodeHex(md.digest(message.getBytes()))).toUpperCase();
 		} catch (Exception e) {
 			throw new RuntimeException(e);
