@@ -21,12 +21,12 @@ public class Cache {
 	/**
 	 * 캐시구현체
 	 */
-	public static AbstractCache cache;
+	public static AbstractCache cache = null;
 
 	/**
 	 * 캐시구현체 이름
 	 */
-	public static String cacheName;
+	public static String cacheName = null;
 
 	/**
 	 * 기본 캐시 시간 (30일)
@@ -42,15 +42,17 @@ public class Cache {
 	/**
 	 * 캐시 초기화, 설정파일을 읽어 캐시 구현체를 셋팅한다.
 	 */
-	public static void init() {
-		try {
-			cache = Memcached.getInstance();
-			cacheName = "Memcached";
-		} catch (Exception e) {
-			cache = EhCache.getInstance();
-			cacheName = "EhCache";
+	public synchronized static void init() {
+		if (cache != null) {
+			try {
+				cache = Memcached.getInstance();
+				cacheName = "Memcached";
+			} catch (Exception e) {
+				cache = EhCache.getInstance();
+				cacheName = "EhCache";
+			}
+			getLogger().info(String.format("[ %s ] init : 초기화 성공", cacheName));
 		}
-		getLogger().info(String.format("[ %s ] init : 초기화 성공", cacheName));
 	}
 
 	/**
