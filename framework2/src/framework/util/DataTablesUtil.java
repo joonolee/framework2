@@ -32,6 +32,21 @@ public class DataTablesUtil {
 	////////////////////////////////////////////////////////////////////////////////////////// RecordSet 이용
 
 	/**
+	 * RecordSet을 DataTables 형식으로 출력한다. DataTablesUtil.setRecordSet과 동일
+	 * <br>
+	 * ex) response로 rs를 DataTables 형식으로 출력하는 경우 => DataTablesUtil.render(response, rs)
+	 * 
+	 * @param response 클라이언트로 응답할 Response 객체
+	 * @param rs DataTables 형식으로 변환할 RecordSet 객체
+	 * @return 처리건수
+	 * @throws ColumnNotFoundException 
+	 * @throws IOException 
+	 */
+	public static int render(HttpServletResponse response, RecordSet rs) throws ColumnNotFoundException, IOException {
+		return setRecordSet(response, rs);
+	}
+
+	/**
 	 * RecordSet을 DataTables 형식으로 출력한다.
 	 * <br>
 	 * ex) response로 rs를 DataTables 형식으로 출력하는 경우 => DataTablesUtil.setRecordSet(response, rs)
@@ -61,6 +76,22 @@ public class DataTablesUtil {
 		pw.print("]");
 		pw.print("}");
 		return rowCount;
+	}
+
+	/**
+	 * RecordSet을 DataTables 형식으로 출력한다. DataTablesUtil.setRecordSet과 동일
+	 * <br>
+	 * ex) response로 rs를 DataTables 형식으로 출력하는 경우 => DataTablesUtil.render(response, rs, new String[] { "col1", "col2" })
+	 * 
+	 * @param response 클라이언트로 응답할 Response 객체
+	 * @param rs DataTables 형식으로 변환할 RecordSet 객체
+	 * @param colNames 컬럼이름 배열
+	 * @return 처리건수
+	 * @throws ColumnNotFoundException 
+	 * @throws IOException 
+	 */
+	public static int render(HttpServletResponse response, RecordSet rs, String[] colNames) throws ColumnNotFoundException, IOException {
+		return setRecordSet(response, rs, colNames);
 	}
 
 	/**
@@ -96,6 +127,19 @@ public class DataTablesUtil {
 	}
 
 	/**
+	 * RecordSet을 DataTables 형식으로 변환한다. DataTablesUtil.format과 동일
+	 * <br>
+	 * ex) rs를 DataTables 형식으로 변환하는 경우 => String json = DataTablesUtil.render(rs)
+	 * 
+	 * @param rs DataTables 형식으로 변환할 RecordSet 객체
+	 * @return DataTables 형식으로 변환된 문자열
+	 * @throws ColumnNotFoundException 
+	 */
+	public static String render(RecordSet rs) throws ColumnNotFoundException {
+		return format(rs);
+	}
+
+	/**
 	 * RecordSet을 DataTables 형식으로 변환한다.
 	 * <br>
 	 * ex) rs를 DataTables 형식으로 변환하는 경우 => String json = DataTablesUtil.format(rs)
@@ -123,6 +167,20 @@ public class DataTablesUtil {
 		buffer.append("]");
 		buffer.append("}");
 		return buffer.toString();
+	}
+
+	/**
+	 * RecordSet을 DataTables 형식으로 변환한다. DataTablesUtil.format과 동일
+	 * <br>
+	 * ex) rs를 DataTables 형식으로 변환하는 경우 => String json = DataTablesUtil.render(rs, new String[] { "col1", "col2" })
+	 * 
+	 * @param rs DataTables 형식으로 변환할 RecordSet 객체
+	 * @param colNames 컬럼이름 배열
+	 * @return DataTables 형식으로 변환된 문자열
+	 * @throws ColumnNotFoundException 
+	 */
+	public static String render(RecordSet rs, String[] colNames) throws ColumnNotFoundException {
+		return format(rs, colNames);
 	}
 
 	/**
@@ -156,6 +214,21 @@ public class DataTablesUtil {
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////// ResultSet 이용
+
+	/**
+	 * ResultSet을 DataTables 형식으로 출력한다. DataTablesUtil.setResultSet과 동일
+	 * <br>
+	 * ex) response로 rs를 DataTables 형식으로 출력하는 경우 => DataTablesUtil.render(response, rs)
+	 * 
+	 * @param response 클라이언트로 응답할 Response 객체
+	 * @param rs DataTables 형식으로 변환할 ResultSet 객체, ResultSet 객체는 자동으로 close 된다.
+	 * @return 처리건수
+	 * @throws SQLException 
+	 * @throws IOException
+	 */
+	public static int render(HttpServletResponse response, ResultSet rs) throws SQLException, IOException {
+		return setResultSet(response, rs);
+	}
 
 	/**
 	 * ResultSet을 DataTables 형식으로 출력한다.
@@ -199,6 +272,22 @@ public class DataTablesUtil {
 	}
 
 	/**
+	 * ResultSet을 DataTables 형식으로 출력한다. DataTablesUtil.setResultSet과 동일
+	 * <br>
+	 * ex) response로 rs를 DataTables 형식으로 출력하는 경우 => DataTablesUtil.render(response, rs, new String[] { "col1", "col2" })
+	 * 
+	 * @param response 클라이언트로 응답할 Response 객체
+	 * @param rs DataTables 형식으로 변환할 ResultSet 객체, ResultSet 객체는 자동으로 close 된다.
+	 * @param colNames 컬럼이름 배열
+	 * @return 처리건수
+	 * @throws SQLException 
+	 * @throws IOException
+	 */
+	public static int render(HttpServletResponse response, ResultSet rs, String[] colNames) throws SQLException, IOException {
+		return setResultSet(response, rs, colNames);
+	}
+
+	/**
 	 * ResultSet을 DataTables 형식으로 출력한다.
 	 * <br>
 	 * ex) response로 rs를 DataTables 형식으로 출력하는 경우 => DataTablesUtil.setResultSet(response, rs, new String[] { "col1", "col2" })
@@ -235,6 +324,19 @@ public class DataTablesUtil {
 			if (stmt != null)
 				stmt.close();
 		}
+	}
+
+	/**
+	 * ResultSet을 DataTables 형식으로 변환한다. DataTablesUtil.format과 동일
+	 * <br>
+	 * ex) rs를 DataTables 형식으로 변환하는 경우 => String json = DataTablesUtil.render(rs)
+	 * 
+	 * @param rs DataTables 형식으로 변환할 ResultSet 객체
+	 * @return DataTables 형식으로 변환된 문자열
+	 * @throws SQLException 
+	 */
+	public static String render(ResultSet rs) throws SQLException {
+		return format(rs);
 	}
 
 	/**
@@ -277,6 +379,20 @@ public class DataTablesUtil {
 	}
 
 	/**
+	 * ResultSet을 DataTables 형식으로 변환한다. DataTablesUtil.format과 동일
+	 * <br>
+	 * ex) rs를 DataTables 형식으로 변환하는 경우 => String json = DataTablesUtil.render(rs, new String[] { "col1", "col2" })
+	 * 
+	 * @param rs DataTables 형식으로 변환할 ResultSet 객체
+	 * @param colNames 컬럼이름 배열
+	 * @return DataTables 형식으로 변환된 문자열
+	 * @throws SQLException 
+	 */
+	public static String render(ResultSet rs, String[] colNames) throws SQLException {
+		return format(rs, colNames);
+	}
+
+	/**
 	 * ResultSet을 DataTables 형식으로 변환한다.
 	 * <br>
 	 * ex) rs를 DataTables 형식으로 변환하는 경우 => String json = DataTablesUtil.format(rs, new String[] { "col1", "col2" })
@@ -314,6 +430,18 @@ public class DataTablesUtil {
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////// 기타 Collection 이용
+
+	/**
+	 * List객체를 DataTables 형식으로 변환한다. DataTablesUtil.format과 동일
+	 * <br>
+	 * ex1) mapList를 DataTables 형식으로 변환하는 경우 => String json = DataTablesUtil.render(mapList)
+	 *
+	 * @param mapList 변환할 List객체
+	 * @return DataTables 형식으로 변환된 문자열
+	 */
+	public static String render(List<Map<String, Object>> mapList) {
+		return format(mapList);
+	}
 
 	/**
 	 * List객체를 DataTables 형식으로 변환한다.

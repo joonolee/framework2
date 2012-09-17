@@ -22,7 +22,7 @@ import framework.db.RecordSet;
  * XML을 이용하여 개발할 때 이용할 수 있는 유틸리티 클래스이다.
  */
 public class XmlUtil {
-	
+
 	/**
 	 * 생성자, 외부에서 객체를 인스턴스화 할 수 없도록 설정
 	 */
@@ -30,6 +30,23 @@ public class XmlUtil {
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////// RecordSet 이용
+
+	/**
+	 * RecordSet을 xml 형식으로 출력한다. (xml 헤더포함). XmlUtil.setRecordSet과 동일
+	 * <br>
+	 * ex) response로 rs를 xml 형식으로 출력하는 경우 => XmlUtil.render(response, rs, "utf-8")
+	 *
+	 * @param response 클라이언트로 응답할 Response 객체
+	 * @param rs xml 형식으로 변환할 RecordSet 객체
+	 * @param encoding 헤더에 포함될 인코딩
+	 * 
+	 * @return 처리건수
+	 * @throws ColumnNotFoundException 
+	 * @throws IOException 
+	 */
+	public static int render(HttpServletResponse response, RecordSet rs, String encoding) throws ColumnNotFoundException, IOException {
+		return setRecordSet(response, rs, encoding);
+	}
 
 	/**
 	 * RecordSet을 xml 형식으로 출력한다. (xml 헤더포함)
@@ -63,6 +80,20 @@ public class XmlUtil {
 	}
 
 	/**
+	 * RecordSet을 xml 형식으로 변환한다. (xml 헤더 미포함). XmlUtil.format과 동일
+	 * <br>
+	 * ex) rs를 xml 형식으로 변환하는 경우 => String xml = XmlUtil.render(rs)
+	 *
+	 * @param rs xml 형식으로 변환할 RecordSet 객체
+	 *
+	 * @return xml 형식으로 변환된 문자열
+	 * @throws ColumnNotFoundException 
+	 */
+	public static String render(RecordSet rs) throws ColumnNotFoundException {
+		return format(rs);
+	}
+
+	/**
 	 * RecordSet을 xml 형식으로 변환한다. (xml 헤더 미포함)
 	 * <br>
 	 * ex) rs를 xml 형식으로 변환하는 경우 => String xml = XmlUtil.format(rs)
@@ -88,6 +119,21 @@ public class XmlUtil {
 	}
 
 	/**
+	 * RecordSet을 xml 형식으로 변환한다. (xml 헤더포함). XmlUtil.format과 동일
+	 * <br>
+	 * ex) rs를 xml 형식으로 변환하는 경우 => String xml = XmlUtil.render(rs, "utf-8")
+	 *
+	 * @param rs xml 형식으로 변환할 RecordSet 객체
+	 * @param encoding 헤더에 포함될 인코딩
+	 *
+	 * @return xml 형식으로 변환된 문자열
+	 * @throws ColumnNotFoundException 
+	 */
+	public static String render(RecordSet rs, String encoding) throws ColumnNotFoundException {
+		return format(rs, encoding);
+	}
+
+	/**
 	 * RecordSet을 xml 형식으로 변환한다. (xml 헤더포함)
 	 * <br>
 	 * ex) rs를 xml 형식으로 변환하는 경우 => String xml = XmlUtil.format(rs, "utf-8")
@@ -109,6 +155,23 @@ public class XmlUtil {
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////// ResultSet 이용
+
+	/**
+	 * ResultSet을 xml 형식으로 출력한다 (xml 헤더포함). XmlUtil.setResultSet과 동일
+	 * <br>
+	 * ex) response로 rs를 xml 형식으로 출력하는 경우 => XmlUtil.render(response, rs, "utf-8")
+	 *
+	 * @param response 클라이언트로 응답할 Response 객체
+	 * @param rs xml 형식으로 변환할 ResultSet 객체, ResultSet 객체는 자동으로 close 된다.
+	 * @param encoding 헤더에 포함될 인코딩
+	 * 
+	 * @return 처리건수
+	 * @throws SQLException 
+	 * @throws IOException 
+	 */
+	public static int render(HttpServletResponse response, ResultSet rs, String encoding) throws SQLException, IOException {
+		return setResultSet(response, rs, encoding);
+	}
 
 	/**
 	 * ResultSet을 xml 형식으로 출력한다 (xml 헤더포함).
@@ -155,6 +218,18 @@ public class XmlUtil {
 	}
 
 	/**
+	 * ResultSet을 xml 형식으로 변환한다 (xml 헤더 미포함). XmlUtil.format과 동일
+	 * <br>
+	 * ex) rs를 xml 형식으로 변환하는 경우 => String xml = XmlUtil.render(rs)
+	 *
+	 * @param rs xml 형식으로 변환할 ResultSet 객체, ResultSet 객체는 자동으로 close 된다.
+	 * @throws SQLException 
+	 */
+	public static String render(ResultSet rs) throws SQLException {
+		return format(rs);
+	}
+
+	/**
 	 * ResultSet을 xml 형식으로 변환한다 (xml 헤더 미포함).
 	 * <br>
 	 * ex) rs를 xml 형식으로 변환하는 경우 => String xml = XmlUtil.format(rs)
@@ -191,6 +266,20 @@ public class XmlUtil {
 	}
 
 	/**
+	 * ResultSet을 xml 형식으로 변환한다 (xml 헤더포함). XmlUtil.format과 동일
+	 * <br>
+	 * ex) rs를 xml 형식으로 변환하는 경우 => String xml = XmlUtil.render(rs, "utf-8")
+	 *
+	 * @param rs xml 형식으로 변환할 ResultSet 객체, ResultSet 객체는 자동으로 close 된다.
+	 * @param encoding 헤더에 포함될 인코딩
+	 * 
+	 * @throws SQLException 
+	 */
+	public static String render(ResultSet rs, String encoding) throws SQLException {
+		return format(rs, encoding);
+	}
+
+	/**
 	 * ResultSet을 xml 형식으로 변환한다 (xml 헤더포함).
 	 * <br>
 	 * ex) rs를 xml 형식으로 변환하는 경우 => String xml = XmlUtil.format(rs, "utf-8")
@@ -213,6 +302,19 @@ public class XmlUtil {
 	////////////////////////////////////////////////////////////////////////////////////////// 기타 Collection 이용
 
 	/**
+	 * Map객체를 xml 형식으로 변환한다 (xml 헤더 미포함). XmlUtil.format과 동일
+	 * <br>
+	 * ex) map을 xml 형식으로 변환하는 경우 => String xml = XmlUtil.render(map)
+	 *
+	 * @param map 변환할 Map객체
+	 *
+	 * @return xml 형식으로 변환된 문자열
+	 */
+	public static String render(Map<String, Object> map) {
+		return format(map);
+	}
+
+	/**
 	 * Map객체를 xml 형식으로 변환한다 (xml 헤더 미포함).
 	 * <br>
 	 * ex) map을 xml 형식으로 변환하는 경우 => String xml = XmlUtil.format(map)
@@ -230,6 +332,20 @@ public class XmlUtil {
 		buffer.append(xmlItemStr(map));
 		buffer.append("</items>");
 		return buffer.toString();
+	}
+
+	/**
+	 * Map객체를 xml 형식으로 변환한다 (xml 헤더포함). XmlUtil.format과 동일
+	 * <br>
+	 * ex) map을 xml 형식으로 변환하는 경우  => String xml = XmlUtil.render(map, "utf-8")
+	 *
+	 * @param map 변환할 Map객체
+	 * @param encoding 헤더에 포함될 인코딩
+	 *
+	 * @return xml 형식으로 변환된 문자열
+	 */
+	public static String render(Map<String, Object> map, String encoding) {
+		return format(map, encoding);
 	}
 
 	/**
@@ -253,6 +369,19 @@ public class XmlUtil {
 	}
 
 	/**
+	 * List객체를 xml 형태로 변환한다 (xml 헤더 미포함).  XmlUtil.format과 동일
+	 * <br>
+	 * ex) mapList를 xml으로 변환하는 경우 => String xml = XmlUtil.render(mapList)
+	 *
+	 * @param mapList 변환할 List객체
+	 *
+	 * @return xml형식으로 변환된 문자열
+	 */
+	public static String render(List<Map<String, Object>> mapList) {
+		return format(mapList);
+	}
+
+	/**
 	 * List객체를 xml 형태로 변환한다 (xml 헤더 미포함).
 	 * <br>
 	 * ex) mapList를 xml으로 변환하는 경우 => String xml = XmlUtil.format(mapList)
@@ -272,6 +401,20 @@ public class XmlUtil {
 		}
 		buffer.append("</items>");
 		return buffer.toString();
+	}
+
+	/**
+	 * List객체를 xml 형태로 변환한다 (xml 헤더포함). XmlUtil.format과 동일
+	 * <br>
+	 * ex) mapList를 xml으로 변환하는 경우  => String xml = XmlUtil.render(mapList, "utf-8")
+	 *
+	 * @param mapList 변환할 List객체
+	 * @param encoding 헤더에 포함될 인코딩
+	 *
+	 * @return xml형식으로 변환된 문자열
+	 */
+	public static String render(List<Map<String, Object>> mapList, String encoding) {
+		return format(mapList, encoding);
 	}
 
 	/**

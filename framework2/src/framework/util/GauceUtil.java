@@ -35,8 +35,23 @@ public class GauceUtil {
 	 */
 	private GauceUtil() {
 	}
-	
+
 	////////////////////////////////////////////////////////////////////////////////////////// RecordSet 이용
+	/**
+	 * RecordSet을 가우스 데이타셋으로 변환하여 응답객체로 전송한다. GauceUtil.setRecordSet과 동일
+	 * <br>
+	 * ex) rs를 가우스 데이터셋으로 변환하여 response로 전송하는 경우 => GauceUtil.render(response, rs)
+	 * 
+	 * @param response 클라이언트로 응답할 Response 객체
+	 * @param rs 가우스 데이타셋으로 변환할 RecordSet 객체
+	 * @return 처리건수
+	 * @throws ColumnNotFoundException 
+	 * @throws IOException 
+	 */
+	public static int render(HttpServletResponse response, RecordSet rs) throws ColumnNotFoundException, IOException {
+		return setRecordSet(response, rs);
+	}
+
 	/**
 	 * RecordSet을 가우스 데이타셋으로 변환하여 응답객체로 전송한다.
 	 * <br>
@@ -53,6 +68,22 @@ public class GauceUtil {
 	}
 
 	/**
+	 * RecordSet을 가우스 데이타셋(명칭은 datasetName 인자 값)으로 변환하여 응답객체로 전송한다. GauceUtil.setRecordSet과 동일
+	 * <br>
+	 * ex) rs를 가우스 데이터셋(명칭은 result)으로 변환하여 response로 전송하는 경우 => GauceUtil.render(response, "result", rs)
+	 * 
+	 * @param response 클라이언트로 응답할 Response 객체
+	 * @param datasetName 데이타셋 이름
+	 * @param rs 가우스 데이타셋으로 변환할 RecordSet 객체
+	 * @return 처리건수
+	 * @throws ColumnNotFoundException 
+	 * @throws IOException 
+	 */
+	public static int render(HttpServletResponse response, String datasetName, RecordSet rs) throws ColumnNotFoundException, IOException {
+		return setRecordSet(response, datasetName, rs);
+	}
+
+	/**
 	 * RecordSet을 가우스 데이타셋(명칭은 datasetName 인자 값)으로 변환하여 응답객체로 전송한다.
 	 * <br>
 	 * ex) rs를 가우스 데이터셋(명칭은 result)으로 변환하여 response로 전송하는 경우 => GauceUtil.setRecordSet(response, "result", rs)
@@ -66,6 +97,22 @@ public class GauceUtil {
 	 */
 	public static int setRecordSet(HttpServletResponse response, String datasetName, RecordSet rs) throws ColumnNotFoundException, IOException {
 		return setRecordSet(response, new String[] { datasetName }, new RecordSet[] { rs });
+	}
+
+	/**
+	 * RecordSet을 가우스 데이타셋(명칭은 datasetNameArray 인자 값)으로 변환하여 응답객체로 전송한다. GauceUtil.setRecordSet과 동일
+	 * <br>
+	 * ex) rs1과 rs2를 가우스 데이터셋으로 변환하여 response로 전송하는 경우 => GauceUtil.render(response, new String[] { "result1", "result2" }, new RecordSet[] { rs1, rs2 })
+	 * 
+	 * @param response 클라이언트로 응답할 Response 객체
+	 * @param datasetNameArray 데이타셋 이름 배열
+	 * @param rsArray 가우스 데이타셋으로 변환할 RecordSet 객체 배열
+	 * @return 처리건수
+	 * @throws ColumnNotFoundException 
+	 * @throws IOException 
+	 */
+	public static int render(HttpServletResponse response, String[] datasetNameArray, RecordSet[] rsArray) throws ColumnNotFoundException, IOException {
+		return setRecordSet(response, datasetNameArray, rsArray);
 	}
 
 	/**
@@ -95,6 +142,22 @@ public class GauceUtil {
 	}
 
 	/**
+	 * RecordSet을 인자로 넘어온 가우스 데이타셋으로 변환하여 응답객체로 전송한다. GauceUtil.setRecordSet과 동일
+	 * <br>
+	 * ex) rs를 가우스 데이터셋으로 변환하여 response로 전송하는 경우 => GauceUtil.render(response, dSet, rs)
+	 * 
+	 * @param response 클라이언트로 응답할 Response 객체
+	 * @param dSet 데이타셋
+	 * @param rs 가우스 데이타셋으로 변환할 RecordSet 객체
+	 * @return 처리건수
+	 * @throws ColumnNotFoundException 
+	 * @throws IOException 
+	 */
+	public static int render(HttpServletResponse response, GauceDataSet dSet, RecordSet rs) throws ColumnNotFoundException, IOException {
+		return setRecordSet(response, dSet, rs);
+	}
+
+	/**
 	 * RecordSet을 인자로 넘어온 가우스 데이타셋으로 변환하여 응답객체로 전송한다.
 	 * <br>
 	 * ex) rs를 가우스 데이터셋으로 변환하여 response로 전송하는 경우 => GauceUtil.setRecordSet(response, dSet, rs)
@@ -108,6 +171,22 @@ public class GauceUtil {
 	 */
 	public static int setRecordSet(HttpServletResponse response, GauceDataSet dSet, RecordSet rs) throws ColumnNotFoundException, IOException {
 		return setRecordSet(response, new GauceDataSet[] { dSet }, new RecordSet[] { rs });
+	}
+
+	/**
+	 * RecordSet을 인자로 넘어온 가우스 데이타셋으로 변환하여 응답객체로 전송한다. GauceUtil.setRecordSet과 동일
+	 * <br>
+	 * ex) rs1과 rs2를 가우스 데이터셋으로 변환하여 response로 전송하는 경우 => GauceUtil.render(response, new GauceDataSet[] { dSet1, dSet2 }, new RecordSet[] { rs1, rs2 })
+	 * 
+	 * @param response 클라이언트로 응답할 Response 객체
+	 * @param dSetArray 데이타셋 배열
+	 * @param rsArray 가우스 데이타셋으로 변환할 RecordSet 객체 배열
+	 * @return 처리건수
+	 * @throws ColumnNotFoundException 
+	 * @throws IOException 
+	 */
+	public static int render(HttpServletResponse response, GauceDataSet[] dSetArray, RecordSet[] rsArray) throws ColumnNotFoundException, IOException {
+		return setRecordSet(response, dSetArray, rsArray);
 	}
 
 	/**
@@ -165,6 +244,22 @@ public class GauceUtil {
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////// ResultSet 이용
+
+	/**
+	 * ResultSet을 가우스 데이타셋으로 변환하여 응답객체로 전송한다. GauceUtil.ResultSet과 동일
+	 * <br>
+	 * ex) rs를 가우스 데이터셋으로 변환하여 response로 전송하는 경우 => GauceUtil.render(response, rs)
+	 * 
+	 * @param response 클라이언트로 응답할 Response 객체
+	 * @param rs 가우스 데이타셋으로 변환할 RecordSet 객체
+	 * @return 처리건수
+	 * @throws IOException 
+	 * @throws SQLException
+	 */
+	public static int render(HttpServletResponse response, ResultSet rs) throws IOException, SQLException {
+		return setResultSet(response, rs);
+	}
+
 	/**
 	 * ResultSet을 가우스 데이타셋으로 변환하여 응답객체로 전송한다.
 	 * <br>
@@ -181,6 +276,22 @@ public class GauceUtil {
 	}
 
 	/**
+	 * ResultSet을 가우스 데이타셋(명칭은 datasetName 인자 값)으로 변환하여 응답객체로 전송한다. GauceUtil.ResultSet과 동일
+	 * <br>
+	 * ex) rs를 가우스 데이터셋(명칭은 result)으로 변환하여 response로 전송하는 경우 => GauceUtil.render(response, "result", rs)
+	 * 
+	 * @param response 클라이언트로 응답할 Response 객체
+	 * @param datasetName 데이타셋 이름
+	 * @param rs 가우스 데이타셋으로 변환할 RecordSet 객체
+	 * @return 처리건수
+	 * @throws IOException 
+	 * @throws SQLException
+	 */
+	public static int render(HttpServletResponse response, String datasetName, ResultSet rs) throws IOException, SQLException {
+		return setResultSet(response, datasetName, rs);
+	}
+
+	/**
 	 * ResultSet을 가우스 데이타셋(명칭은 datasetName 인자 값)으로 변환하여 응답객체로 전송한다.
 	 * <br>
 	 * ex) rs를 가우스 데이터셋(명칭은 result)으로 변환하여 response로 전송하는 경우 => GauceUtil.ResultSet(response, "result", rs)
@@ -194,6 +305,22 @@ public class GauceUtil {
 	 */
 	public static int setResultSet(HttpServletResponse response, String datasetName, ResultSet rs) throws IOException, SQLException {
 		return setResultSet(response, new String[] { datasetName }, new ResultSet[] { rs });
+	}
+
+	/**
+	 * ResultSet을 가우스 데이타셋(명칭은 datasetNameArray 인자 값)으로 변환하여 응답객체로 전송한다. GauceUtil.setResultSet과 동일
+	 * <br>
+	 * ex) rs1과 rs2를 가우스 데이터셋으로 변환하여 response로 전송하는 경우 => GauceUtil.render(response, new String[] { "result1", "result2" }, new ResultSet[] { rs1, rs2 })
+	 * 
+	 * @param response 클라이언트로 응답할 Response 객체
+	 * @param datasetNameArray 데이타셋 이름 배열
+	 * @param rsArray 가우스 데이타셋으로 변환할 ResultSet 객체 배열, ResultSet 객체는 자동으로 close 된다.
+	 * @return 처리건수
+	 * @throws IOException 
+	 * @throws SQLException 
+	 */
+	public static int render(HttpServletResponse response, String[] datasetNameArray, ResultSet[] rsArray) throws IOException, SQLException {
+		return setResultSet(response, datasetNameArray, rsArray);
 	}
 
 	/**
@@ -223,6 +350,22 @@ public class GauceUtil {
 	}
 
 	/**
+	 * ResultSet을 인자로 넘어온 가우스 데이타셋으로 변환하여 응답객체로 전송한다. GauceUtil.ResultSet과 동일
+	 * <br>
+	 * ex) rs를 가우스 데이터셋으로 변환하여 response로 전송하는 경우 => GauceUtil.render(response, dSet, rs)
+	 * 
+	 * @param response 클라이언트로 응답할 Response 객체
+	 * @param dSet 데이타셋
+	 * @param rs 가우스 데이타셋으로 변환할 RecordSet 객체
+	 * @return 처리건수
+	 * @throws IOException 
+	 * @throws SQLException
+	 */
+	public static int render(HttpServletResponse response, GauceDataSet dSet, ResultSet rs) throws IOException, SQLException {
+		return setResultSet(response, dSet, rs);
+	}
+
+	/**
 	 * ResultSet을 인자로 넘어온 가우스 데이타셋으로 변환하여 응답객체로 전송한다.
 	 * <br>
 	 * ex) rs를 가우스 데이터셋으로 변환하여 response로 전송하는 경우 => GauceUtil.ResultSet(response, dSet, rs)
@@ -236,6 +379,22 @@ public class GauceUtil {
 	 */
 	public static int setResultSet(HttpServletResponse response, GauceDataSet dSet, ResultSet rs) throws IOException, SQLException {
 		return setResultSet(response, new GauceDataSet[] { dSet }, new ResultSet[] { rs });
+	}
+
+	/**
+	 * ResultSet을 인자로 넘어온 가우스 데이타셋으로 변환하여 응답객체로 전송한다. GauceUtil.setResultSet과 동일
+	 * <br>
+	 * ex) rs1과 rs2를 가우스 데이터셋으로 변환하여 response로 전송하는 경우 => GauceUtil.render(response, new GauceDataSet[] { dSet1, dSet2 }, new ResultSet[] { rs1, rs2 })
+	 * 
+	 * @param response 클라이언트로 응답할 Response 객체
+	 * @param dSetArray 데이타셋 이름 배열
+	 * @param rsArray 가우스 데이타셋으로 변환할 ResultSet 객체 배열, ResultSet 객체는 자동으로 close 된다.
+	 * @return 처리건수
+	 * @throws IOException 
+	 * @throws SQLException 
+	 */
+	public static int render(HttpServletResponse response, GauceDataSet[] dSetArray, ResultSet[] rsArray) throws IOException, SQLException {
+		return setResultSet(response, dSetArray, rsArray);
 	}
 
 	/**

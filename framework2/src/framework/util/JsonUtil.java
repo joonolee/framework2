@@ -35,6 +35,21 @@ public class JsonUtil {
 	////////////////////////////////////////////////////////////////////////////////////////// RecordSet 이용
 
 	/**
+	 * RecordSet을 JSON 형식으로 출력한다. JsonUtil.setRecordSet과 동일
+	 * <br>
+	 * ex) response로 rs를 JSON 형식으로 출력하는 경우 => JsonUtil.render(response, rs)
+	 * 
+	 * @param response 클라이언트로 응답할 Response 객체
+	 * @param rs JSON 형식으로 변환할 RecordSet 객체
+	 * @return 처리건수
+	 * @throws ColumnNotFoundException 
+	 * @throws IOException 
+	 */
+	public static int render(HttpServletResponse response, RecordSet rs) throws ColumnNotFoundException, IOException {
+		return setRecordSet(response, rs);
+	}
+
+	/**
 	 * RecordSet을 JSON 형식으로 출력한다.
 	 * <br>
 	 * ex) response로 rs를 JSON 형식으로 출력하는 경우 => JsonUtil.setRecordSet(response, rs)
@@ -62,6 +77,20 @@ public class JsonUtil {
 		}
 		pw.print("]");
 		return rowCount;
+	}
+
+	/**
+	 * RecordSet을 Json 배열 형태로 변환한다. JsonUtil.format과 동일
+	 * <br>
+	 * ex) rs를 JSON 형식으로 변환하는 경우 => String json = JsonUtil.render(rs)
+	 * 
+	 * @param rs JSON 형식으로 변환할 RecordSet 객체
+	 * 
+	 * @return JSON 형식으로 변환된 문자열
+	 * @throws ColumnNotFoundException 
+	 */
+	public static String render(RecordSet rs) throws ColumnNotFoundException {
+		return format(rs);
 	}
 
 	/**
@@ -94,6 +123,21 @@ public class JsonUtil {
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////// ResultSet 이용
+
+	/**
+	 * ResultSet을 JSON 형식으로 출력한다. JsonUtil.setResultSet과 동일
+	 * <br>
+	 * ex) response로 rs를 JSON 형식으로 출력하는 경우 => JsonUtil.render(response, rs)
+	 * 
+	 * @param response 클라이언트로 응답할 Response 객체
+	 * @param rs JSON 형식으로 변환할 ResultSet 객체, ResultSet 객체는 자동으로 close 된다.
+	 * @return 처리건수
+	 * @throws SQLException 
+	 * @throws IOException 
+	 */
+	public static int render(HttpServletResponse response, ResultSet rs) throws SQLException, IOException {
+		return setResultSet(response, rs);
+	}
 
 	/**
 	 * ResultSet을 JSON 형식으로 출력한다.
@@ -136,6 +180,20 @@ public class JsonUtil {
 			if (stmt != null)
 				stmt.close();
 		}
+	}
+
+	/**
+	 * ResultSet을 Json 배열 형태로 변환한다. JsonUtil.format과 동일
+	 * <br>
+	 * ex) rs를 JSON 형식으로 변환하는 경우 => String json = JsonUtil.render(rs)
+	 * 
+	 * @param rs JSON 형식으로 변환할 ResultSet 객체
+	 * 
+	 * @return JSON 형식으로 변환된 문자열
+	 * @throws SQLException 
+	 */
+	public static String render(ResultSet rs) throws SQLException {
+		return format(rs);
 	}
 
 	/**
@@ -183,6 +241,19 @@ public class JsonUtil {
 	////////////////////////////////////////////////////////////////////////////////////////// 기타 Collection 이용
 
 	/**
+	 * Map객체를 JSON 형식으로 변환한다. JsonUtil.format과 동일
+	 * <br>
+	 * ex) map을 JSON 형식으로 변환하는 경우 => String json = JsonUtil.render(map)
+	 *
+	 * @param map 변환할 Map객체
+	 *
+	 * @return JSON 형식으로 변환된 문자열
+	 */
+	public static String render(Map<String, Object> map) {
+		return format(map);
+	}
+
+	/**
 	 * Map객체를 JSON 형식으로 변환한다.
 	 * <br>
 	 * ex) map을 JSON 형식으로 변환하는 경우 => String json = JsonUtil.format(map)
@@ -198,6 +269,19 @@ public class JsonUtil {
 		StringBuilder buffer = new StringBuilder();
 		buffer.append(jsonRowStr(map));
 		return buffer.toString();
+	}
+
+	/**
+	 * List객체를 JSON 형식으로 변환한다. JsonUtil.format과 동일
+	 * <br>
+	 * ex1) mapList를 JSON 형식으로 변환하는 경우 => String json = JsonUtil.render(mapList)
+	 *
+	 * @param mapList 변환할 List객체
+	 *
+	 * @return JSON 형식으로 변환된 문자열
+	 */
+	public static String render(List<Map<String, Object>> mapList) {
+		return format(mapList);
 	}
 
 	/**

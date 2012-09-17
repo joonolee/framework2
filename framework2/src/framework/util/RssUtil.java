@@ -28,7 +28,7 @@ public class RssUtil {
 	 */
 	private RssUtil() {
 	}
-	
+
 	private static final String BR = System.getProperty("line.separator");
 
 	/**
@@ -123,6 +123,26 @@ public class RssUtil {
 	////////////////////////////////////////////////////////////////////////////////////////// RecordSet 이용
 
 	/**
+	 * RecordSet을 RSS 2.0 형식으로 출력한다. RecordSet에는 다음컬럼이 반드시 포함되어야 한다.(title, link, description, author, category, pubDate). RssUtil.setRecordSet과 동일
+	 * <br>
+	 * ex) response로 rs를 RSS 형식으로 출력하는 경우 => RssUtil.render(response, rs, "utf-8", "제목", "http://www.xxx.com", "설명", "admin@xxx.com")
+	 *
+	 * @param response 클라이언트로 응답할 Response 객체
+	 * @param rs RSS 형식으로 변환할 RecordSet 객체
+	 * @param encoding 헤더에 포함될 인코딩
+	 * @param title 제목 : 필수
+	 * @param link 링크(validator를 통과하기 위해서는 url에 앰퍼센드등은 엔터티표기를 사용하여야 함) : 필수
+	 * @param description 설명 : 필수
+	 * @param webMaster 웹마스터 e-mail 주소(validator를 통과하기 위해서는 "이메일주소(이름)" 형식으로 표기하여야 함) : 옵션
+	 * @return 처리건수
+	 * @throws IOException 
+	 * @throws ColumnNotFoundException 
+	 */
+	public static int render(HttpServletResponse response, RecordSet rs, String encoding, String title, String link, String description, String webMaster) throws IOException {
+		return setRecordSet(response, rs, encoding, title, link, description, webMaster);
+	}
+
+	/**
 	 * RecordSet을 RSS 2.0 형식으로 출력한다. RecordSet에는 다음컬럼이 반드시 포함되어야 한다.(title, link, description, author, category, pubDate).
 	 * <br>
 	 * ex) response로 rs를 RSS 형식으로 출력하는 경우 => RssUtil.setRecordSet(response, rs, "utf-8", "제목", "http://www.xxx.com", "설명", "admin@xxx.com")
@@ -167,6 +187,24 @@ public class RssUtil {
 	}
 
 	/**
+	 * RecordSet을 RSS 2.0 형식으로 변환한다. RecordSet에는 다음컬럼이 반드시 포함되어야 한다.(title, link, description, author, category, pubDate). RssUtil.format과 동일
+	 * <br>
+	 * ex) rs를 RSS 형식으로 변환하는 경우 => String rss = RssUtil.render(rs, "utf-8", "제목", "http://www.xxx.com", "설명", "admin@xxx.com")
+	 *
+	 * @param rs RSS 형식으로 변환할 RecordSet 객체
+	 * @param encoding 헤더에 포함될 인코딩
+	 * @param title 제목 : 필수
+	 * @param link 링크(validator를 통과하기 위해서는 url에 앰퍼센드등은 엔터티표기를 사용하여야 함) : 필수
+	 * @param description 설명 : 필수
+	 * @param webMaster 웹마스터 e-mail 주소(validator를 통과하기 위해서는 "이메일주소(이름)" 형식으로 표기하여야 함) : 옵션
+	 * @return RSS 형식으로 변환된 문자열
+	 * @throws ColumnNotFoundException 
+	 */
+	public static String render(RecordSet rs, String encoding, String title, String link, String description, String webMaster) {
+		return format(rs, encoding, title, link, description, webMaster);
+	}
+
+	/**
 	 * RecordSet을 RSS 2.0 형식으로 변환한다. RecordSet에는 다음컬럼이 반드시 포함되어야 한다.(title, link, description, author, category, pubDate).
 	 * <br>
 	 * ex) rs를 RSS 형식으로 변환하는 경우 => String rss = RssUtil.format(rs, "utf-8", "제목", "http://www.xxx.com", "설명", "admin@xxx.com")
@@ -207,6 +245,26 @@ public class RssUtil {
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////// ResultSet 이용
+
+	/**
+	 * ResultSet을 RSS 2.0 형식으로 출력한다. ResultSet에는 다음컬럼이 반드시 포함되어야 한다.(title, link, description, author, category, pubDate). RssUtil.setResultSet과 동일
+	 * <br>
+	 * ex) response로 rs를 RSS 형식으로 출력하는 경우 => RssUtil.render(response, rs, "utf-8", "제목", "http://www.xxx.com", "설명", "admin@xxx.com")
+	 *
+	 * @param response 클라이언트로 응답할 Response 객체
+	 * @param rs RSS 형식으로 변환할 ResultSet 객체, ResultSet 객체는 자동으로 close 된다.
+	 * @param encoding 헤더에 포함될 인코딩
+	 * @param title 제목 : 필수
+	 * @param link 링크(validator를 통과하기 위해서는 url에 앰퍼센드등은 엔터티표기를 사용하여야 함) : 필수
+	 * @param description 설명 : 필수
+	 * @param webMaster 웹마스터 e-mail 주소(validator를 통과하기 위해서는 "이메일주소(이름)" 형식으로 표기하여야 함) : 옵션
+	 * @return 처리건수
+	 * @throws SQLException 
+	 * @throws IOException 
+	 */
+	public static int render(HttpServletResponse response, ResultSet rs, String encoding, String title, String link, String description, String webMaster) throws SQLException, IOException {
+		return setResultSet(response, rs, encoding, title, link, description, webMaster);
+	}
 
 	/**
 	 * ResultSet을 RSS 2.0 형식으로 출력한다. ResultSet에는 다음컬럼이 반드시 포함되어야 한다.(title, link, description, author, category, pubDate).
@@ -260,6 +318,23 @@ public class RssUtil {
 	}
 
 	/**
+	 * ResultSet을 RSS 2.0 형식으로 변환한다. ResultSet에는 다음컬럼이 반드시 포함되어야 한다.(title, link, description, author, category, pubDate). RssUtil.format과 동일
+	 * <br>
+	 * ex) rs를 RSS 형식으로 변환하는 경우 => String rss = RssUtil.render(rs, "utf-8", "제목", "http://www.xxx.com", "설명", "admin@xxx.com")
+	 *
+	 * @param rs RSS 형식으로 변환할 ResultSet 객체, ResultSet 객체는 자동으로 close 된다.
+	 * @param encoding 헤더에 포함될 인코딩
+	 * @param title 제목 : 필수
+	 * @param link 링크(validator를 통과하기 위해서는 url에 앰퍼센드등은 엔터티표기를 사용하여야 함) : 필수
+	 * @param description 설명 : 필수
+	 * @param webMaster 웹마스터 e-mail 주소(validator를 통과하기 위해서는 "이메일주소(이름)" 형식으로 표기하여야 함) : 옵션
+	 * @throws SQLException 
+	 */
+	public static String render(ResultSet rs, String encoding, String title, String link, String description, String webMaster) throws SQLException {
+		return format(rs, encoding, title, link, description, webMaster);
+	}
+
+	/**
 	 * ResultSet을 RSS 2.0 형식으로 변환한다. ResultSet에는 다음컬럼이 반드시 포함되어야 한다.(title, link, description, author, category, pubDate).
 	 * <br>
 	 * ex) rs를 RSS 형식으로 변환하는 경우 => String rss = RssUtil.format(rs, "utf-8", "제목", "http://www.xxx.com", "설명", "admin@xxx.com")
@@ -306,6 +381,23 @@ public class RssUtil {
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////// 기타 Collection 이용
+
+	/**
+	 * List객체를 RSS 2.0 형태로 변환한다. RssUtil.format과 동일
+	 * <br>
+	 * ex) rssItemList를 RSS 로 변환하는 경우  => String rss = RssUtil.render(rssItemList, "utf-8", "제목", "http://www.xxx.com", "설명", "admin@xxx.com")
+	 *
+	 * @param rssItemList 변환할 List객체
+	 * @param encoding 헤더에 포함될 인코딩
+	 * @param title 제목 : 필수
+	 * @param link 링크(validator를 통과하기 위해서는 url에 앰퍼센드등은 엔터티표기를 사용하여야 함) : 필수
+	 * @param description 설명 : 필수
+	 * @param webMaster 웹마스터 e-mail 주소(validator를 통과하기 위해서는 "이메일주소(이름)" 형식으로 표기하여야 함) : 옵션
+	 * @return RSS 형식으로 변환된 문자열
+	 */
+	public static String render(List<RssItem> rssItemList, String encoding, String title, String link, String description, String webMaster) {
+		return format(rssItemList, encoding, title, link, description, webMaster);
+	}
 
 	/**
 	 * List객체를 RSS 2.0 형태로 변환한다.

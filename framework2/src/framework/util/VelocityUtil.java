@@ -21,13 +21,29 @@ import framework.action.Box;
  * Velocity를 이용한 템플릿 처리 라이브러리
  */
 public class VelocityUtil {
-	
+
 	/**
 	 * 생성자, 외부에서 객체를 인스턴스화 할 수 없도록 설정
 	 */
 	private VelocityUtil() {
 	}
-	
+
+	/**
+	 * action.properties 파일에 설정된 key와 연결된 템플릿 파일에서 statement에 정의된 COMMAND의 문자열을 파라미터를 
+	 * 적용한 문자열을 생성한다. VelocityUtil.evalutate과 동일
+	 * <br>
+	 * Sql 문장생성 및 이메일 발송을 위한 템플릿 생성할때 응용할 수 있다.
+	 * @param servlet 서블릿 객체
+	 * @param key action.properties에 등록한 템플릿의 키 문자열 
+	 * @param statement 문장식별 문자열
+	 * @param param 파라미터 Box 객체
+	 * @return 템플릿이 적용된 문자열
+	 * @throws Exception 
+	 */
+	public static String render(HttpServlet servlet, String key, String statement, Box param) throws Exception {
+		return evaluate(servlet, key, statement, param);
+	}
+
 	/**
 	 * action.properties 파일에 설정된 key와 연결된 템플릿 파일에서 statement에 정의된 COMMAND의 문자열을 파라미터를 
 	 * 적용한 문자열을 생성한다.

@@ -51,6 +51,24 @@ public class MiPlatformUtil {
 	public static int ZLIB_COMP = PlatformRequest.ZLIB_COMP;
 
 	////////////////////////////////////////////////////////////////////////////////////////// RecordSet 이용
+
+	/**
+	 * RecordSet을 마이플랫폼 데이타셋(명칭은 datasetName 인자 값)으로 변환하여 응답객체로 전송한다. MiPlatformUtil.setRecordSet과 동일
+	 * <br>
+	 * ex) rs를 마이플랫폼 데이터셋(명칭은 result)으로 변환하여 response로 XML 형식으로 전송하는 경우 => MiPlatformUtil.render(response, "result", rs, MiPlatformUtil.XML)
+	 * 
+	 * @param response 클라이언트로 응답할 Response 객체
+	 * @param datasetName 데이타셋 이름
+	 * @param rs 마이플랫폼 데이타셋으로 변환할 RecordSet 객체
+	 * @param dataFormat 송수신 형식 (MiPlatformUtil.BIN, MiPlatformUtil.ZLIB_COMP, MiPlatformUtil.XML)
+	 * @return 처리건수
+	 * @throws ColumnNotFoundException 
+	 * @throws IOException 
+	 */
+	public static int render(HttpServletResponse response, String datasetName, RecordSet rs, int dataFormat) throws ColumnNotFoundException, IOException {
+		return setRecordSet(response, datasetName, rs, dataFormat);
+	}
+
 	/**
 	 * RecordSet을 마이플랫폼 데이타셋(명칭은 datasetName 인자 값)으로 변환하여 응답객체로 전송한다.
 	 * <br>
@@ -66,6 +84,23 @@ public class MiPlatformUtil {
 	 */
 	public static int setRecordSet(HttpServletResponse response, String datasetName, RecordSet rs, int dataFormat) throws ColumnNotFoundException, IOException {
 		return setRecordSet(response, new String[] { datasetName }, new RecordSet[] { rs }, dataFormat);
+	}
+
+	/**
+	 * RecordSet을 마이플랫폼 데이타셋(명칭은 datasetNameArray 인자 값)으로 변환하여 응답객체로 전송한다. MiPlatformUtil.setRecordSet과 동일
+	 * <br>
+	 * ex) rs1과 rs2를 마이플랫폼 데이터셋으로 변환하여 response로 XML 형식으로 전송하는 경우 => MiPlatformUtil.render(response, new String[] { "result1", "result2" }, new RecordSet[] { rs1, rs2 }, MiPlatformUtil.XML)
+	 * 
+	 * @param response 클라이언트로 응답할 Response 객체
+	 * @param datasetNameArray 데이타셋 이름 배열
+	 * @param rsArray 마이플랫폼 데이타셋으로 변환할 RecordSet 객체 배열
+	 * @param dataFormat 송수신 형식 (MiPlatformUtil.BIN, MiPlatformUtil.ZLIB_COMP, MiPlatformUtil.XML)
+	 * @return 처리건수
+	 * @throws ColumnNotFoundException 
+	 * @throws IOException 
+	 */
+	public static int render(HttpServletResponse response, String[] datasetNameArray, RecordSet[] rsArray, int dataFormat) throws ColumnNotFoundException, IOException {
+		return setRecordSet(response, datasetNameArray, rsArray, dataFormat);
 	}
 
 	/**
@@ -140,6 +175,24 @@ public class MiPlatformUtil {
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////// ResultSet 이용
+
+	/**
+	 * ResultSet을 마이플랫폼 데이타셋(명칭은 datasetName 인자 값)으로 변환하여 응답객체로 전송한다. MiPlatformUtil.setResultSet과 동일
+	 * <br>
+	 * ex) rs를 마이플랫폼 데이터셋(명칭은 result)으로 변환하여 response로 XML 형식으로 전송하는 경우 => MiPlatformUtil.render(response, "result", rs, MiPlatformUtil.XML)
+	 * 
+	 * @param response 클라이언트로 응답할 Response 객체
+	 * @param datasetName 데이타셋 이름
+	 * @param rs 마이플랫폼 데이타셋으로 변환할 ResultSet 객체, ResultSet 객체는 자동으로 close 된다.
+	 * @param dataFormat 송수신 형식 (MiPlatformUtil.BIN, MiPlatformUtil.ZLIB_COMP, MiPlatformUtil.XML)
+	 * @return 처리건수
+	 * @throws IOException 
+	 * @throws SQLException 
+	 */
+	public static int render(HttpServletResponse response, String datasetName, ResultSet rs, int dataFormat) throws IOException, SQLException {
+		return setResultSet(response, datasetName, rs, dataFormat);
+	}
+
 	/**
 	 * ResultSet을 마이플랫폼 데이타셋(명칭은 datasetName 인자 값)으로 변환하여 응답객체로 전송한다.
 	 * <br>
@@ -155,6 +208,23 @@ public class MiPlatformUtil {
 	 */
 	public static int setResultSet(HttpServletResponse response, String datasetName, ResultSet rs, int dataFormat) throws IOException, SQLException {
 		return setResultSet(response, new String[] { datasetName }, new ResultSet[] { rs }, dataFormat);
+	}
+
+	/**
+	 * ResultSet을 마이플랫폼 데이타셋(명칭은 datasetNameArray 인자 값)으로 변환하여 응답객체로 전송한다. MiPlatformUtil.setResultSet과 동일
+	 * <br>
+	 * ex) rs1과 rs2를 마이플랫폼 데이터셋으로 변환하여 response로 XML 형식으로 전송하는 경우 => MiPlatformUtil.render(response, new String[] { "result1", "result2" }, new ResultSet[] { rs1, rs2 }, MiPlatformUtil.XML)
+	 * 
+	 * @param response 클라이언트로 응답할 Response 객체
+	 * @param datasetNameArray 데이타셋 이름 배열
+	 * @param rsArray 마이플랫폼 데이타셋으로 변환할 ResultSet 객체 배열, ResultSet 객체는 자동으로 close 된다.
+	 * @param dataFormat 송수신 형식 (MiPlatformUtil.BIN, MiPlatformUtil.ZLIB_COMP, MiPlatformUtil.XML)
+	 * @return 처리건수
+	 * @throws IOException 
+	 * @throws SQLException 
+	 */
+	public static int render(HttpServletResponse response, String[] datasetNameArray, ResultSet[] rsArray, int dataFormat) throws IOException, SQLException {
+		return setResultSet(response, datasetNameArray, rsArray, dataFormat);
 	}
 
 	/**
