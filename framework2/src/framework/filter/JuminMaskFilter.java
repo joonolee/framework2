@@ -32,17 +32,24 @@ public class JuminMaskFilter implements Filter {
 	}
 
 	public void doFilter(ServletRequest p_req, ServletResponse p_res, FilterChain p_chain) throws IOException, ServletException {
-		MyResponseWrapper l_resWrapper = new MyResponseWrapper((HttpServletResponse) p_res);
-		p_chain.doFilter(p_req, l_resWrapper);
-		String l_contentType = StringUtil.nullToBlankString(p_res.getContentType());
-		if (l_contentType.contains("text") || l_contentType.contains("json")) {
-			String l_juminMaskData = _juminPattern.matcher(l_resWrapper.toString()).replaceAll("$1******");
-			PrintWriter l_writer = p_res.getWriter();
-			l_writer.print(l_juminMaskData);
-			l_writer.flush();
-			l_writer.close();
-		} else {
-			l_resWrapper.writeTo(p_res.getOutputStream());
+		MyResponseWrapper l_resWrapper = null;
+		try {
+			l_resWrapper = new MyResponseWrapper((HttpServletResponse) p_res);
+			p_chain.doFilter(p_req, l_resWrapper);
+			String l_contentType = StringUtil.nullToBlankString(p_res.getContentType());
+			if (l_contentType.contains("text") || l_contentType.contains("json")) {
+				String l_juminMaskData = _juminPattern.matcher(l_resWrapper.toString()).replaceAll("$1******");
+				PrintWriter l_writer = p_res.getWriter();
+				l_writer.print(l_juminMaskData);
+				l_writer.flush();
+				l_writer.close();
+			} else {
+				l_resWrapper.writeTo(p_res.getOutputStream());
+			}
+		} finally {
+			if (l_resWrapper != null) {
+				l_resWrapper.close();
+			}
 		}
 	}
 
@@ -58,7 +65,7 @@ public class JuminMaskFilter implements Filter {
 
 		public MyResponseWrapper(HttpServletResponse p_res) {
 			super(p_res);
-			_bytes = new ByteArrayOutputStream(8192);
+			_bytes = new ByteArrayOutputStream();
 			_writer = new PrintWriter(_bytes);
 		}
 
@@ -80,6 +87,11 @@ public class JuminMaskFilter implements Filter {
 
 		public void writeTo(OutputStream os) throws IOException {
 			_bytes.writeTo(os);
+		}
+
+		public void close() throws IOException {
+			_bytes.close();
+			_writer.close();
 		}
 	}
 
