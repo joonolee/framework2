@@ -10,7 +10,7 @@
  * @(#)<xsl:value-of select="@class"/>VO.java
  * <xsl:value-of select="@class"/> Table VO INFO
  */
-package COM.VO;
+package com;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;

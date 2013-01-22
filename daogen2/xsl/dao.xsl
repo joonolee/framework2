@@ -10,7 +10,7 @@
  * @(#)<xsl:value-of select="@class"/>DAO.java
  * <xsl:value-of select="@class"/> Table DAO INFO
  */
-package COM.DAO;
+package com;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -19,7 +19,7 @@ import framework.db.ConnectionManager;
 import framework.db.RecordSet;
 import framework.db.AbstractDao;
 import framework.db.ValueObject;
-import COM.VO.<xsl:value-of select="@class"/>VO;
+import com.<xsl:value-of select="@class"/>VO;
 
 /**
 	Table : <xsl:value-of select="@name"/>
