@@ -18,10 +18,11 @@ import java.util.List;
 
 public class CreateOracleXMLFile {
 	private static final String _jdbcDriver = "oracle.jdbc.driver.OracleDriver";
-	private static final String _jdbcUrl = "jdbc:oracle:thin:@ip:port:sid";
-	private static final String _jdbcUid = "";
-	private static final String _jdbcPw = "";
+	private static final String _jdbcUrl = "jdbc:oracle:thin:@192.1.1.97:1522:HJDB2";
+	private static final String _jdbcUid = "socusr";
+	private static final String _jdbcPw = "socusr#hjdb2";
 	private static List<String> _tableNameList = Arrays.asList(
+			
 	);
 	private static String _filePath = "xml";
 
@@ -130,7 +131,7 @@ public class CreateOracleXMLFile {
 				str.append(" insert=\"SYSDATE\" update=\"none\"");
 			}
 			if (meta.getColumnName(c).equals("UPDATEDATE")) {
-				str.append(" insert=\"SYSDATE\" update=\"SYSDATE\"");
+				str.append(" insert=\"none\" update=\"SYSDATE\"");
 			}
 			if (primaryKeyList.contains(meta.getColumnName(c))) {
 				str.append(" primarykey=\"true\"");
