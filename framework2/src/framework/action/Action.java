@@ -30,6 +30,7 @@ public abstract class Action {
 	private Map<String, ConnectionManager> _connMgrMap = new HashMap<String, ConnectionManager>();
 	private HttpServlet _servlet = null;
 	private Box _input = null;
+	private Box _cookies = null;
 	private MultipartBox _multipartInput = null;
 	private PrintWriter _out = null;
 	private HttpServletRequest _request = null;
@@ -281,6 +282,22 @@ public abstract class Action {
 			this._multipartInput = MultipartBox.getMultipartBox(getRequest());
 		}
 		return this._multipartInput;
+	}
+
+	/** 
+	 * 쿠키값을 담고 있는 해시테이블을 리턴한다.
+	 * <br>
+	 * ex1) [ name=홍길동 ]인 쿠키를 받아오는 경우 => String name = getCookies().getString("name")
+	 * <br>
+	 * ex2) [ age=20 ]인 쿠키를 받아오는 경우 => Integer age = getCookies().getInteger("age")
+	 *
+	 * @return 쿠키값을 담는 해시테이블
+	 */
+	protected Box getCookies() {
+		if (this._cookies == null) {
+			this._cookies = Box.getBoxFromCookie(getRequest());
+		}
+		return this._cookies;
 	}
 
 	/** 
