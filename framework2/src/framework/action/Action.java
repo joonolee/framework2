@@ -47,17 +47,18 @@ public abstract class Action {
 	 * @param servlet 서블릿 객체
 	 * @param request 클라이언트에서 요청된 Request객체
 	 * @param response 클라이언트로 응답할 Response객체
+	 * @throws Exception 
 	 */
-	public void execute(HttpServlet servlet, HttpServletRequest request, HttpServletResponse response) {
+	public void execute(HttpServlet servlet, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		setServlet(servlet);
 		setRequest(request);
 		setResponse(response);
+		Method method = getMethod(request.getParameter("action"));
+		if (method == null) {
+			throw new PageNotFoundExeption("action");
+		}
 		try {
-			Method method = getMethod(request.getParameter("action"));
 			method.invoke(this, (Object[]) null);
-		} catch (Exception e) {
-			response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-			getLogger().error("Action execute Error!", e);
 		} finally {
 			destroy();
 		}
@@ -405,9 +406,6 @@ public abstract class Action {
 		sb.setCharAt(0, Character.toUpperCase(methodName.charAt(0)));
 		String name = "process" + sb.toString().trim();
 		Method m = getMethod(this.getClass(), name);
-		if (m == null) {
-			throw new IllegalArgumentException("Can not find method named '" + name + "' ");
-		}
 		return m;
 	}
 

@@ -5,7 +5,6 @@
 package framework.filter;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -19,77 +18,32 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 public class AccessLogFilter implements Filter {
-	private static Log _logger = LogFactory.getLog(framework.filter.AccessLogFilter.class);
+	private Log _logger = LogFactory.getLog(framework.filter.AccessLogFilter.class);
 
 	@Override
-	public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
-		HttpServletRequest httpReq = (HttpServletRequest) req;
-		if (getLogger().isDebugEnabled()) {
-			getLogger().debug("★★★ " + httpReq.getRemoteAddr() + " 로 부터 \"" + httpReq.getMethod() + " " + httpReq.getRequestURI() + "\" 요청이 시작되었습니다");
-			getLogger().debug(getParamString(httpReq));
-			getLogger().debug("ContentLength : " + httpReq.getContentLength() + "bytes");
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain) throws IOException, ServletException {
+		HttpServletRequest httpReq = (HttpServletRequest) request;
+		long currTime = 0;
+		if (_getLogger().isDebugEnabled()) {
+			currTime = System.currentTimeMillis();
+			_getLogger().debug("★★★ " + httpReq.getRemoteAddr() + " 로 부터 \"" + httpReq.getMethod() + " " + httpReq.getRequestURI() + "\" 요청이 시작되었습니다");
+			_getLogger().debug("ContentLength : " + httpReq.getContentLength() + "bytes");
 		}
-		chain.doFilter(req, res);
-		if (getLogger().isDebugEnabled()) {
-			getLogger().debug("★★★ " + httpReq.getRemoteAddr() + " 로 부터 \"" + httpReq.getMethod() + " " + httpReq.getRequestURI() + "\" 요청이 종료되었습니다\n");
+		filterChain.doFilter(request, response);
+		if (_getLogger().isDebugEnabled()) {
+			_getLogger().debug("☆☆☆ " + httpReq.getRemoteAddr() + " 로 부터 \"" + httpReq.getMethod() + " " + httpReq.getRequestURI() + "\" 요청이 종료되었습니다 | duration : " + (System.currentTimeMillis() - currTime) + " msec\n");
 		}
 	}
 
 	@Override
-	public void init(FilterConfig config) throws ServletException {
+	public void init(FilterConfig filterConfig) throws ServletException {
 	}
 
 	@Override
 	public void destroy() {
 	}
 
-	private String getParamString(HttpServletRequest req) {
-		StringBuilder buf = new StringBuilder();
-		buf.append("{ ");
-		long currentRow = 0;
-		for (Object obj : req.getParameterMap().keySet()) {
-			String key = (String) obj;
-			String value = null;
-			Object o = req.getParameterValues(key);
-			if (o == null) {
-				value = "";
-			} else {
-				int length = Array.getLength(o);
-				if (length == 0) {
-					value = "";
-				} else if (length == 1) {
-					Object item = Array.get(o, 0);
-					if (item == null) {
-						value = "";
-					} else {
-						value = item.toString();
-					}
-				} else {
-					StringBuilder valueBuf = new StringBuilder();
-					valueBuf.append("[");
-					for (int j = 0; j < length; j++) {
-						Object item = Array.get(o, j);
-						if (item != null) {
-							valueBuf.append(item.toString());
-						}
-						if (j < length - 1) {
-							valueBuf.append(",");
-						}
-					}
-					valueBuf.append("]");
-					value = valueBuf.toString();
-				}
-			}
-			if (currentRow++ > 0) {
-				buf.append(", ");
-			}
-			buf.append(key + "=" + value);
-		}
-		buf.append(" }");
-		return "Box[requestbox]=" + buf.toString();
-	}
-
-	private Log getLogger() {
-		return AccessLogFilter._logger;
+	private Log _getLogger() {
+		return this._logger;
 	}
 }
