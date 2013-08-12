@@ -81,18 +81,6 @@ public abstract class Action {
 		}
 	}
 
-	/**
-	 * 요청을 JSP페이지로 포워드(Forward) 한다.
-	 * 작성된 JSP페이지는  action.properties에 등록된다.
-	 * <br>
-	 * ex) 키가 search-jsp 인 JSP페이지로 포워딩 할 경우 => render("search-jsp")
-	 * 
-	 * @param key action.properties 파일에 등록된 JSP 페이지의 키
-	 */
-	protected void render(String key) {
-		route(key);
-	}
-
 	/** 
 	 * 요청을 JSP페이지로 포워드(Forward) 또는 재지향(Redirect) 한다.
 	 * 작성된 JSP페이지는  action.properties에 등록된다.
