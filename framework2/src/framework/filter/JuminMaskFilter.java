@@ -21,23 +21,14 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpServletResponseWrapper;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import framework.util.StringUtil;
 
 public class JuminMaskFilter implements Filter {
-	private Log _logger = LogFactory.getLog(framework.filter.JuminMaskFilter.class);
 	private Pattern _juminPattern = Pattern.compile("(?<=[^0-9])(\\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12][0-9]|3[01])(?:\\s|&nbsp;)*[-|~]?(?:\\s|&nbsp;)*)[1-8]\\d{6}(?=[^0-9])?", Pattern.MULTILINE);
 
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain) throws IOException, ServletException {
 		MyResponseWrapper resWrapper = null;
-		long currTime = 0;
-		if (_getLogger().isDebugEnabled()) {
-			currTime = System.currentTimeMillis();
-			_getLogger().debug("Start");
-		}
 		try {
 			resWrapper = new MyResponseWrapper((HttpServletResponse) response);
 			filterChain.doFilter(request, resWrapper);
@@ -58,9 +49,6 @@ public class JuminMaskFilter implements Filter {
 				resWrapper.close();
 				resWrapper = null;
 			}
-		}
-		if (_getLogger().isDebugEnabled()) {
-			_getLogger().debug("End | duration : " + (System.currentTimeMillis() - currTime) + " msec");
 		}
 	}
 
@@ -139,9 +127,5 @@ public class JuminMaskFilter implements Filter {
 			super.close();
 			_bytes = null;
 		}
-	}
-
-	private Log _getLogger() {
-		return this._logger;
 	}
 }

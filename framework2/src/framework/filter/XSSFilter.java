@@ -16,12 +16,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 public class XSSFilter implements Filter {
-	private Log _logger = LogFactory.getLog(framework.filter.XSSFilter.class);
-
 	// Avoid anything between script tags
 	private Pattern _scriptPattern1 = Pattern.compile("<script>(.*?)</script>", Pattern.CASE_INSENSITIVE);
 
@@ -52,15 +47,7 @@ public class XSSFilter implements Filter {
 
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain) throws IOException, ServletException {
-		long currTime = 0;
-		if (_getLogger().isDebugEnabled()) {
-			currTime = System.currentTimeMillis();
-			_getLogger().debug("Start");
-		}
 		filterChain.doFilter(new XSSRequestWrapper((HttpServletRequest) request), response);
-		if (_getLogger().isDebugEnabled()) {
-			_getLogger().debug("End | duration : " + (System.currentTimeMillis() - currTime) + " msec");
-		}
 	}
 
 	@Override
@@ -118,9 +105,5 @@ public class XSSFilter implements Filter {
 			}
 			return value;
 		}
-	}
-
-	private Log _getLogger() {
-		return this._logger;
 	}
 }

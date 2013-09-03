@@ -5,21 +5,43 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
 
 	<display-name></display-name>
-
-	<filter>
-		<filter-name>AccessLogFilter</filter-name>
-		<filter-class>framework.filter.AccessLogFilter</filter-class>
-	</filter>
-
-	<filter-mapping>
-		<filter-name>AccessLogFilter</filter-name>
-		<url-pattern>/do</url-pattern>
-	</filter-mapping>
 	
+	<filter>
+		<filter-name>CharacterEncodingFilter</filter-name>
+		<filter-class>framework.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>utf-8</param-value>
+		</init-param>
+		<init-param>
+			<param-name>force</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
 	<filter-mapping>
-		<filter-name>AccessLogFilter</filter-name>
+		<filter-name>CharacterEncodingFilter</filter-name>
 		<url-pattern>*.do</url-pattern>
 	</filter-mapping>
+
+	<!--
+	<filter>
+		<filter-name>XSSFilter</filter-name>
+		<filter-class>framework.filter.XSSFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>XSSFilter</filter-name>
+		<url-pattern>*.do</url-pattern>
+	</filter-mapping>
+
+	<filter>
+		<filter-name>JuminMaskFilter</filter-name>
+		<filter-class>framework.filter.JuminMaskFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>JuminMaskFilter</filter-name>
+		<url-pattern>*.do</url-pattern>
+	</filter-mapping>
+	-->
 
 	<servlet>
 		<servlet-name>ActionServlet</servlet-name>
@@ -30,11 +52,6 @@
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
-
-	<servlet-mapping>
-		<servlet-name>ActionServlet</servlet-name>
-		<url-pattern>/do</url-pattern>
-	</servlet-mapping>
 	
 	<servlet-mapping>
 		<servlet-name>ActionServlet</servlet-name>

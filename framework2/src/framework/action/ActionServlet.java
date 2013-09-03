@@ -125,20 +125,19 @@ public class ActionServlet extends HttpServlet {
 			String actionClassName = getActionClass(actionKey);
 			Action action = null;
 			if (actionClassName == null) {
-				throw new PageNotFoundExeption("controller class");
+				throw new PageNotFoundExeption("controller");
 			} else {
-
 				Class<?> actionClass = Class.forName(actionClassName);
 				action = (Action) actionClass.newInstance();
-
 				long currTime = 0;
 				if (getLogger().isDebugEnabled()) {
 					currTime = System.currentTimeMillis();
-					getLogger().debug("Start [ Pgm : " + actionKey + " | Action : " + actionClassName + " ]");
+					getLogger().debug("★★★ " + request.getRemoteAddr() + " 로 부터 \"" + request.getMethod() + " " + request.getRequestURI() + "\" 요청이 시작되었습니다");
+					getLogger().debug("ContentLength : " + request.getContentLength() + "bytes");
 				}
 				action.execute(this, request, response);
 				if (getLogger().isDebugEnabled()) {
-					getLogger().debug("End [ Pgm : " + actionKey + " | Action : " + actionClassName + " ] TIME : " + (System.currentTimeMillis() - currTime) + "ms");
+					getLogger().debug("☆☆☆ " + request.getRemoteAddr() + " 로 부터 \"" + request.getMethod() + " " + request.getRequestURI() + "\" 요청이 종료되었습니다 | duration : " + (System.currentTimeMillis() - currTime) + "ms\n");
 				}
 			}
 		} catch (PageNotFoundExeption e) {

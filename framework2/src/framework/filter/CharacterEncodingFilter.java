@@ -13,21 +13,12 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 public class CharacterEncodingFilter implements Filter {
-	private Log _logger = LogFactory.getLog(framework.filter.CharacterEncodingFilter.class);
 	private String _encoding = null;
 	private boolean _force = true;
 
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain) throws IOException, ServletException {
-		long currTime = 0;
-		if (_getLogger().isDebugEnabled()) {
-			currTime = System.currentTimeMillis();
-			_getLogger().debug("Start [ encoding=" + this._encoding + ", force=" + this._force + " ]");
-		}
 		if (this._force || (request.getCharacterEncoding() == null)) {
 			if (this._encoding != null) {
 				request.setCharacterEncoding(this._encoding);
@@ -39,9 +30,6 @@ public class CharacterEncodingFilter implements Filter {
 			}
 		}
 		filterChain.doFilter(request, response);
-		if (_getLogger().isDebugEnabled()) {
-			_getLogger().debug("End | duration : " + (System.currentTimeMillis() - currTime) + " msec");
-		}
 	}
 
 	@Override
@@ -61,9 +49,5 @@ public class CharacterEncodingFilter implements Filter {
 
 	@Override
 	public void destroy() {
-	}
-
-	private Log _getLogger() {
-		return this._logger;
 	}
 }
