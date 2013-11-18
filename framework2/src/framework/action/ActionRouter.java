@@ -52,17 +52,17 @@ public class ActionRouter {
 	 * @param response 클라이언트로 응답할 Response객체
 	 */
 	public synchronized void route(GenericServlet servlet, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ResourceBundle bundle = (ResourceBundle) servlet.getServletContext().getAttribute("action-mapping");
-		String url = ((String) bundle.getObject(this._key)).trim();
 		if (this._isForward) {
+			ResourceBundle bundle = (ResourceBundle) servlet.getServletContext().getAttribute("action-mapping");
+			String url = ((String) bundle.getObject(this._key)).trim();
 			servlet.getServletContext().getRequestDispatcher(response.encodeURL(url)).forward(request, response);
 			if (getLogger().isDebugEnabled()) {
 				getLogger().debug("☆☆☆ " + request.getRemoteAddr() + " 로 부터 \"" + request.getMethod() + " " + request.getRequestURI() + "\" 요청이 \"" + url + "\" 로 forward 되었습니다");
 			}
 		} else {
-			response.sendRedirect(response.encodeRedirectURL(url));
+			response.sendRedirect(response.encodeRedirectURL(this._key));
 			if (getLogger().isDebugEnabled()) {
-				getLogger().debug("☆☆☆ " + request.getRemoteAddr() + " 로 부터 \"" + request.getMethod() + " " + request.getRequestURI() + "\" 요청이 \"" + url + "\" 로 redirect 되었습니다");
+				getLogger().debug("☆☆☆ " + request.getRemoteAddr() + " 로 부터 \"" + request.getMethod() + " " + request.getRequestURI() + "\" 요청이 \"" + this._key + "\" 로 redirect 되었습니다");
 			}
 		}
 	}
