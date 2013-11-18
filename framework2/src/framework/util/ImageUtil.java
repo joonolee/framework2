@@ -152,7 +152,8 @@ public class ImageUtil {
 	 * @return 생성된 문자열
 	 */
 	public static String captcha(HttpServletResponse response, int width, int height) {
-		Captcha captcha = new Captcha.Builder(width, height).addText().addBackground().addNoise().gimp(new RippleGimpyRenderer()).build();
+		response.reset();
+		Captcha captcha = new Captcha.Builder(width, height).addText().addBackground().gimp(new RippleGimpyRenderer()).build();
 		CaptchaServletUtil.writeImage(response, captcha.getImage());
 		return captcha.getAnswer();
 	}
