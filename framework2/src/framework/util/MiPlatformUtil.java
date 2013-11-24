@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Types;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -156,17 +157,28 @@ public class MiPlatformUtil {
 		}
 		String[] colNms = rs.getColumns();
 		int[] colSize = rs.getColumnsSize();
-		rs.moveRow(0); // rs의 위치를 1번째로 이동 
-		int rowCount = 0;
+		int[] colType = rs.getColumnsType();
 		// 컬럼 레이아웃 셋팅
 		for (int c = 0; c < colNms.length; c++) {
-			Object value = rs.get(colNms[c]);
-			if (value instanceof Number) {
+			switch (colType[c]) {
+			case Types.BIGINT:
+			case Types.DECIMAL:
+			case Types.DOUBLE:
+			case Types.FLOAT:
+			case Types.INTEGER:
+			case Types.NUMERIC:
+			case Types.REAL:
+			case Types.SMALLINT:
+			case Types.TINYINT:
 				dSet.addColumn(colNms[c].toLowerCase(), ColumnInfo.COLUMN_TYPE_DECIMAL, colSize[c]);
-			} else {
+				break;
+			default:
 				dSet.addColumn(colNms[c].toLowerCase(), ColumnInfo.COLUMN_TYPE_STRING, colSize[c]);
+				break;
 			}
 		}
+		rs.moveRow(0); // rs의 위치를 1번째로 이동 
+		int rowCount = 0;
 		while (rs.nextRow()) {
 			rowCount++;
 			appendRow(dSet, rs, colNms);
@@ -283,22 +295,35 @@ public class MiPlatformUtil {
 			int count = rsmd.getColumnCount();
 			String[] colNms = new String[count];
 			int[] colSize = new int[count];
+			int[] colType = new int[count];
 			for (int i = 1; i <= count; i++) {
 				//Table의 Field 가 소문자 인것은 대문자로 변경처리
 				colNms[i - 1] = rsmd.getColumnName(i).toUpperCase();
 				//Fiels 의 정보 및 Size 추가
 				colSize[i - 1] = rsmd.getColumnDisplaySize(i);
+				// Field 의 타입 추가
+				colType[i - 1] = rsmd.getColumnType(i);
 			}
-			int rowCount = 0;
 			// 컬럼 레이아웃 셋팅
 			for (int c = 0; c < colNms.length; c++) {
-				Object value = rs.getObject(colNms[c]);
-				if (value instanceof Number) {
+				switch (colType[c]) {
+				case Types.BIGINT:
+				case Types.DECIMAL:
+				case Types.DOUBLE:
+				case Types.FLOAT:
+				case Types.INTEGER:
+				case Types.NUMERIC:
+				case Types.REAL:
+				case Types.SMALLINT:
+				case Types.TINYINT:
 					dSet.addColumn(colNms[c].toLowerCase(), ColumnInfo.COLUMN_TYPE_DECIMAL, colSize[c]);
-				} else {
+					break;
+				default:
 					dSet.addColumn(colNms[c].toLowerCase(), ColumnInfo.COLUMN_TYPE_STRING, colSize[c]);
+					break;
 				}
 			}
+			int rowCount = 0;
 			while (rs.next()) {
 				rowCount++;
 				appendRow(dSet, rs, colNms);

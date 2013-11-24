@@ -148,6 +148,14 @@ public class RecordSet implements Iterable<Map<String, Object>>, Serializable {
 	}
 
 	/**
+	 * 주어진 쿼리를 수행 후 컬럼의 타입을 int[] 로 반환 
+	 * @return String[]
+	 */
+	public int[] getColumnsType() {
+		return _columnsType;
+	}
+
+	/**
 	 * 주어진 쿼리를 수행 후 결과를  ArrayList 로 반환
 	 *
 	 * @return ArrayList
