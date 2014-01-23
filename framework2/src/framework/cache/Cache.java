@@ -43,7 +43,7 @@ public class Cache {
 	 * 캐시 초기화, 설정파일을 읽어 캐시 구현체를 셋팅한다.
 	 */
 	public synchronized static void init() {
-		if (cache != null) {
+		if (cache == null) {
 			try {
 				cache = Memcached.getInstance();
 				cacheName = "Memcached";
