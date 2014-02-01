@@ -13,8 +13,11 @@ import java.util.List;
 import java.util.Map;
 
 import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPoolConfig;
 import redis.clients.jedis.JedisShardInfo;
 import redis.clients.jedis.ShardedJedis;
+import redis.clients.jedis.ShardedJedisPool;
+import redis.clients.jedis.exceptions.JedisConnectionException;
 import framework.config.Configuration;
 
 /**
@@ -26,10 +29,15 @@ public class Redis extends AbstractCache {
 	 */
 	private static Redis _uniqueInstance;
 
-	/**
-	 * 캐시 클라이언트
+	/** 
+	 * 타임아웃 값 (ms)
 	 */
-	private ShardedJedis _client;
+	private static final int _TIMEOUT = 500;
+
+	/**
+	 * 캐시 클라이언트 Pool
+	 */
+	private ShardedJedisPool _pool;
 
 	/**
 	 * 생성자, 외부에서 객체를 인스턴스화 할 수 없도록 설정
@@ -49,7 +57,7 @@ public class Redis extends AbstractCache {
 		} else {
 			throw new RuntimeException("redis의 호스트설정이 누락되었습니다.");
 		}
-		_client = new ShardedJedis(shards);
+		_pool = new ShardedJedisPool(new JedisPoolConfig(), shards);
 	}
 
 	/** 
@@ -70,8 +78,20 @@ public class Redis extends AbstractCache {
 	}
 
 	public void set(byte[] key, byte[] value, int seconds) {
-		_client.set(key, value);
-		_client.expire(key, seconds);
+		ShardedJedis jedis = null;
+		try {
+			jedis = _pool.getResource();
+			jedis.set(key, value);
+			jedis.expire(key, seconds);
+		} catch (JedisConnectionException e) {
+			if (jedis != null) {
+				_pool.returnBrokenResource(jedis);
+			}
+		} finally {
+			if (jedis != null) {
+				_pool.returnResource(jedis);
+			}
+		}
 	}
 
 	@Override
@@ -80,7 +100,21 @@ public class Redis extends AbstractCache {
 	}
 
 	public Object get(byte[] key) {
-		return _deserialize(_client.get(key));
+		ShardedJedis jedis = null;
+		Object value = null;
+		try {
+			jedis = _pool.getResource();
+			value = _deserialize(jedis.get(key));
+		} catch (JedisConnectionException e) {
+			if (jedis != null) {
+				_pool.returnBrokenResource(jedis);
+			}
+		} finally {
+			if (jedis != null) {
+				_pool.returnResource(jedis);
+			}
+		}
+		return value;
 	}
 
 	@Override
@@ -98,7 +132,21 @@ public class Redis extends AbstractCache {
 	}
 
 	public long incr(byte[] key, int by) {
-		return _client.incrBy(key, by);
+		ShardedJedis jedis = null;
+		Long value = null;
+		try {
+			jedis = _pool.getResource();
+			value = jedis.incrBy(key, by);
+		} catch (JedisConnectionException e) {
+			if (jedis != null) {
+				_pool.returnBrokenResource(jedis);
+			}
+		} finally {
+			if (jedis != null) {
+				_pool.returnResource(jedis);
+			}
+		}
+		return value;
 	}
 
 	@Override
@@ -107,18 +155,56 @@ public class Redis extends AbstractCache {
 	}
 
 	public long decr(byte[] key, int by) {
-		return _client.decrBy(key, by);
+		ShardedJedis jedis = null;
+		Long value = null;
+		try {
+			jedis = _pool.getResource();
+			value = jedis.decrBy(key, by);
+		} catch (JedisConnectionException e) {
+			if (jedis != null) {
+				_pool.returnBrokenResource(jedis);
+			}
+		} finally {
+			if (jedis != null) {
+				_pool.returnResource(jedis);
+			}
+		}
+		return value;
 	}
 
 	@Override
 	public void delete(String key) {
-		_client.del(key);
+		ShardedJedis jedis = null;
+		try {
+			jedis = _pool.getResource();
+			jedis.del(key);
+		} catch (JedisConnectionException e) {
+			if (jedis != null) {
+				_pool.returnBrokenResource(jedis);
+			}
+		} finally {
+			if (jedis != null) {
+				_pool.returnResource(jedis);
+			}
+		}
 	}
 
 	@Override
 	public void clear() {
-		for (Jedis jedis : _client.getAllShards()) {
-			jedis.flushAll();
+		ShardedJedis jedis = null;
+		try {
+			jedis = _pool.getResource();
+			for (Jedis j : jedis.getAllShards()) {
+				j.flushAll();
+			}
+		} catch (JedisConnectionException e) {
+			if (jedis != null) {
+				_pool.returnBrokenResource(jedis);
+			}
+		} finally {
+			if (jedis != null) {
+				_pool.returnResource(jedis);
+			}
 		}
 	}
 
@@ -150,7 +236,7 @@ public class Redis extends AbstractCache {
 			if (sep < 1) {
 				throw new IllegalArgumentException("서버설정이 잘못되었습니다. 형식=>호스트:포트");
 			}
-			shards.add(new JedisShardInfo(addr.substring(0, sep), Integer.valueOf(addr.substring(sep + 1))));
+			shards.add(new JedisShardInfo(addr.substring(0, sep), Integer.valueOf(addr.substring(sep + 1)), _TIMEOUT));
 		}
 		assert !shards.isEmpty() : "redis의 호스트설정이 누락되었습니다.";
 		return shards;
