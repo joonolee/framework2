@@ -146,6 +146,9 @@ public class Redis extends AbstractCache {
 				_pool.returnResource(jedis);
 			}
 		}
+		if (value == null) {
+			value = Long.valueOf(-1);
+		}
 		return value;
 	}
 
@@ -168,6 +171,9 @@ public class Redis extends AbstractCache {
 			if (jedis != null) {
 				_pool.returnResource(jedis);
 			}
+		}
+		if (value == null) {
+			value = Long.valueOf(-1);
 		}
 		return value;
 	}
