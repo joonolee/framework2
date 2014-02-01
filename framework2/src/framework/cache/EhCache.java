@@ -38,9 +38,9 @@ public class EhCache extends AbstractCache {
 	 * 생성자, 외부에서 객체를 인스턴스화 할 수 없도록 설정
 	 */
 	private EhCache() {
-		this._cacheManager = CacheManager.create();
-		this._cacheManager.addCache(_CACHE_NAME);
-		this._cache = _cacheManager.getCache(_CACHE_NAME);
+		_cacheManager = CacheManager.create();
+		_cacheManager.addCache(_CACHE_NAME);
+		_cache = _cacheManager.getCache(_CACHE_NAME);
 	}
 
 	/** 
@@ -56,27 +56,7 @@ public class EhCache extends AbstractCache {
 	}
 
 	@Override
-	public void add(String key, Object value, int seconds) {
-		if (_cache.get(key) != null) {
-			return;
-		}
-		Element element = new Element(key, value);
-		element.setTimeToLive(seconds);
-		_cache.put(element);
-	}
-
-	@Override
 	public void set(String key, Object value, int seconds) {
-		Element element = new Element(key, value);
-		element.setTimeToLive(seconds);
-		_cache.put(element);
-	}
-
-	@Override
-	public void replace(String key, Object value, int seconds) {
-		if (_cache.get(key) == null) {
-			return;
-		}
 		Element element = new Element(key, value);
 		element.setTimeToLive(seconds);
 		_cache.put(element);
@@ -131,10 +111,5 @@ public class EhCache extends AbstractCache {
 	@Override
 	public void clear() {
 		_cache.removeAll();
-	}
-
-	@Override
-	public void stop() {
-		_cacheManager.shutdown();
 	}
 }

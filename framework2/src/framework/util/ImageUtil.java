@@ -120,7 +120,7 @@ public class ImageUtil {
 		try {
 			qrcode(url, new FileOutputStream(destFile), width);
 		} catch (FileNotFoundException e) {
-			new RuntimeException(e);
+			throw new RuntimeException(e);
 		}
 	}
 
@@ -136,7 +136,7 @@ public class ImageUtil {
 			response.setContentType("image/png");
 			qrcode(url, response.getOutputStream(), width);
 		} catch (Exception e) {
-			new RuntimeException(e);
+			throw new RuntimeException(e);
 		}
 	}
 
