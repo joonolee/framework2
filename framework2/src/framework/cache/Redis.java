@@ -81,8 +81,7 @@ public class Redis extends AbstractCache {
 		ShardedJedis jedis = null;
 		try {
 			jedis = _pool.getResource();
-			jedis.set(key, value);
-			jedis.expire(key, seconds);
+			jedis.setex(key, seconds, value);
 		} catch (JedisConnectionException e) {
 			if (jedis != null) {
 				_pool.returnBrokenResource(jedis);
