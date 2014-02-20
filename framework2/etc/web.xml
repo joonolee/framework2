@@ -41,6 +41,15 @@
 		<filter-name>JuminMaskFilter</filter-name>
 		<url-pattern>*.do</url-pattern>
 	</filter-mapping>
+	
+	<filter>
+		<filter-name>MinifyFilter</filter-name>
+		<filter-class>framework.filter.MinifyFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>MinifyFilter</filter-name>
+		<url-pattern>*.do</url-pattern>
+	</filter-mapping>
 	-->
 
 	<servlet>

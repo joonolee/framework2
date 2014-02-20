@@ -1,6 +1,6 @@
 /* 
- * @(#)JuminMaskFilter.java
- * 응답데이터에서 주민번호 패턴 마스킹 필터
+ * @(#)MinifyFilter.java
+ * HTML, JavaScript, CSS Minify filter
  */
 package framework.filter;
 
@@ -8,8 +8,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -21,10 +19,12 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpServletResponseWrapper;
 
+import com.googlecode.htmlcompressor.compressor.HtmlCompressor;
+
 import framework.util.StringUtil;
 
-public class JuminMaskFilter implements Filter {
-	private Pattern _juminPattern = Pattern.compile("(?<=[^0-9])(\\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12][0-9]|3[01])(?:\\s|&nbsp;)*[-|~]?(?:\\s|&nbsp;)*)[1-8]\\d{6}(?=[^0-9])?", Pattern.MULTILINE);
+public class MinifyFilter implements Filter {
+	private HtmlCompressor _compressor;
 
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain) throws IOException, ServletException {
@@ -34,10 +34,8 @@ public class JuminMaskFilter implements Filter {
 			filterChain.doFilter(request, resWrapper);
 			String contentType = StringUtil.nullToBlankString(resWrapper.getContentType()).toLowerCase();
 			if ("".equals(contentType) || contentType.contains("text") || contentType.contains("json") || contentType.contains("xml")) {
-				Matcher matcher = _juminPattern.matcher(resWrapper.toString());
-				String juminMaskData = matcher.replaceAll("$1******");
 				PrintWriter writer = response.getWriter();
-				writer.print(juminMaskData);
+				writer.write(_compressor.compress(resWrapper.toString()));
 				writer.flush();
 				writer.close();
 				writer = null;
@@ -54,6 +52,9 @@ public class JuminMaskFilter implements Filter {
 
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
+		_compressor = new HtmlCompressor();
+		_compressor.setCompressCss(true);
+		_compressor.setCompressJavaScript(true);
 	}
 
 	@Override
