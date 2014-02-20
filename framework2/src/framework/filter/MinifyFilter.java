@@ -33,12 +33,16 @@ public class MinifyFilter implements Filter {
 			resWrapper = new MyResponseWrapper((HttpServletResponse) response);
 			filterChain.doFilter(request, resWrapper);
 			String contentType = StringUtil.nullToBlankString(resWrapper.getContentType()).toLowerCase();
-			if ("".equals(contentType) || contentType.contains("text") || contentType.contains("json") || contentType.contains("xml")) {
+			if ("".equals(contentType) || contentType.contains("text")) {
 				PrintWriter writer = response.getWriter();
-				writer.write(_compressor.compress(resWrapper.toString()));
+				String content = resWrapper.toString();
+				if (contentType.contains("html") || contentType.contains("xml") || contentType.contains("javascript") || contentType.contains("css")) {
+					writer.write(_compressor.compress(content));
+				} else {
+					writer.write(content);
+				}
 				writer.flush();
 				writer.close();
-				writer = null;
 			} else {
 				resWrapper.writeTo(response.getOutputStream());
 			}
