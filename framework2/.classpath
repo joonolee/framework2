@@ -39,6 +39,7 @@
 	<classpathentry kind="lib" path="lib/stringtree-json-2.0.5.jar"/>
 	<classpathentry kind="lib" path="lib/velocity-dep-1.5.jar"/>
 	<classpathentry kind="lib" path="lib/xmlbeans-2.3.0.jar"/>
+	<classpathentry kind="lib" path="lib/yuicompressor-2.4.6.jar"/>
 	<classpathentry kind="lib" path="lib/zxing-core.jar"/>
 	<classpathentry kind="lib" path="lib/zxing-javase.jar"/>
 	<classpathentry kind="output" path="bin"/>
