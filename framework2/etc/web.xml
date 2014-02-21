@@ -59,6 +59,10 @@
 			<param-name>action-mapping</param-name>
 			<param-value>action</param-value>
 		</init-param>
+		<!--<init-param>
+			<param-name>default-servlet-name</param-name>
+			<param-value>default</param-value>
+		</init-param>-->
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 	
