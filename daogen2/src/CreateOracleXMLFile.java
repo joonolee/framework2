@@ -18,9 +18,9 @@ import java.util.List;
 
 public class CreateOracleXMLFile {
 	private static final String _jdbcDriver = "oracle.jdbc.driver.OracleDriver";
-	private static final String _jdbcUrl = "jdbc:oracle:thin:@192.1.1.97:1522:HJDB2";
-	private static final String _jdbcUid = "socusr";
-	private static final String _jdbcPw = "socusr#hjdb2";
+	private static final String _jdbcUrl = "jdbc:oracle:thin:@ip:port:sid";
+	private static final String _jdbcUid = "";
+	private static final String _jdbcPw = "";
 	private static List<String> _tableNameList = Arrays.asList(
 			
 	);
