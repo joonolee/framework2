@@ -39,7 +39,7 @@
 	</filter>
 	<filter-mapping>
 		<filter-name>JuminMaskFilter</filter-name>
-		<url-pattern>/*</url-pattern>
+		<url-pattern>*.do</url-pattern>
 	</filter-mapping>
 	
 	<filter>
@@ -48,7 +48,7 @@
 	</filter>
 	<filter-mapping>
 		<filter-name>MinifyFilter</filter-name>
-		<url-pattern>/*</url-pattern>
+		<url-pattern>*.do</url-pattern>
 	</filter-mapping>
 	-->
 
