@@ -28,7 +28,7 @@ import framework.util.StringUtil;
 public class ActionServlet extends HttpServlet {
 	private static final long serialVersionUID = -6478697606075642071L;
 	private static Log _logger = LogFactory.getLog(framework.action.ActionServlet.class);
-	private static final String[] _DEFAULT_SERVLET_NAMES = new String[] { "default", "WorkerServlet", "FileServlet", "resin-file", "SimpleFileServlet", "_ah_default" };
+	private static final String[] _DEFAULT_SERVLET_NAMES = new String[] { "default", "WorkerServlet", "ResourceServlet", "FileServlet", "resin-file", "SimpleFileServlet", "_ah_default" };
 	private String _defaultServletName = null;
 
 	/**
