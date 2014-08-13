@@ -99,7 +99,11 @@ public class Box extends HashMap<String, String[]> {
 	 * @return key에 매핑되어 있는 문자열 배열
 	 */
 	public String[] getArray(String key) {
-		return (String[]) super.get(key);
+		String[] value = super.get(key);
+		if (value == null) {
+			return new String[] {};
+		}
+		return value;
 	}
 
 	/** 
