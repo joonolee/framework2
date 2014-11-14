@@ -86,7 +86,7 @@ public class MultipartBox extends Box {
 					}
 				}
 			} catch (Exception e) {
-				e.printStackTrace();
+				throw new RuntimeException(e);
 			}
 		}
 		return multipartBox;
