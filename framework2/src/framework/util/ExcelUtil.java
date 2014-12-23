@@ -190,6 +190,9 @@ public class ExcelUtil {
 			appendRow(row, rs, colNms);
 			rowCount++;
 		}
+		for (int i = 0; i < colNms.length; i++) {
+			sheet.autoSizeColumn(i);
+		}
 		workbook.write(os);
 		return rowCount;
 	}
@@ -216,6 +219,9 @@ public class ExcelUtil {
 			Row row = sheet.createRow(rowCount);
 			appendRow(row, rs, colNms);
 			rowCount++;
+		}
+		for (int i = 0; i < colNms.length; i++) {
+			sheet.autoSizeColumn(i);
 		}
 		workbook.write(fos);
 		fos.close();
@@ -263,6 +269,9 @@ public class ExcelUtil {
 			appendRow(row, rs, colNms);
 			rowCount++;
 		}
+		for (int i = 0; i < colNms.length; i++) {
+			sheet.autoSizeColumn(i);
+		}
 		workbook.write(os);
 		return rowCount;
 	}
@@ -289,6 +298,9 @@ public class ExcelUtil {
 			Row row = sheet.createRow(rowCount);
 			appendRow(row, rs, colNms);
 			rowCount++;
+		}
+		for (int i = 0; i < colNms.length; i++) {
+			sheet.autoSizeColumn(i);
 		}
 		workbook.write(fos);
 		fos.close();
@@ -541,6 +553,9 @@ public class ExcelUtil {
 				appendRow(row, rs, colNms);
 				rowCount++;
 			}
+			for (int i = 0; i < colNms.length; i++) {
+				sheet.autoSizeColumn(i);
+			}
 			workbook.write(os);
 			return rowCount;
 		} finally {
@@ -580,6 +595,9 @@ public class ExcelUtil {
 				Row row = sheet.createRow(rowCount);
 				appendRow(row, rs, colNms);
 				rowCount++;
+			}
+			for (int i = 0; i < colNms.length; i++) {
+				sheet.autoSizeColumn(i);
 			}
 			workbook.write(fos);
 			return rowCount;
@@ -641,6 +659,9 @@ public class ExcelUtil {
 				appendRow(row, rs, colNms);
 				rowCount++;
 			}
+			for (int i = 0; i < colNms.length; i++) {
+				sheet.autoSizeColumn(i);
+			}
 			workbook.write(os);
 			return rowCount;
 		} finally {
@@ -680,6 +701,9 @@ public class ExcelUtil {
 				Row row = sheet.createRow(rowCount);
 				appendRow(row, rs, colNms);
 				rowCount++;
+			}
+			for (int i = 0; i < colNms.length; i++) {
+				sheet.autoSizeColumn(i);
 			}
 			workbook.write(fos);
 			return rowCount;
