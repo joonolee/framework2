@@ -1334,7 +1334,7 @@ public class ExcelUtil {
 		for (int c = 0; c < header.length; c++) {
 			Cell cell = row.createCell(c);
 			cell.setCellType(Cell.CELL_TYPE_STRING);
-			cell.setCellValue(header[0]);
+			cell.setCellValue(header[c]);
 		}
 	}
 
