@@ -23,7 +23,7 @@ public class MaSaferUtil {
 	 */
 	private MaSaferUtil() {
 	}
-	
+
 	/**
 	 * 원본파일을 DRM 암호화를 적용하여 대상파일로 저장한다.
 	 * @param configpath

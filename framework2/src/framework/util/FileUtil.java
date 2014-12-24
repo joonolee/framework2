@@ -24,7 +24,7 @@ public class FileUtil {
 	 */
 	private FileUtil() {
 	}
-	
+
 	/**
 	 * 인자로 전달된 경로에 해당하는 디렉토리의 크기를 byte 단위로 반환하는 메소드
 	 * 
@@ -241,13 +241,10 @@ public class FileUtil {
 	private static void _download(HttpServletResponse response, File file) {
 		BufferedInputStream bufferin = null;
 		BufferedOutputStream stream = null;
-
 		try {
-
 			int readBytes = 0;
 			int available = 1024;
 			byte b[] = new byte[available];
-
 			bufferin = new BufferedInputStream(new FileInputStream(file));
 			stream = new BufferedOutputStream(response.getOutputStream());
 			while ((readBytes = bufferin.read(b, 0, available)) != -1) {

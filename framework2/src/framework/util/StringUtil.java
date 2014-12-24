@@ -12,13 +12,13 @@ import java.util.StringTokenizer;
 import java.util.TimeZone;
 
 public class StringUtil {
-	
+
 	/**
 	 * 생성자, 외부에서 객체를 인스턴스화 할 수 없도록 설정
 	 */
 	private StringUtil() {
 	}
-	
+
 	/**
 	 * 특정 기호를 기준으로 스트링을 잘라서 배열로 반환하는 함수
 	 * <br>
