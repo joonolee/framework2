@@ -60,20 +60,35 @@ public class ImageUtil {
 	 * @param height 리사이즈할 세로 사이즈
 	 */
 	public static void resize(File srcFile, File destFile, int width, int height) {
-		Image image = new ImageIcon(srcFile.getAbsolutePath()).getImage();
-		if (image.getWidth(null) < 1 || image.getHeight(null) < 1) {
-			throw new IllegalArgumentException("파일이 존재하지 않습니다.");
+		BufferedImage bufImg = null;
+		Image image = null;
+		Image resizedImg = null;
+		try {
+			image = new ImageIcon(srcFile.getAbsolutePath()).getImage();
+			if (image.getWidth(null) < 1 || image.getHeight(null) < 1) {
+				throw new IllegalArgumentException("파일이 존재하지 않습니다.");
+			}
+			double scale = _getScale(width, height, image.getWidth(null), image.getHeight(null));
+			int scaleWidth = (int) (scale * image.getWidth(null));
+			int scaleHeight = (int) (scale * image.getHeight(null));
+			bufImg = new BufferedImage(image.getWidth(null), image.getHeight(null), BufferedImage.TYPE_4BYTE_ABGR);
+			Graphics2D g2d = bufImg.createGraphics();
+			AffineTransform ax = new AffineTransform();
+			ax.setToScale(1, 1);
+			g2d.drawImage(image, ax, null);
+			resizedImg = bufImg.getScaledInstance(scaleWidth, scaleHeight, Image.SCALE_SMOOTH);
+			_writePNG(resizedImg, destFile);
+		} finally {
+			if (resizedImg != null) {
+				resizedImg.flush();
+			}
+			if (bufImg != null) {
+				bufImg.flush();
+			}
+			if (image != null) {
+				image.flush();
+			}
 		}
-		double scale = _getScale(width, height, image.getWidth(null), image.getHeight(null));
-		int scaleWidth = (int) (scale * image.getWidth(null));
-		int scaleHeight = (int) (scale * image.getHeight(null));
-		BufferedImage bufImg = new BufferedImage(image.getWidth(null), image.getHeight(null), BufferedImage.TYPE_4BYTE_ABGR);
-		Graphics2D g2d = bufImg.createGraphics();
-		AffineTransform ax = new AffineTransform();
-		ax.setToScale(1, 1);
-		g2d.drawImage(image, ax, null);
-		Image resizedImg = bufImg.getScaledInstance(scaleWidth, scaleHeight, Image.SCALE_SMOOTH);
-		_writePNG(resizedImg, destFile);
 	}
 
 	/**
@@ -184,13 +199,18 @@ public class ImageUtil {
 	 * @param destFile 대상 이미지 파일
 	 */
 	private static void _writePNG(Image image, File destFile) {
-		BufferedImage bufImg = new BufferedImage(image.getWidth(null), image.getHeight(null), BufferedImage.TYPE_4BYTE_ABGR);
-		Graphics2D g2d = bufImg.createGraphics();
-		g2d.drawImage(image, 0, 0, null);
+		BufferedImage bufImg = null;
 		try {
+			bufImg = new BufferedImage(image.getWidth(null), image.getHeight(null), BufferedImage.TYPE_4BYTE_ABGR);
+			Graphics2D g2d = bufImg.createGraphics();
+			g2d.drawImage(image, 0, 0, null);
 			ImageIO.write(bufImg, "png", destFile);
 		} catch (IOException e) {
 			throw new RuntimeException(e);
+		} finally {
+			if (bufImg != null) {
+				bufImg.flush();
+			}
 		}
 	}
 }
