@@ -36,7 +36,7 @@
 	<classpathentry kind="lib" path="lib/slf4j-log4j12-1.6.1.jar"/>
 	<classpathentry kind="lib" path="lib/sqljdbc4.jar"/>
 	<classpathentry kind="lib" path="lib/standard.jar"/>
-	<classpathentry kind="lib" path="lib/stringtree-json-2.0.5.jar"/>
+	<classpathentry kind="lib" path="lib/stringtree-json-2.0.9.jar"/>
 	<classpathentry kind="lib" path="lib/velocity-dep-1.5.jar"/>
 	<classpathentry kind="lib" path="lib/xmlbeans-2.3.0.jar"/>
 	<classpathentry kind="lib" path="lib/yuicompressor-2.4.6.jar"/>
