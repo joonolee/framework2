@@ -22,7 +22,7 @@ public class CreateOracleXMLFile {
 	private static final String _jdbcUid = "";
 	private static final String _jdbcPw = "";
 	private static List<String> _tableNameList = Arrays.asList(
-			
+
 	);
 	private static String _filePath = "xml";
 
@@ -105,7 +105,7 @@ public class CreateOracleXMLFile {
 		}
 		File dir = new File(_filePath);
 		if (!dir.exists()) {
-			dir.mkdir();
+			dir.mkdirs();
 		}
 		File file = new File(_filePath, name + ".xml");
 		if (file.exists()) {
@@ -149,6 +149,14 @@ public class CreateOracleXMLFile {
 		bw.close();
 		fw.close();
 		System.out.println("info : " + _filePath + "/" + name + ".xml create end ");
+		String cmd = "";
+		if (System.getProperty("os.name").toLowerCase().startsWith("win")) {
+			cmd = "run.bat " + name;
+		} else {
+			cmd = "run.sh " + name;
+		}
+		Process p = Runtime.getRuntime().exec(cmd);
+		p.waitFor();
 	}
 
 	private static String getJavaType(int type, int len, int s) {
