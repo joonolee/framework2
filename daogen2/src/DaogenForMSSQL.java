@@ -1,5 +1,5 @@
 /*
- * @(#)CreateOracleXMLFile.java
+ * @(#)CreateMSSqlXMLFile.java
  * DAO, VO 생성에 필요한 메타정보 xml 파일을 추출
  */
 import java.io.BufferedWriter;
@@ -15,34 +15,44 @@ import java.sql.Types;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.ResourceBundle;
 
-public class CreateOracleXMLFile {
-	private static final String _jdbcDriver = "oracle.jdbc.driver.OracleDriver";
-	private static final String _jdbcUrl = "jdbc:oracle:thin:@ip:port:sid";
-	private static final String _jdbcUid = "";
-	private static final String _jdbcPw = "";
-	private static List<String> _tableNameList = Arrays.asList(
+public class DaogenForMSSQL {
+	private static final String _filePath = "xml";
+	private static String _jdbcDriver = "";
+	private static String _jdbcUrl = "";
+	private static String _jdbcUid = "";
+	private static String _jdbcPwd = "";
 
-	);
-	private static String _filePath = "xml";
+	// 테이블 목록
+	private static List<String> _tbList = Arrays.asList();
 
 	public static void main(String[] args) throws Exception {
+		// db properties setting
+		ResourceBundle bundle = ResourceBundle.getBundle("db");
+		_jdbcDriver = bundle.getString("jdbc.driver").trim();
+		_jdbcUrl = bundle.getString("jdbc.url").trim();
+		_jdbcUid = bundle.getString("jdbc.uid").trim();
+		_jdbcPwd = bundle.getString("jdbc.pwd").trim();
+		// table list
+		if (_tbList.size() == 0) {
+			_tbList = Arrays.asList(args);
+		}
 		Connection conn = null;
 		Statement stmt = null;
 		Statement stmt2 = null;
 		ResultSet rs = null;
 		ResultSet rs2 = null;
 		try {
-			System.out.println("Oracle JDBC Driver Loading.....");
+			System.out.println("MS-SQL JDBC Driver Loading.....");
 			DriverManager.registerDriver((Driver) Class.forName(_jdbcDriver).newInstance());
-			conn = DriverManager.getConnection(_jdbcUrl, _jdbcUid, _jdbcPw);
-			System.out.println("Oracle JDBC Driver Loading Complete\n");
+			conn = DriverManager.getConnection(_jdbcUrl, _jdbcUid, _jdbcPwd);
+			System.out.println("MS-SQL JDBC Driver Loading Complete\n");
 			stmt = conn.createStatement();
 			stmt2 = conn.createStatement();
-
-			if (_tableNameList != null && _tableNameList.size() > 0) {
-				for (String tableName : _tableNameList) {
-					rs = stmt.executeQuery("SELECT * FROM " + tableName + " where rownum = 1");
+			if (_tbList != null && _tbList.size() > 0) {
+				for (String tableName : _tbList) {
+					rs = stmt.executeQuery("SELECT TOP 1 * FROM " + tableName);
 					ResultSetMetaData meta = rs.getMetaData();
 					System.out.println(tableName);
 					write(meta, tableName, conn);
@@ -50,11 +60,11 @@ public class CreateOracleXMLFile {
 				}
 			} else {
 				String TABLE = null;
-				rs2 = stmt2.executeQuery("SELECT * FROM TAB");
+				rs2 = stmt2.executeQuery("SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES ");
 
 				while (rs2.next()) {
 					TABLE = rs2.getString(1);
-					rs = stmt.executeQuery("SELECT * FROM " + TABLE + " WHERE ROWNUM = 1");
+					rs = stmt.executeQuery("SELECT TOP 1 * FROM " + TABLE);
 					ResultSetMetaData meta = rs.getMetaData();
 					System.out.println(TABLE);
 					write(meta, TABLE, conn);
@@ -87,12 +97,11 @@ public class CreateOracleXMLFile {
 			stmt3 = conn2.createStatement();
 			StringBuffer strPK = new StringBuffer();
 			strPK.append("SELECT COL.COLUMN_NAME  ");
-			strPK.append("FROM  ");
-			strPK.append("    USER_CONSTRAINTS CONS INNER JOIN ");
-			strPK.append("    USER_CONS_COLUMNS COL ON CONS.CONSTRAINT_NAME = COL.CONSTRAINT_NAME  ");
-			strPK.append("WHERE CONSTRAINT_TYPE = 'P'  ");
-			strPK.append("    AND COL.TABLE_NAME = '" + name.trim() + "' ");
-			strPK.append("ORDER BY COL.POSITION");
+			strPK.append("FROM SYSOBJECTS CONS ");
+			strPK.append("	INNER JOIN INFORMATION_SCHEMA.KEY_COLUMN_USAGE COL ON CONS.NAME = COL.CONSTRAINT_NAME ");
+			strPK.append("WHERE CONS.XTYPE = 'PK' ");
+			strPK.append("	AND COL.TABLE_NAME = '" + name.trim() + "' ");
+			strPK.append("ORDER BY COL.ORDINAL_POSITION ");
 			rs3 = stmt3.executeQuery(strPK.toString());
 			pkProcess = true;
 		} catch (Exception e) {
@@ -132,10 +141,10 @@ public class CreateOracleXMLFile {
 			}
 			// 입력일, 수정일에 대한 별도 처리
 			if (meta.getColumnName(c).equals("ENTERDATE")) {
-				str.append(" insert=\"SYSDATE\" update=\"none\"");
+				str.append(" insert=\"GETDATE()\" update=\"none\"");
 			}
 			if (meta.getColumnName(c).equals("UPDATEDATE")) {
-				str.append(" insert=\"none\" update=\"SYSDATE\"");
+				str.append(" insert=\"none\" update=\"GETDATE()\"");
 			}
 			if (primaryKeyList.contains(meta.getColumnName(c))) {
 				str.append(" primarykey=\"true\"");
@@ -145,7 +154,6 @@ public class CreateOracleXMLFile {
 		}
 		bw.write("</columns>\n");
 		bw.write("</table>");
-
 		bw.close();
 		fw.close();
 		System.out.println("info : " + _filePath + "/" + name + ".xml create end ");
@@ -188,9 +196,13 @@ public class CreateOracleXMLFile {
 		case Types.NUMERIC:
 			return "number(" + len + (s == 0 ? ")" : "." + s + ")");
 		case Types.VARCHAR:
-			return "varchar2(" + len + ")";
+			return "varchar(" + len + ")";
+		case Types.NVARCHAR:
+			return "nvarchar(" + len + ")";
 		case Types.CHAR:
 			return "char(" + len + ")";
+		case Types.NCHAR:
+			return "nchar(" + len + ")";
 		case Types.DATE:
 			return "date";
 		default:
