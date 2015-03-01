@@ -1,7 +1,3 @@
-/*
- * @(#)CreateOracleXMLFile.java
- * DAO, VO 생성에 필요한 메타정보 xml 파일을 추출
- */
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
