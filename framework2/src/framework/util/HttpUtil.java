@@ -1,6 +1,3 @@
-/* 
- * @(#)HttpUtil.java
- */
 package framework.util;
 
 import java.io.File;
@@ -61,6 +58,7 @@ public class HttpUtil {
 			return _content;
 		}
 
+		@Override
 		public String toString() {
 			return String.format("Result={ statusCode : %d, content : %s }", getStatusCode(), getContent());
 		}
@@ -84,22 +82,27 @@ public class HttpUtil {
 	public static Result get(String url, Map<String, String> headerMap) {
 		int statusCode = 0;
 		String content = "";
+		HttpClient httpClient = null;
 		try {
-			HttpClient client = new DefaultHttpClient();
-			HttpGet get = new HttpGet(url);
+			httpClient = new DefaultHttpClient();
+			HttpGet httpGet = new HttpGet(url);
 			if (headerMap != null) {
 				for (Entry<String, String> entry : headerMap.entrySet()) {
-					get.addHeader(entry.getKey(), entry.getValue());
+					httpGet.addHeader(entry.getKey(), entry.getValue());
 				}
 			}
-			HttpResponse responseGet = client.execute(get);
-			statusCode = responseGet.getStatusLine().getStatusCode();
-			HttpEntity resEntityGet = responseGet.getEntity();
-			if (resEntityGet != null) {
-				content = EntityUtils.toString(resEntityGet);
+			HttpResponse response = httpClient.execute(httpGet);
+			statusCode = response.getStatusLine().getStatusCode();
+			HttpEntity resEntity = response.getEntity();
+			if (resEntity != null) {
+				content = EntityUtils.toString(resEntity);
 			}
-		} catch (Exception e) {
+		} catch (Throwable e) {
 			throw new RuntimeException(e);
+		} finally {
+			if (httpClient != null) {
+				httpClient.getConnectionManager().shutdown();
+			}
 		}
 		return new Result(statusCode, content);
 	}
@@ -133,12 +136,13 @@ public class HttpUtil {
 	public static Result post(String url, Map<String, String> paramMap, Map<String, String> headerMap) {
 		int statusCode = 0;
 		String content = "";
+		HttpClient httpClient = null;
 		try {
-			HttpClient client = new DefaultHttpClient();
-			HttpPost post = new HttpPost(url);
+			httpClient = new DefaultHttpClient();
+			HttpPost httpPost = new HttpPost(url);
 			if (headerMap != null) {
 				for (Entry<String, String> entry : headerMap.entrySet()) {
-					post.addHeader(entry.getKey(), entry.getValue());
+					httpPost.addHeader(entry.getKey(), entry.getValue());
 				}
 			}
 			List<NameValuePair> params = new ArrayList<NameValuePair>();
@@ -148,15 +152,19 @@ public class HttpUtil {
 				}
 			}
 			UrlEncodedFormEntity ent = new UrlEncodedFormEntity(params, "UTF-8");
-			post.setEntity(ent);
-			HttpResponse responsePOST = client.execute(post);
-			statusCode = responsePOST.getStatusLine().getStatusCode();
-			HttpEntity resEntity = responsePOST.getEntity();
+			httpPost.setEntity(ent);
+			HttpResponse response = httpClient.execute(httpPost);
+			statusCode = response.getStatusLine().getStatusCode();
+			HttpEntity resEntity = response.getEntity();
 			if (resEntity != null) {
 				content = EntityUtils.toString(resEntity);
 			}
-		} catch (Exception e) {
+		} catch (Throwable e) {
 			throw new RuntimeException(e);
+		} finally {
+			if (httpClient != null) {
+				httpClient.getConnectionManager().shutdown();
+			}
 		}
 		return new Result(statusCode, content);
 	}
@@ -183,12 +191,13 @@ public class HttpUtil {
 	public static Result post(String url, Map<String, String> paramMap, List<File> fileList, Map<String, String> headerMap) {
 		int statusCode = 0;
 		String content = "";
+		HttpClient httpClient = null;
 		try {
-			HttpClient client = new DefaultHttpClient();
-			HttpPost post = new HttpPost(url);
+			httpClient = new DefaultHttpClient();
+			HttpPost httpPost = new HttpPost(url);
 			if (headerMap != null) {
 				for (Entry<String, String> entry : headerMap.entrySet()) {
-					post.addHeader(entry.getKey(), entry.getValue());
+					httpPost.addHeader(entry.getKey(), entry.getValue());
 				}
 			}
 			MultipartEntity reqEntity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
@@ -203,15 +212,19 @@ public class HttpUtil {
 					reqEntity.addPart("userfile", contentBody);
 				}
 			}
-			post.setEntity(reqEntity);
-			HttpResponse response = client.execute(post);
+			httpPost.setEntity(reqEntity);
+			HttpResponse response = httpClient.execute(httpPost);
 			statusCode = response.getStatusLine().getStatusCode();
 			HttpEntity resEntity = response.getEntity();
 			if (resEntity != null) {
 				content = EntityUtils.toString(resEntity);
 			}
-		} catch (Exception e) {
+		} catch (Throwable e) {
 			throw new RuntimeException(e);
+		} finally {
+			if (httpClient != null) {
+				httpClient.getConnectionManager().shutdown();
+			}
 		}
 		return new Result(statusCode, content);
 	}
