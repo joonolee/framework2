@@ -27,11 +27,16 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.fileupload.FileItem;
 import org.apache.poi.hssf.record.crypto.Biff8EncryptionKey;
+import org.apache.poi.hssf.usermodel.HSSFCellStyle;
+import org.apache.poi.hssf.usermodel.HSSFFont;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.poifs.crypt.Decryptor;
 import org.apache.poi.poifs.crypt.EncryptionInfo;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.Font;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -215,16 +220,19 @@ public class ExcelUtil {
 		int rowCount = 0;
 		if (header != null) {
 			Row row = sheet.createRow(rowCount);
-			appendHeader(row, header);
+			CellStyle cellStyle = headerStyle(workbook);
+			appendHeader(row, header, cellStyle);
 			rowCount++;
 		}
+		CellStyle cellStyle = rowStyle(workbook);
 		while (rs.nextRow()) {
 			Row row = sheet.createRow(rowCount);
-			appendRow(row, rs, colNms);
+			appendRow(row, rs, colNms, cellStyle);
 			rowCount++;
 		}
 		for (int i = 0; i < colNms.length; i++) {
 			sheet.autoSizeColumn(i);
+			sheet.setColumnWidth(i, sheet.getColumnWidth(i) + 1024);
 		}
 		workbook.write(os);
 		return rowCount;
@@ -263,16 +271,19 @@ public class ExcelUtil {
 		int rowCount = 0;
 		if (header != null) {
 			Row row = sheet.createRow(rowCount);
-			appendHeader(row, header);
+			CellStyle cellStyle = headerStyle(workbook);
+			appendHeader(row, header, cellStyle);
 			rowCount++;
 		}
+		CellStyle cellStyle = rowStyle(workbook);
 		while (rs.nextRow()) {
 			Row row = sheet.createRow(rowCount);
-			appendRow(row, rs, colNms);
+			appendRow(row, rs, colNms, cellStyle);
 			rowCount++;
 		}
 		for (int i = 0; i < colNms.length; i++) {
 			sheet.autoSizeColumn(i);
+			sheet.setColumnWidth(i, sheet.getColumnWidth(i) + 1024);
 		}
 		workbook.write(fos);
 		fos.close();
@@ -345,16 +356,19 @@ public class ExcelUtil {
 		int rowCount = 0;
 		if (header != null) {
 			Row row = sheet.createRow(rowCount);
-			appendHeader(row, header);
+			CellStyle cellStyle = headerStyle(workbook);
+			appendHeader(row, header, cellStyle);
 			rowCount++;
 		}
+		CellStyle cellStyle = rowStyle(workbook);
 		while (rs.nextRow()) {
 			Row row = sheet.createRow(rowCount);
-			appendRow(row, rs, colNms);
+			appendRow(row, rs, colNms, cellStyle);
 			rowCount++;
 		}
 		for (int i = 0; i < colNms.length; i++) {
 			sheet.autoSizeColumn(i);
+			sheet.setColumnWidth(i, sheet.getColumnWidth(i) + 1024);
 		}
 		workbook.write(os);
 		return rowCount;
@@ -393,16 +407,19 @@ public class ExcelUtil {
 		int rowCount = 0;
 		if (header != null) {
 			Row row = sheet.createRow(rowCount);
-			appendHeader(row, header);
+			CellStyle cellStyle = headerStyle(workbook);
+			appendHeader(row, header, cellStyle);
 			rowCount++;
 		}
+		CellStyle cellStyle = rowStyle(workbook);
 		while (rs.nextRow()) {
 			Row row = sheet.createRow(rowCount);
-			appendRow(row, rs, colNms);
+			appendRow(row, rs, colNms, cellStyle);
 			rowCount++;
 		}
 		for (int i = 0; i < colNms.length; i++) {
 			sheet.autoSizeColumn(i);
+			sheet.setColumnWidth(i, sheet.getColumnWidth(i) + 1024);
 		}
 		workbook.write(fos);
 		fos.close();
@@ -680,16 +697,19 @@ public class ExcelUtil {
 			int rowCount = 0;
 			if (header != null) {
 				Row row = sheet.createRow(rowCount);
-				appendHeader(row, header);
+				CellStyle cellStyle = headerStyle(workbook);
+				appendHeader(row, header, cellStyle);
 				rowCount++;
 			}
+			CellStyle cellStyle = rowStyle(workbook);
 			while (rs.next()) {
 				Row row = sheet.createRow(rowCount);
-				appendRow(row, rs, colNms);
+				appendRow(row, rs, colNms, cellStyle);
 				rowCount++;
 			}
 			for (int i = 0; i < colNms.length; i++) {
 				sheet.autoSizeColumn(i);
+				sheet.setColumnWidth(i, sheet.getColumnWidth(i) + 1024);
 			}
 			workbook.write(os);
 			return rowCount;
@@ -741,16 +761,19 @@ public class ExcelUtil {
 			int rowCount = 0;
 			if (header != null) {
 				Row row = sheet.createRow(rowCount);
-				appendHeader(row, header);
+				CellStyle cellStyle = headerStyle(workbook);
+				appendHeader(row, header, cellStyle);
 				rowCount++;
 			}
+			CellStyle cellStyle = rowStyle(workbook);
 			while (rs.next()) {
 				Row row = sheet.createRow(rowCount);
-				appendRow(row, rs, colNms);
+				appendRow(row, rs, colNms, cellStyle);
 				rowCount++;
 			}
 			for (int i = 0; i < colNms.length; i++) {
 				sheet.autoSizeColumn(i);
+				sheet.setColumnWidth(i, sheet.getColumnWidth(i) + 1024);
 			}
 			workbook.write(fos);
 			return rowCount;
@@ -837,16 +860,19 @@ public class ExcelUtil {
 			int rowCount = 0;
 			if (header != null) {
 				Row row = sheet.createRow(rowCount);
-				appendHeader(row, header);
+				CellStyle cellStyle = headerStyle(workbook);
+				appendHeader(row, header, cellStyle);
 				rowCount++;
 			}
+			CellStyle cellStyle = rowStyle(workbook);
 			while (rs.next()) {
 				Row row = sheet.createRow(rowCount);
-				appendRow(row, rs, colNms);
+				appendRow(row, rs, colNms, cellStyle);
 				rowCount++;
 			}
 			for (int i = 0; i < colNms.length; i++) {
 				sheet.autoSizeColumn(i);
+				sheet.setColumnWidth(i, sheet.getColumnWidth(i) + 1024);
 			}
 			workbook.write(os);
 			return rowCount;
@@ -898,16 +924,19 @@ public class ExcelUtil {
 			int rowCount = 0;
 			if (header != null) {
 				Row row = sheet.createRow(rowCount);
-				appendHeader(row, header);
+				CellStyle cellStyle = headerStyle(workbook);
+				appendHeader(row, header, cellStyle);
 				rowCount++;
 			}
+			CellStyle cellStyle = rowStyle(workbook);
 			while (rs.next()) {
 				Row row = sheet.createRow(rowCount);
-				appendRow(row, rs, colNms);
+				appendRow(row, rs, colNms, cellStyle);
 				rowCount++;
 			}
 			for (int i = 0; i < colNms.length; i++) {
 				sheet.autoSizeColumn(i);
+				sheet.setColumnWidth(i, sheet.getColumnWidth(i) + 1024);
 			}
 			workbook.write(fos);
 			return rowCount;
@@ -1328,7 +1357,7 @@ public class ExcelUtil {
 		return buffer.toString();
 	}
 
-	private static void appendHeader(Row row, String[] header) {
+	private static void appendHeader(Row row, String[] header, CellStyle cellStyle) {
 		if (header == null)
 			return;
 		for (int c = 0; c < header.length; c++) {
@@ -1338,7 +1367,7 @@ public class ExcelUtil {
 		}
 	}
 
-	private static void appendRow(Row row, RecordSet rs, String[] colNms) throws ColumnNotFoundException {
+	private static void appendRow(Row row, RecordSet rs, String[] colNms, CellStyle cellStyle) throws ColumnNotFoundException {
 		if (rs.getRowCount() == 0)
 			return;
 		for (int c = 0; c < colNms.length; c++) {
@@ -1359,7 +1388,7 @@ public class ExcelUtil {
 		}
 	}
 
-	private static void appendRow(Row row, ResultSet rs, String[] colNms) throws SQLException {
+	private static void appendRow(Row row, ResultSet rs, String[] colNms, CellStyle cellStyle) throws SQLException {
 		if (rs.getRow() == 0)
 			return;
 		for (int c = 0; c < colNms.length; c++) {
@@ -1475,5 +1504,58 @@ public class ExcelUtil {
 			mapList.add(map);
 		}
 		return mapList;
+	}
+
+	/** 
+	 * Çì´õ ¼¿ ½ºÅ¸ÀÏ ¸®ÅÏ
+	 */
+	private static CellStyle headerStyle(Workbook workbook) {
+		Font font = workbook.createFont();
+		font.setFontHeightInPoints((short) 11);
+		font.setBoldweight(HSSFFont.BOLDWEIGHT_BOLD);
+		font.setFontName("µ¸¿ò");
+		font.setColor(HSSFColor.BLACK.index);
+		CellStyle cellStyle = workbook.createCellStyle();
+		cellStyle.setFont(font);
+		cellStyle.setFillForegroundColor(HSSFColor.YELLOW.index);
+		cellStyle.setFillPattern(HSSFCellStyle.SOLID_FOREGROUND);
+		cellStyle.setBorderBottom(HSSFCellStyle.BORDER_THIN);
+		cellStyle.setBottomBorderColor(HSSFColor.BLACK.index);
+		cellStyle.setBorderLeft(HSSFCellStyle.BORDER_THIN);
+		cellStyle.setLeftBorderColor(HSSFColor.BLACK.index);
+		cellStyle.setBorderRight(HSSFCellStyle.BORDER_THIN);
+		cellStyle.setRightBorderColor(HSSFColor.BLACK.index);
+		cellStyle.setBorderTop(HSSFCellStyle.BORDER_THIN);
+		cellStyle.setTopBorderColor(HSSFColor.BLACK.index);
+		cellStyle.setAlignment(HSSFCellStyle.ALIGN_CENTER);
+		cellStyle.setVerticalAlignment(HSSFCellStyle.VERTICAL_CENTER);
+		cellStyle.setWrapText(true);
+		return cellStyle;
+	}
+
+	/** 
+	 * ·Î¿ì ¼¿ ½ºÅ¸ÀÏ ¸®ÅÏ
+	 */
+	private static CellStyle rowStyle(Workbook workbook) {
+		Font font = workbook.createFont();
+		font.setFontHeightInPoints((short) 11);
+		font.setBoldweight(Font.BOLDWEIGHT_NORMAL);
+		font.setFontName("µ¸¿ò");
+		font.setColor(HSSFColor.BLACK.index);
+		CellStyle cellStyle = workbook.createCellStyle();
+		cellStyle.setFont(font);
+		cellStyle.setFillForegroundColor(HSSFColor.WHITE.index);
+		cellStyle.setFillPattern(HSSFCellStyle.SOLID_FOREGROUND);
+		cellStyle.setBorderBottom(HSSFCellStyle.BORDER_THIN);
+		cellStyle.setBottomBorderColor(HSSFColor.BLACK.index);
+		cellStyle.setBorderLeft(HSSFCellStyle.BORDER_THIN);
+		cellStyle.setLeftBorderColor(HSSFColor.BLACK.index);
+		cellStyle.setBorderRight(HSSFCellStyle.BORDER_THIN);
+		cellStyle.setRightBorderColor(HSSFColor.BLACK.index);
+		cellStyle.setBorderTop(HSSFCellStyle.BORDER_THIN);
+		cellStyle.setTopBorderColor(HSSFColor.BLACK.index);
+		cellStyle.setVerticalAlignment(CellStyle.VERTICAL_CENTER);
+		cellStyle.setWrapText(true);
+		return cellStyle;
 	}
 }

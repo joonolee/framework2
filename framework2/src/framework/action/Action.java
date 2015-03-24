@@ -8,6 +8,7 @@ import java.io.PrintWriter;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -28,6 +29,7 @@ import framework.db.ConnectionManager;
  */
 public abstract class Action {
 	private Map<String, ConnectionManager> _connMgrMap = new HashMap<String, ConnectionManager>();
+	private static final String _FLASH_SCOPE_OBJECT_KEY = "___FLASH_SCOPE_OBJECT___";
 	private HttpServlet _servlet = null;
 	private Box _input = null;
 	private Box _cookies = null;
@@ -35,6 +37,7 @@ public abstract class Action {
 	private PrintWriter _out = null;
 	private HttpServletRequest _request = null;
 	private HttpServletResponse _response = null;
+	private Map<String, Object> flash = null;
 	private static Log _logger = LogFactory.getLog(framework.action.Action.class);
 
 	/** 
@@ -53,6 +56,8 @@ public abstract class Action {
 		setServlet(servlet);
 		setRequest(request);
 		setResponse(response);
+		this.flash = new HashMap<String, Object>();
+		flashRestore();
 		Method method = getMethod(request.getParameter("action"));
 		if (method == null) {
 			throw new PageNotFoundExeption("action");
@@ -60,6 +65,7 @@ public abstract class Action {
 		try {
 			method.invoke(this, (Object[]) null);
 		} finally {
+			flashSave();
 			destroy();
 		}
 	}
@@ -359,6 +365,18 @@ public abstract class Action {
 		getSession().setAttribute(key, value);
 	}
 
+	/** 
+	 * 플래시객체에 키,값 속성을 설정한다.
+	 * Controller에서 처리한 결과를 다음 요청의 요청객체에 저장한다.
+	 * <br>
+	 * ex) message 라는 객체를 message 라는 키로 플래시객체에 설정하는 경우 : setFlashAttribute("message", message)
+	 * @param key 속성의 키 문자열
+	 * @param value 속성의 값 객체
+	 */
+	protected void setFlashAttribute(String key, Object value) {
+		flash.put(key, value);
+	}
+
 	//////////////////////////////////////////////////////////////////////////////////////////Private 메소드
 	private void setServlet(HttpServlet servlet) {
 		this._servlet = servlet;
@@ -405,5 +423,26 @@ public abstract class Action {
 			}
 		}
 		return null;
+	}
+
+	/*
+	 * 플래시객체를 세션에 저장
+	 */
+	private void flashSave() {
+		setSessionAttribute(_FLASH_SCOPE_OBJECT_KEY, flash);
+	}
+
+	/*
+	 * 세션에서 플래시객체를 복원
+	 */
+	@SuppressWarnings("unchecked")
+	private void flashRestore() {
+		Map<String, Object> flashMap = (Map<String, Object>) getSessionAttribute(_FLASH_SCOPE_OBJECT_KEY);
+		if (flashMap != null) {
+			for (Entry<String, Object> entry : flashMap.entrySet()) {
+				setAttribute(entry.getKey(), entry.getValue());
+			}
+			getSession().removeAttribute(_FLASH_SCOPE_OBJECT_KEY);
+		}
 	}
 }
