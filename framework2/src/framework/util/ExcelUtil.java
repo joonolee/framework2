@@ -232,7 +232,7 @@ public class ExcelUtil {
 		}
 		for (int i = 0; i < colNms.length; i++) {
 			sheet.autoSizeColumn(i);
-			sheet.setColumnWidth(i, sheet.getColumnWidth(i) + 1024);
+			sheet.setColumnWidth(i, (int) (sheet.getColumnWidth(i) * 1.2));
 		}
 		workbook.write(os);
 		return rowCount;
@@ -283,7 +283,7 @@ public class ExcelUtil {
 		}
 		for (int i = 0; i < colNms.length; i++) {
 			sheet.autoSizeColumn(i);
-			sheet.setColumnWidth(i, sheet.getColumnWidth(i) + 1024);
+			sheet.setColumnWidth(i, (int) (sheet.getColumnWidth(i) * 1.2));
 		}
 		workbook.write(fos);
 		fos.close();
@@ -368,7 +368,7 @@ public class ExcelUtil {
 		}
 		for (int i = 0; i < colNms.length; i++) {
 			sheet.autoSizeColumn(i);
-			sheet.setColumnWidth(i, sheet.getColumnWidth(i) + 1024);
+			sheet.setColumnWidth(i, (int) (sheet.getColumnWidth(i) * 1.2));
 		}
 		workbook.write(os);
 		return rowCount;
@@ -419,7 +419,7 @@ public class ExcelUtil {
 		}
 		for (int i = 0; i < colNms.length; i++) {
 			sheet.autoSizeColumn(i);
-			sheet.setColumnWidth(i, sheet.getColumnWidth(i) + 1024);
+			sheet.setColumnWidth(i, (int) (sheet.getColumnWidth(i) * 1.2));
 		}
 		workbook.write(fos);
 		fos.close();
@@ -709,7 +709,7 @@ public class ExcelUtil {
 			}
 			for (int i = 0; i < colNms.length; i++) {
 				sheet.autoSizeColumn(i);
-				sheet.setColumnWidth(i, sheet.getColumnWidth(i) + 1024);
+				sheet.setColumnWidth(i, (int) (sheet.getColumnWidth(i) * 1.2));
 			}
 			workbook.write(os);
 			return rowCount;
@@ -773,7 +773,7 @@ public class ExcelUtil {
 			}
 			for (int i = 0; i < colNms.length; i++) {
 				sheet.autoSizeColumn(i);
-				sheet.setColumnWidth(i, sheet.getColumnWidth(i) + 1024);
+				sheet.setColumnWidth(i, (int) (sheet.getColumnWidth(i) * 1.2));
 			}
 			workbook.write(fos);
 			return rowCount;
@@ -872,7 +872,7 @@ public class ExcelUtil {
 			}
 			for (int i = 0; i < colNms.length; i++) {
 				sheet.autoSizeColumn(i);
-				sheet.setColumnWidth(i, sheet.getColumnWidth(i) + 1024);
+				sheet.setColumnWidth(i, (int) (sheet.getColumnWidth(i) * 1.2));
 			}
 			workbook.write(os);
 			return rowCount;
@@ -936,7 +936,7 @@ public class ExcelUtil {
 			}
 			for (int i = 0; i < colNms.length; i++) {
 				sheet.autoSizeColumn(i);
-				sheet.setColumnWidth(i, sheet.getColumnWidth(i) + 1024);
+				sheet.setColumnWidth(i, (int) (sheet.getColumnWidth(i) * 1.2));
 			}
 			workbook.write(fos);
 			return rowCount;
