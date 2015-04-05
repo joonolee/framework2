@@ -30,14 +30,20 @@ public class GZIPFilter implements Filter {
 			resWrapper = new MyResponseWrapper((HttpServletResponse) response);
 			filterChain.doFilter(request, resWrapper);
 			String contentType = _nullToBlankString(resWrapper.getContentType());
-			if (_isGzipSupported(request) && _isTextualContentType(contentType)) {
-				resWrapper.setHeader("Content-Encoding", "gzip");
-				GZIPOutputStream gzos = new GZIPOutputStream(response.getOutputStream());
-				OutputStreamWriter osw = new OutputStreamWriter(gzos, response.getCharacterEncoding());
-				PrintWriter writer = new PrintWriter(osw);
-				writer.print(resWrapper.toString());
-				writer.flush();
-				gzos.finish();
+			if (_isTextualContentType(contentType)) {
+				if (_isGzipSupported(request)) {
+					resWrapper.setHeader("Content-Encoding", "gzip");
+					GZIPOutputStream gzos = new GZIPOutputStream(response.getOutputStream());
+					OutputStreamWriter osw = new OutputStreamWriter(gzos, response.getCharacterEncoding());
+					PrintWriter writer = new PrintWriter(osw);
+					writer.print(resWrapper.toString());
+					writer.flush();
+					gzos.finish();
+				} else {
+					PrintWriter writer = response.getWriter();
+					writer.print(resWrapper.toString());
+					writer.flush();
+				}
 			} else {
 				resWrapper.writeTo(response.getOutputStream());
 			}
