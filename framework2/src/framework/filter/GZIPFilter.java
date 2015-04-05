@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.zip.GZIPOutputStream;
 
 import javax.servlet.Filter;
@@ -31,19 +32,7 @@ public class GZIPFilter implements Filter {
 			filterChain.doFilter(request, resWrapper);
 			String contentType = _nullToBlankString(resWrapper.getContentType());
 			if (_isTextualContentType(contentType)) {
-				if (_isGzipSupported(request)) {
-					resWrapper.setHeader("Content-Encoding", "gzip");
-					GZIPOutputStream gzos = new GZIPOutputStream(response.getOutputStream());
-					OutputStreamWriter osw = new OutputStreamWriter(gzos, response.getCharacterEncoding());
-					PrintWriter writer = new PrintWriter(osw);
-					writer.print(resWrapper.toString());
-					writer.flush();
-					gzos.finish();
-				} else {
-					PrintWriter writer = response.getWriter();
-					writer.print(resWrapper.toString());
-					writer.flush();
-				}
+				_write(request, response, resWrapper);
 			} else {
 				resWrapper.writeTo(response.getOutputStream());
 			}
@@ -61,6 +50,22 @@ public class GZIPFilter implements Filter {
 
 	@Override
 	public void destroy() {
+	}
+
+	private void _write(ServletRequest request, ServletResponse response, MyResponseWrapper resWrapper) throws IOException, UnsupportedEncodingException {
+		if (_isGzipSupported(request)) {
+			resWrapper.setHeader("Content-Encoding", "gzip");
+			GZIPOutputStream gzos = new GZIPOutputStream(response.getOutputStream());
+			OutputStreamWriter osw = new OutputStreamWriter(gzos, response.getCharacterEncoding());
+			PrintWriter writer = new PrintWriter(osw);
+			writer.print(resWrapper.toString());
+			writer.flush();
+			gzos.finish();
+		} else {
+			PrintWriter writer = response.getWriter();
+			writer.print(resWrapper.toString());
+			writer.flush();
+		}
 	}
 
 	private boolean _isGzipSupported(ServletRequest request) {
