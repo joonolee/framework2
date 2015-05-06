@@ -22,6 +22,7 @@ import nl.captcha.gimpy.RippleGimpyRenderer;
 import nl.captcha.servlet.CaptchaServletUtil;
 
 import com.google.zxing.BarcodeFormat;
+import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
@@ -168,6 +169,76 @@ public class ImageUtil {
 			BitMatrix l_bit_matrix = l_qr_writer.encode(l_url, BarcodeFormat.QR_CODE, width, width);
 			MatrixToImageWriter.writeToStream(l_bit_matrix, "png", os);
 		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	/**
+	 * 바코드 이미지를 생성한다.
+	 * @param num 생성할 바코드 번호
+	 * @param destPath 바코드 이미지 파일명
+	 * @param width 바코드 이미지 가로 길이
+	 * @param height 바코드 이미지 세로길이
+	 */
+	public static void barcode(String num, String destPath, int width, int height) {
+		barcode(num, new File(destPath), width, height);
+	}
+
+	/**
+	 * 바코드 이미지를 생성한다.
+	 * @param num 생성할 바코드 번호
+	 * @param destFile 바코드 이미지 파일 객체
+	 * @param width 바코드 이미지 가로길이
+	 * @param height 바코드 이미지 세로길이
+	 */
+	public static void barcode(String num, File destFile, int width, int height) {
+		FileOutputStream fos = null;
+		try {
+			fos = new FileOutputStream(destFile);
+			barcode(num, fos, width, height);
+			fos.flush();
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		} finally {
+			if (fos != null) {
+				try {
+					fos.close();
+				} catch (IOException e) {
+				}
+			}
+		}
+	}
+
+	/**
+	 * 바코드 이미지를 생성한다.
+	 * @param num 생성할 바코드 번호
+	 * @param response 바코드 이미지를 전송할 응답객체
+	 * @param width 바코드 이미지 가로길이
+	 * @param height 바코드 이미지 세로길이
+	 */
+	public static void barcode(String num, HttpServletResponse response, int width, int height) {
+		try {
+			response.reset();
+			response.setContentType("image/png");
+			barcode(num, response.getOutputStream(), width, height);
+		} catch (Throwable e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	/**
+	 * 바코드 이미지를 생성한다.
+	 * @param num 생성할 바코드 번호
+	 * @param os 출력 스트림
+	 * @param width 바코드 이미지 가로길이
+	 * @param height 바코드 이미지 세로길이
+	 */
+	public static void barcode(String num, OutputStream os, int width, int height) {
+		MultiFormatWriter barcodeWriter = new MultiFormatWriter();
+		try {
+			BitMatrix bitMatrix = barcodeWriter.encode(num, BarcodeFormat.CODE_128, width, height);
+			MatrixToImageWriter.writeToStream(bitMatrix, "png", os);
+		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
 	}

@@ -28,7 +28,7 @@ import framework.db.ConnectionManager;
  * 작성된 Actioin은 action.properties에 등록된다.
  */
 public abstract class Action {
-	private Map<String, ConnectionManager> _connMgrMap = new HashMap<String, ConnectionManager>();
+	private final Map<String, ConnectionManager> _connMgrMap = new HashMap<String, ConnectionManager>();
 	private static final String _FLASH_SCOPE_OBJECT_KEY = "___FLASH_SCOPE_OBJECT___";
 	private HttpServlet _servlet = null;
 	private Box _input = null;
@@ -429,7 +429,13 @@ public abstract class Action {
 	 * 플래시객체를 세션에 저장
 	 */
 	private void flashSave() {
-		setSessionAttribute(_FLASH_SCOPE_OBJECT_KEY, flash);
+		if (!flash.isEmpty()) {
+			try {
+				setSessionAttribute(_FLASH_SCOPE_OBJECT_KEY, flash);
+			} catch (IllegalStateException e) {
+				getLogger().error("Session State Error!");
+			}
+		}
 	}
 
 	/*
