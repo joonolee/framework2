@@ -83,7 +83,9 @@ public class FileUtil {
 	 * @return 경로가 제거된 파일명
 	 */
 	public static String getFileName(String filePath) {
-		return filePath.substring(filePath.lastIndexOf("/") + 1, filePath.length()).substring(filePath.lastIndexOf("\\") + 1, filePath.length());
+		filePath = filePath.substring(filePath.lastIndexOf("/") + 1, filePath.length());
+		filePath = filePath.substring(filePath.lastIndexOf("\\") + 1, filePath.length());
+		return filePath;
 	}
 
 	/**
