@@ -6,7 +6,6 @@ package framework.db;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -60,10 +59,14 @@ public class SQLPreparedStatement extends DBStatement {
 			PreparedStatement pstmt = getPrepareStatment();
 			if (getParamSize() > 0) {
 				for (int i = 1; i <= getParamSize(); i++) {
-					if (getObject(i - 1) == null || "".equals(getObject(i - 1))) {
+					Object param = getObject(i - 1);
+					if (param == null || "".equals(param)) {
 						pstmt.setNull(i, java.sql.Types.VARCHAR);
+					} else if (param instanceof java.util.Date) {
+						java.util.Date d = (java.util.Date) param;
+						pstmt.setObject(i, new java.sql.Timestamp(d.getTime()));
 					} else {
-						pstmt.setObject(i, getObject(i - 1));
+						pstmt.setObject(i, param);
 					}
 				}
 			}
@@ -116,6 +119,9 @@ public class SQLPreparedStatement extends DBStatement {
 						} else {
 							pstmt.setBinaryStream(i, null, 0);
 						}
+					} else if (param instanceof java.util.Date) {
+						java.util.Date d = (java.util.Date) param;
+						pstmt.setObject(i, new java.sql.Timestamp(d.getTime()));
 					} else {
 						pstmt.setObject(i, param);
 					}
@@ -222,6 +228,7 @@ public class SQLPreparedStatement extends DBStatement {
 		_sql = newSql;
 	}
 
+	@Override
 	public String toString() {
 		return "SQL : " + getSQL();
 	}
@@ -239,8 +246,11 @@ public class SQLPreparedStatement extends DBStatement {
 					value = _param.get(qMarkCount++);
 					if (value == null || "".equals(value)) {
 						value = "NULL";
-					} else if (value instanceof CharSequence || value instanceof Date) {
+					} else if (value instanceof CharSequence) {
 						value = "'" + value + "'";
+					} else if (value instanceof java.util.Date) {
+						java.util.Date d = (java.util.Date) value;
+						value = "'" + new java.sql.Timestamp(d.getTime()) + "'";
 					}
 				} else {
 					if (token.hasMoreTokens()) {
