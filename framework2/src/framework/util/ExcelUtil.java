@@ -17,7 +17,9 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,6 +38,7 @@ import org.apache.poi.poifs.crypt.EncryptionInfo;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.DateUtil;
 import org.apache.poi.ss.usermodel.Font;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -1474,6 +1477,7 @@ public class ExcelUtil {
 	 */
 	private static List<Map<String, String>> parseSheet(Sheet sheet) throws Exception {
 		List<Map<String, String>> mapList = new ArrayList<Map<String, String>>();
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		int rowCount = sheet.getPhysicalNumberOfRows();
 		int colCount = sheet.getRow(0).getPhysicalNumberOfCells();
 		for (int i = 0; i < rowCount; i++) {
@@ -1482,20 +1486,22 @@ public class ExcelUtil {
 			for (int j = 0; j < colCount; j++) {
 				Cell cell = row.getCell(j);
 				String item = "";
-				if (cell == null) {
-					item = "";
-				} else {
+				if (cell != null) {
 					switch (cell.getCellType()) {
-					case Cell.CELL_TYPE_ERROR:
-						throw new Exception("EXCEL에 수식 에러가 포함되어 있어 분석에 실패하였습니다.");
+					case Cell.CELL_TYPE_BOOLEAN:
 					case Cell.CELL_TYPE_FORMULA:
-						throw new Exception("EXCEL에 수식이 포함되어 있어 분석에 실패하였습니다.");
-					case Cell.CELL_TYPE_NUMERIC:
+					case Cell.CELL_TYPE_STRING:
 						cell.setCellType(Cell.CELL_TYPE_STRING);
 						item = cell.getStringCellValue();
 						break;
-					case Cell.CELL_TYPE_STRING:
-						item = cell.getStringCellValue();
+					case Cell.CELL_TYPE_NUMERIC:
+						if (DateUtil.isCellDateFormatted(cell)) {
+							Date date = cell.getDateCellValue();
+							item = dateFormat.format(date);
+						} else {
+							cell.setCellType(Cell.CELL_TYPE_STRING);
+							item = cell.getStringCellValue();
+						}
 						break;
 					}
 				}
