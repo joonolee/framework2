@@ -22,12 +22,12 @@ public class EhCache extends AbstractCache {
 	/**
 	 * 캐시 매니저
 	 */
-	private CacheManager _cacheManager;
+	private final CacheManager _cacheManager;
 
 	/**
 	 * 캐시 오브젝트
 	 */
-	private net.sf.ehcache.Cache _cache;
+	private final net.sf.ehcache.Cache _cache;
 
 	/**
 	 * 기본 캐시 이름
@@ -57,15 +57,15 @@ public class EhCache extends AbstractCache {
 
 	@Override
 	public void set(String key, Object value, int seconds) {
-		Element element = new Element(key, value);
-		element.setTimeToLive(seconds);
-		_cache.put(element);
+		Element e = new Element(key, value);
+		e.setTimeToLive(seconds);
+		_cache.put(e);
 	}
 
 	@Override
 	public Object get(String key) {
-		Element element = _cache.get(key);
-		return (element == null) ? null : element.getValue();
+		Element e = _cache.get(key);
+		return (e == null) ? null : e.getObjectValue();
 	}
 
 	@Override
@@ -79,27 +79,27 @@ public class EhCache extends AbstractCache {
 
 	@Override
 	public synchronized long incr(String key, int by) {
-		Element element = _cache.get(key);
-		if (element == null) {
+		Element e = _cache.get(key);
+		if (e == null) {
 			return -1;
 		}
-		long newValue = ((Number) element.getValue()).longValue() + by;
-		Element newElement = new Element(key, newValue);
-		newElement.setTimeToLive(element.getTimeToLive());
-		_cache.put(newElement);
+		long newValue = ((Number) e.getObjectValue()).longValue() + by;
+		Element newE = new Element(key, newValue);
+		newE.setTimeToLive(e.getTimeToLive());
+		_cache.put(newE);
 		return newValue;
 	}
 
 	@Override
 	public synchronized long decr(String key, int by) {
-		Element element = _cache.get(key);
-		if (element == null) {
+		Element e = _cache.get(key);
+		if (e == null) {
 			return -1;
 		}
-		long newValue = ((Number) element.getValue()).longValue() - by;
-		Element newElement = new Element(key, newValue);
-		newElement.setTimeToLive(element.getTimeToLive());
-		_cache.put(newElement);
+		long newValue = ((Number) e.getObjectValue()).longValue() - by;
+		Element newE = new Element(key, newValue);
+		newE.setTimeToLive(e.getTimeToLive());
+		_cache.put(newE);
 		return newValue;
 	}
 
