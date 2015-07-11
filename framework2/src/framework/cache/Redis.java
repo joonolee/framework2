@@ -37,23 +37,15 @@ public class Redis extends AbstractCache {
 	/**
 	 * 캐시 클라이언트 Pool
 	 */
-	private ShardedJedisPool _pool;
+	private final ShardedJedisPool _pool;
 
 	/**
 	 * 생성자, 외부에서 객체를 인스턴스화 할 수 없도록 설정
 	 */
 	private Redis() {
 		List<JedisShardInfo> shards;
-		if (_getConfig().containsKey("redis.host")) {
-			shards = _getAddresses(_getConfig().getString("redis.host"));
-		} else if (_getConfig().containsKey("redis.1.host")) {
-			int count = 1;
-			StringBuilder buffer = new StringBuilder();
-			while (_getConfig().containsKey("redis." + count + ".host")) {
-				buffer.append(_getConfig().getString("redis." + count + ".host") + " ");
-				count++;
-			}
-			shards = _getAddresses(buffer.toString());
+		if (_getConfig().containsKey("redis.servers")) {
+			shards = _getAddresses(_getConfig().getString("redis.servers"));
 		} else {
 			throw new RuntimeException("redis의 호스트설정이 누락되었습니다.");
 		}
