@@ -15,8 +15,6 @@ import javax.servlet.http.HttpServlet;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.Velocity;
 
-import framework.action.Box;
-
 /**
  * Velocity를 이용한 템플릿 처리 라이브러리
  */
@@ -36,11 +34,11 @@ public class VelocityUtil {
 	 * @param servlet 서블릿 객체
 	 * @param key action.properties에 등록한 템플릿의 키 문자열 
 	 * @param statement 문장식별 문자열
-	 * @param param 파라미터 Box 객체
+	 * @param param 파라미터 Object 객체
 	 * @return 템플릿이 적용된 문자열
 	 * @throws Exception 
 	 */
-	public static String render(HttpServlet servlet, String key, String statement, Box param) throws Exception {
+	public static String render(HttpServlet servlet, String key, String statement, Object param) throws Exception {
 		return evaluate(servlet, key, statement, param);
 	}
 
@@ -52,17 +50,16 @@ public class VelocityUtil {
 	 * @param servlet 서블릿 객체
 	 * @param key action.properties에 등록한 템플릿의 키 문자열 
 	 * @param statement 문장식별 문자열
-	 * @param param 파라미터 Box 객체
+	 * @param param 파라미터 Object 객체
 	 * @return 템플릿이 적용된 문자열
 	 * @throws Exception 
 	 */
-	public static String evaluate(HttpServlet servlet, String key, String statement, Box param) throws Exception {
+	public static String evaluate(HttpServlet servlet, String key, String statement, Object param) throws Exception {
 		Velocity.init();
 		VelocityContext context = new VelocityContext();
 		context.put("COMMAND", statement);
 		context.put("PARAM", param);
 		context.put("UTIL", StringUtil.class);
-
 		ResourceBundle bundle = (ResourceBundle) servlet.getServletContext().getAttribute("action-mapping");
 		String fileName = ((String) bundle.getObject(key)).trim();
 		StringWriter writer = new StringWriter();
@@ -89,7 +86,6 @@ public class VelocityUtil {
 		StringBuilder ta = new StringBuilder();
 		FileReader fr = null;
 		BufferedReader br = null;
-
 		try {
 			fr = new FileReader(pathFile);
 			br = new BufferedReader(fr);
