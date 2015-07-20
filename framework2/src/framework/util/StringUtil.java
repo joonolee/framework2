@@ -499,6 +499,28 @@ public class StringUtil {
 	}
 
 	/**
+	 * 문자열이 빈문자열(null 또는 "")인지 검사하여 빈문자열이면 true, 아니면 false를 반환하는 함수
+	 * @param str 체크할 문자열
+	 * @return 빈문자열(null 또는 "")이면 true, 아니면 false
+	 */
+	public static boolean isEmpty(String str) {
+		if (str == null || "".equals(str)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	/**
+	 * 문자열이 빈문자열(null 또는 "")이 아닌지 검사하여 빈문자열이면 false, 아니면 true를 반환하는 함수
+	 * @param str 체크할 문자열
+	 * @return 빈문자열(null 또는 "")이면 false, 아니면 true
+	 */
+	public static boolean isNotEmpty(String str) {
+		return !isEmpty(str);
+	}
+
+	/**
 	 * 인자에 포함된 모든 태크를 제거하는 함수
 	 * 
 	 * @param src 원본문자열
