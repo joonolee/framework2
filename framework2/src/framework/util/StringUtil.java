@@ -325,12 +325,10 @@ public class StringUtil {
 	 * @return 널(null)값을 빈문자("") 로 변환한 문자열
 	 */
 	public static String nullToBlankString(String str) {
-		String rval = "";
-		if (str == null)
-			rval = "";
-		else
-			rval = str;
-		return rval;
+		if (str == null) {
+			return "";
+		}
+		return str;
 	}
 
 	/**
@@ -342,12 +340,10 @@ public class StringUtil {
 	 * @return 널(null)값을 두번째 인자의 값 문자열
 	 */
 	public static String null2Str(String str1, String str2) {
-		String rval = "";
-		if (str1 == null)
-			rval = str2;
-		else
-			rval = str1;
-		return rval;
+		if (str1 == null) {
+			return str2;
+		}
+		return str1;
 	}
 
 	/**
