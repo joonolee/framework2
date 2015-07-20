@@ -3,14 +3,14 @@
  */
 package framework.util;
 
-/**
- * 스트링 처리 라이브러리
- */
 import java.util.Calendar;
 import java.util.Date;
 import java.util.StringTokenizer;
 import java.util.TimeZone;
 
+/**
+ * 스트링 처리 라이브러리
+ */
 public class StringUtil {
 
 	/**
