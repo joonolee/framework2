@@ -74,13 +74,11 @@ public class DateUtil {
 	public static Date toDate(String dateStr, String format) {
 		SimpleDateFormat sdf = new SimpleDateFormat(format);
 		sdf.setLenient(false);
-		Date date = new Date();
 		try {
-			date = sdf.parse(dateStr);
+			return sdf.parse(dateStr);
 		} catch (ParseException pe) {
-			date = null;
+			return null;
 		}
-		return date;
 	}
 
 	/**
@@ -100,9 +98,7 @@ public class DateUtil {
 	 */
 	public static String toString(Date date, String format) {
 		SimpleDateFormat sdf = new SimpleDateFormat(format);
-		String dateStr = "";
-		dateStr = sdf.format(date);
-		return dateStr;
+		return sdf.format(date);
 	}
 
 	/**
