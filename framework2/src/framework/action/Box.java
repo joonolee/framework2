@@ -6,6 +6,7 @@ package framework.action;
 import java.lang.reflect.Array;
 import java.math.BigDecimal;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -69,164 +70,233 @@ public class Box extends HashMap<String, String[]> {
 	}
 
 	/** 
-	 * 키(key)문자열과 매핑되어 있는 오브젝트를 리턴한다.
-	 * 
+	 * 키(key)문자열과 매핑되어 있는 값(value)문자열을 리턴한다.
 	 * @param key 값을 찾기 위한 키 문자열
-	 * 
-	 * @return key에 매핑되어 있는 오브젝트
+	 * @return key에 매핑되어 있는 값
 	 */
-	public Object get(String key) {
-		Object value = null;
-		value = super.get(key);
-		if (value == null) {
-			return value;
+	public String get(String key) {
+		return get(key, "");
+	}
+
+	/** 
+	 * 키(key)문자열과 매핑되어 있는 값(value)문자열을 리턴한다.
+	 * @param key 값을 찾기 위한 키 문자열
+	 * @param defaultValue 값이 없을 때 리턴할 기본 값
+	 * @return key에 매핑되어 있는 값 또는 기본 값
+	 */
+	public String get(String key, String defaultValue) {
+		String[] value = super.get(key);
+		if (value == null || value.length == 0) {
+			return defaultValue;
 		}
-		if (value.getClass().isArray()) {
-			int length = Array.getLength(value);
-			if (length == 0) {
-				value = null;
-			} else {
-				value = Array.get(value, 0);
-			}
-		}
-		return value;
+		return value[0];
 	}
 
 	/** 
 	 * 키(key)문자열과 매핑되어 있는 문자열 배열을 리턴한다.
-	 * 
 	 * @param key 값을 찾기 위한 키 문자열
-	 * 
-	 * @return key에 매핑되어 있는 문자열 배열
+	 * @return key에 매핑되어 있는 값
 	 */
 	public String[] getArray(String key) {
+		return getArray(key, new String[] {});
+	}
+
+	/** 
+	 * 키(key)문자열과 매핑되어 있는 문자열 배열을 리턴한다.
+	 * @param key 값을 찾기 위한 키 문자열
+	 * @param defaultValue 값이 없을 때 리턴할 기본 값
+	 * @return key에 매핑되어 있는 값 또는 기본 값
+	 */
+	public String[] getArray(String key, String[] defaultValue) {
 		String[] value = super.get(key);
 		if (value == null) {
-			return new String[] {};
+			return defaultValue;
 		}
 		return value;
 	}
 
 	/** 
 	 * 키(key)문자열과 매핑되어 있는 Boolean 객체를 리턴한다.
-	 * 
 	 * @param key 값을 찾기 위한 키 문자열
-	 * 
-	 * @return key에 매핑되어 있는 Boolean 객체
+	 * @return key에 매핑되어 있는 값
 	 */
 	public Boolean getBoolean(String key) {
-		String value = getString(key);
-		Boolean isTrue = Boolean.valueOf(false);
-		try {
-			isTrue = Boolean.valueOf(value);
-		} catch (Exception e) {
+		return getBoolean(key, Boolean.FALSE);
+	}
+
+	/** 
+	 * 키(key)문자열과 매핑되어 있는 Boolean 객체를 리턴한다.
+	 * @param key 값을 찾기 위한 키 문자열
+	 * @param defaultValue 값이 없을 때 리턴할 기본 값
+	 * @return key에 매핑되어 있는 값 또는 기본 값
+	 */
+	public Boolean getBoolean(String key, Boolean defaultValue) {
+		String value = getString(key).trim();
+		if (value.isEmpty()) {
+			return defaultValue;
 		}
-		return isTrue;
+		return Boolean.valueOf(value);
 	}
 
 	/** 
 	 * 키(key)문자열과 매핑되어 있는 Double 객체를 리턴한다.
-	 * 
 	 * @param key 값을 찾기 위한 키 문자열
-	 * 
-	 * @return key에 매핑되어 있는 Double 객체
+	 * @return key에 매핑되어 있는 값
 	 */
 	public Double getDouble(String key) {
-		String value = getString(key).trim().replaceAll(",", "");
-		if (value.equals("")) {
-			return Double.valueOf(0);
-		}
-		Double num = null;
+		return getDouble(key, Double.valueOf(0));
+	}
+
+	/** 
+	 * 키(key)문자열과 매핑되어 있는 Double 객체를 리턴한다.
+	 * @param key 값을 찾기 위한 키 문자열
+	 * @param defaultValue 값이 없을 때 리턴할 기본 값
+	 * @return key에 매핑되어 있는 값 또는 기본 값
+	 */
+	public Double getDouble(String key, Double defaultValue) {
 		try {
-			num = Double.valueOf(value);
-		} catch (Exception e) {
-			num = Double.valueOf(0);
+			String value = getString(key).trim().replaceAll(",", "");
+			if (value.isEmpty()) {
+				return defaultValue;
+			}
+			return Double.valueOf(value);
+		} catch (NumberFormatException e) {
+			return defaultValue;
 		}
-		return num;
 	}
 
 	/** 
 	 * 키(key)문자열과 매핑되어 있는 BigDecimal 객체를 리턴한다.
-	 * 
 	 * @param key 값을 찾기 위한 키 문자열
-	 * 
-	 * @return key에 매핑되어 있는 BigDecimal 객체
+	 * @return key에 매핑되어 있는 값
 	 */
 	public BigDecimal getBigDecimal(String key) {
-		String value = getString(key).trim().replaceAll(",", "");
-		if (value.equals("")) {
-			return BigDecimal.valueOf(0);
-		}
+		return getBigDecimal(key, BigDecimal.ZERO);
+	}
+
+	/** 
+	 * 키(key)문자열과 매핑되어 있는 BigDecimal 객체를 리턴한다.
+	 * @param key 값을 찾기 위한 키 문자열
+	 * @param defaultValue 값이 없을 때 리턴할 기본 값
+	 * @return key에 매핑되어 있는 값 또는 기본 값
+	 */
+	public BigDecimal getBigDecimal(String key, BigDecimal defaultValue) {
 		try {
+			String value = getString(key).trim().replaceAll(",", "");
+			if (value.isEmpty()) {
+				return defaultValue;
+			}
 			return new BigDecimal(value);
-		} catch (Exception e) {
-			return BigDecimal.valueOf(0);
+		} catch (NumberFormatException e) {
+			return defaultValue;
 		}
 	}
 
 	/** 
 	 * 키(key)문자열과 매핑되어 있는 Float 객체를 리턴한다.
-	 * 
 	 * @param key 값을 찾기 위한 키 문자열
-	 * 
-	 * @return key에 매핑되어 있는 Float 객체
+	 * @return key에 매핑되어 있는 값
 	 */
 	public Float getFloat(String key) {
-		return new Float(getDouble(key).doubleValue());
+		return getFloat(key, Float.valueOf(0));
+	}
+
+	/** 
+	 * 키(key)문자열과 매핑되어 있는 Float 객체를 리턴한다.
+	 * @param key 값을 찾기 위한 키 문자열
+	 * @param defaultValue 값이 없을 때 리턴할 기본 값
+	 * @return key에 매핑되어 있는 값 또는 기본 값
+	 */
+	public Float getFloat(String key, Float defaultValue) {
+		try {
+			String value = getString(key).trim().replaceAll(",", "");
+			if (value.isEmpty()) {
+				return defaultValue;
+			}
+			return Float.valueOf(value);
+		} catch (NumberFormatException e) {
+			return defaultValue;
+		}
 	}
 
 	/** 
 	 * 키(key)문자열과 매핑되어 있는 Integer 객체를 리턴한다.
-	 * 
 	 * @param key 값을 찾기 위한 키 문자열
-	 * 
-	 * @return key에 매핑되어 있는 Integer 객체
+	 * @return key에 매핑되어 있는 값
 	 */
 	public Integer getInteger(String key) {
-		Double value = getDouble(key);
-		return Integer.valueOf(value.intValue());
+		return getInteger(key, Integer.valueOf(0));
+	}
+
+	/** 
+	 * 키(key)문자열과 매핑되어 있는 Integer 객체를 리턴한다.
+	 * @param key 값을 찾기 위한 키 문자열
+	 * @param defaultValue 값이 없을 때 리턴할 기본 값
+	 * @return key에 매핑되어 있는 값 또는 기본 값
+	 */
+	public Integer getInteger(String key, Integer defaultValue) {
+		try {
+			String value = getString(key).trim().replaceAll(",", "");
+			if (value.isEmpty()) {
+				return defaultValue;
+			}
+			return Integer.valueOf(value);
+		} catch (NumberFormatException e) {
+			return defaultValue;
+		}
 	}
 
 	/** 
 	 * 키(key)문자열과 매핑되어 있는 Long 객체를 리턴한다.
-	 * 
 	 * @param key 값을 찾기 위한 키 문자열
-	 * 
-	 * @return key에 매핑되어 있는 Long 객체
+	 * @return key에 매핑되어 있는 값
 	 */
 	public Long getLong(String key) {
-		Double value = getDouble(key);
-		return Long.valueOf(value.longValue());
+		return getLong(key, Long.valueOf(0));
 	}
 
 	/** 
-	 * 키(key)문자열과 매핑되어 있는 long 변수를 리턴한다.
-	 * 
+	 * 키(key)문자열과 매핑되어 있는 Long 객체를 리턴한다.
 	 * @param key 값을 찾기 위한 키 문자열
-	 * 
-	 * @return key에 매핑되어 있는 long 변수를
+	 * @param defaultValue 값이 없을 때 리턴할 기본 값
+	 * @return key에 매핑되어 있는 값 또는 기본 값
 	 */
-	public long getlong(String key) {
-		Double value = getDouble(key);
-		return value.longValue();
+	public Long getLong(String key, Long defaultValue) {
+		try {
+			String value = getString(key).trim().replaceAll(",", "");
+			if (value.isEmpty()) {
+				return defaultValue;
+			}
+			return Long.valueOf(value);
+		} catch (NumberFormatException e) {
+			return defaultValue;
+		}
 	}
 
 	/** 
 	 * 키(key)문자열과 매핑되어 있는 String 객체를 리턴한다.
 	 * 크로스사이트 스크립팅 공격 방지를 위해 &lt;, &gt; 치환을 수행한다.
-	 * 
 	 * @param key 값을 찾기 위한 키 문자열
-	 * 
-	 * @return key에 매핑되어 있는 String 객체
+	 * @return key에 매핑되어 있는 값
 	 */
 	public String getString(String key) {
-		String str = (String) get(key);
-		if (str == null) {
-			return "";
+		return getString(key, "");
+	}
+
+	/** 
+	 * 키(key)문자열과 매핑되어 있는 String 객체를 리턴한다.
+	 * @param key 값을 찾기 위한 키 문자열
+	 * @param defaultValue 값이 없을 때 리턴할 기본 값
+	 * @return key에 매핑되어 있는 값 또는 기본 값
+	 */
+	public String getString(String key, String defaultValue) {
+		String value = get(key);
+		if (value.isEmpty()) {
+			return defaultValue;
 		}
-		StringBuilder result = new StringBuilder(str.length());
-		for (int i = 0; i < str.length(); i++) {
-			switch (str.charAt(i)) {
+		StringBuilder result = new StringBuilder(value.length());
+		for (int i = 0; i < value.length(); i++) {
+			switch (value.charAt(i)) {
 			case '<':
 				result.append("&lt;");
 				break;
@@ -234,7 +304,7 @@ public class Box extends HashMap<String, String[]> {
 				result.append("&gt;");
 				break;
 			default:
-				result.append(str.charAt(i));
+				result.append(value.charAt(i));
 				break;
 			}
 		}
@@ -243,50 +313,53 @@ public class Box extends HashMap<String, String[]> {
 
 	/** 
 	 * 키(key)문자열과 매핑되어 있는 String 객체를 변환없이 리턴한다.
-	 * 
-	 * 
 	 * @param key 값을 찾기 위한 키 문자열
-	 * 
-	 * @return key에 매핑되어 있는 String 객체
+	 * @return key에 매핑되어 있는 값
 	 */
 	public String getRawString(String key) {
-		String str = (String) get(key);
-		if (str == null) {
-			return "";
-		}
-		return str;
+		return getRawString(key, "");
 	}
 
 	/** 
-	 * 키(key)문자열과 매핑되어 있는 바이트 배열을 리턴한다.
-	 * 
+	 * 키(key)문자열과 매핑되어 있는 String 객체를 변환없이 리턴한다.
 	 * @param key 값을 찾기 위한 키 문자열
-	 * 
-	 * @return key에 매핑되어 있는 바이트 배열
+	 * @param defaultValue 값이 없을 때 리턴할 기본 값
+	 * @return key에 매핑되어 있는 값 또는 기본 값
 	 */
-	public byte[] getByte(String key) {
-		Object obj = super.get(key);
-		if (obj == null) {
-			return null;
+	public String getRawString(String key, String defaultValue) {
+		String value = get(key);
+		if (value.isEmpty()) {
+			return defaultValue;
 		}
-		return (byte[]) obj;
+		return value;
 	}
 
 	/** 
 	 * 키(key)문자열과 매핑되어 있는 Date 객체를 리턴한다.
 	 * @param key 값을 찾기 위한 키 문자열(기본형식: yyyy-MM-dd)
-	 * @return key에 매핑되어 있는 Date 객체
+	 * @return key에 매핑되어 있는 값
 	 */
 	public Date getDate(String key) {
-		String str = getString(key);
-		if ("".equals(str)) {
-			return null;
+		return getDate(key, (Date) null);
+	}
+
+	/** 
+	 * 키(key)문자열과 매핑되어 있는 Date 객체를 리턴한다.
+	 * @param key 값을 찾기 위한 키 문자열(기본형식: yyyy-MM-dd)
+	 * @param defaultValue 값이 없을 때 리턴할 기본 값
+	 * @return key에 매핑되어 있는 값 또는 기본 값
+	 */
+	public Date getDate(String key, Date defaultValue) {
+		String value = getString(key).trim().replaceAll("[^\\d]", "");
+		if (value.isEmpty()) {
+			return defaultValue;
 		}
-		java.text.SimpleDateFormat formater = new java.text.SimpleDateFormat("yyyy-MM-dd", java.util.Locale.KOREA);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+		sdf.setLenient(false);
 		try {
-			return formater.parse(str);
+			return sdf.parse(value);
 		} catch (ParseException e) {
-			return null;
+			return defaultValue;
 		}
 	}
 
@@ -294,18 +367,30 @@ public class Box extends HashMap<String, String[]> {
 	 * 키(key)문자열과 매핑되어 있는 Date 객체를 리턴한다.
 	 * @param key 값을 찾기 위한 키 문자열
 	 * @param format 날짜 포맷(예, yyyy-MM-dd HH:mm:ss)
-	 * @return key에 매핑되어 있는 Date 객체
+	 * @return key에 매핑되어 있는 값
 	 */
 	public Date getDate(String key, String format) {
-		String str = getString(key);
-		if ("".equals(str)) {
-			return null;
+		return getDate(key, format, (Date) null);
+	}
+
+	/** 
+	 * 키(key)문자열과 매핑되어 있는 Date 객체를 리턴한다.
+	 * @param key 값을 찾기 위한 키 문자열
+	 * @param format 날짜 포맷(예, yyyy-MM-dd HH:mm:ss)
+	 * @param defaultValue 값이 없을 때 리턴할 기본 값
+	 * @return key에 매핑되어 있는 값 또는 기본 값
+	 */
+	public Date getDate(String key, String format, Date defaultValue) {
+		String value = getString(key).trim();
+		if (value.isEmpty()) {
+			return defaultValue;
 		}
-		java.text.SimpleDateFormat formatter = new java.text.SimpleDateFormat(format, java.util.Locale.KOREA);
+		SimpleDateFormat sdf = new SimpleDateFormat(format);
+		sdf.setLenient(false);
 		try {
-			return formatter.parse(str);
+			return sdf.parse(value);
 		} catch (ParseException e) {
-			return null;
+			return defaultValue;
 		}
 	}
 
