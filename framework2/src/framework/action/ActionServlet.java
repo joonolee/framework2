@@ -148,6 +148,9 @@ public class ActionServlet extends HttpServlet {
 			RequestDispatcher dispatcher = (RequestDispatcher) getServletContext().getAttribute("default-servlet-dispatcher");
 			if (dispatcher != null) {
 				dispatcher.forward(request, response);
+			} else {
+				response.setStatus(404);
+				response.setContentType("text/plain;charset=utf-8");
 			}
 			return;
 		} catch (Exception e) {
