@@ -21,10 +21,11 @@ public class CORSFilter implements Filter {
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse res = (HttpServletResponse) response;
 		res.setHeader("Access-Control-Allow-Origin", req.getHeader("Origin"));
-		res.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT, OPTIONS, DELETE");
+		res.setHeader("Access-Control-Allow-Methods", "POST, GET, HEAD, PUT, OPTIONS, DELETE");
 		res.setHeader("Access-Control-Max-Age", "3600");
 		res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 		res.setHeader("Access-Control-Allow-Credentials", "true");
+		res.setHeader("P3P", "CP=\"ALL IND DSP COR ADM CONo CUR CUSo IVAo IVDo PSA PSD TAI TELo OUR SAMo CNT COM INT NAV ONL PHY PRE PUR UNI\"");
 		filterChain.doFilter(request, response);
 	}
 
