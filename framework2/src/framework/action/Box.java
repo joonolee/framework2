@@ -294,7 +294,7 @@ public class Box extends HashMap<String, String[]> {
 		if (value.isEmpty()) {
 			return defaultValue;
 		}
-		StringBuilder result = new StringBuilder(value.length());
+		StringBuilder result = new StringBuilder(value.length() * 2);
 		for (int i = 0; i < value.length(); i++) {
 			switch (value.charAt(i)) {
 			case '<':
@@ -302,6 +302,12 @@ public class Box extends HashMap<String, String[]> {
 				break;
 			case '>':
 				result.append("&gt;");
+				break;
+			case '&':
+				result.append("&amp;");
+				break;
+			case '"':
+				result.append("&quot;");
 				break;
 			default:
 				result.append(value.charAt(i));
