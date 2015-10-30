@@ -307,7 +307,13 @@ public class Box extends HashMap<String, String[]> {
 				result.append("&amp;");
 				break;
 			case '"':
-				result.append("&quot;");
+				result.append("&#34;");
+				break;
+			case '\'':
+				result.append("&#39;");
+				break;
+			case '%':
+				result.append("&#37;");
 				break;
 			default:
 				result.append(value.charAt(i));
