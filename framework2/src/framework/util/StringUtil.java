@@ -7,11 +7,14 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.StringTokenizer;
 import java.util.TimeZone;
+import java.util.regex.Pattern;
 
 /**
  * 스트링 처리 라이브러리
  */
 public class StringUtil {
+	private static final Pattern TAG_PATTERN = Pattern.compile("<[^<]*?>");
+	private static final Pattern SCRIPT_TAG_PATTERN = Pattern.compile("<\\s*[s|S][c|C][r|R][i|I][p|P][t|T].*?>.*?<\\s*/\\s*[s|S][c|C][r|R][i|I][p|P][t|T]\\s*>", Pattern.DOTALL);
 
 	/**
 	 * 생성자, 외부에서 객체를 인스턴스화 할 수 없도록 설정
@@ -518,58 +521,34 @@ public class StringUtil {
 
 	/**
 	 * 인자에 포함된 모든 태크를 제거하는 함수
-	 * 
 	 * @param src 원본문자열
 	 * @return 태그가 제거된 문자열
 	 */
 	public static String stripTag(String src) {
-		StringBuilder noTagContent = new StringBuilder();
-		for (int i = 0; i < src.length(); i++) {
-			if (src.charAt(i) == '<') {
-				for (i++; i < src.length(); i++) {
-					if (src.charAt(i) == 'S' || src.charAt(i) == 's') {
-						if (i + 5 >= src.length()) {
-							return noTagContent.toString();
-						}
-						String temp = src.substring(i, i + 6);
-						if (temp.equalsIgnoreCase("script")) {
-							for (i = i + 6; i < src.length(); i++) {
-								if (src.charAt(i) == '<') {
-									if (i + 8 >= src.length()) {
-										return noTagContent.toString();
-									}
-									temp = src.substring(i, i + 9);
-									if (temp.equalsIgnoreCase("</script>")) {
-										i = i + 8;
-										break;
-									}
-								}
-							}
-							if (i >= src.length()) {
-								return noTagContent.toString();
-							}
-						}
-					}
-					if (src.charAt(i) == '>') {
-						break;
-					}
-				}
-				continue;
-			}
-			noTagContent.append(src.charAt(i));
+		if (src == null) {
+			return "";
 		}
-		return noTagContent.toString();
+		String noTag = src;
+		while (TAG_PATTERN.matcher(noTag).find()) {
+			noTag = TAG_PATTERN.matcher(noTag).replaceAll("");
+		}
+		return noTag;
 	}
 
 	/**
 	 * 인자에 포함된 스크립트 태크를 제거하는 함수
-	 * 
 	 * @param src 원본문자열
 	 * @return 스크립트 태그가 제거된 문자열
 	 */
 	public static String stripScriptTag(String src) {
-		String pattern = "<\\s*[s|S][c|C][r|R][i|I][p|P][t|T].*>.*<\\s*/\\s*[s|S][c|C][r|R][i|I][p|P][t|T]\\s*>";
-		return src.replaceAll(pattern, "");
+		if (src == null) {
+			return "";
+		}
+		String noScriptTag = src;
+		while (SCRIPT_TAG_PATTERN.matcher(noScriptTag).find()) {
+			noScriptTag = SCRIPT_TAG_PATTERN.matcher(noScriptTag).replaceAll("");
+		}
+		return noScriptTag;
 	}
 
 	/**

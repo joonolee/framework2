@@ -13,6 +13,8 @@ import java.util.HashMap;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
+import framework.util.StringUtil;
+
 /** 
  * 요청객체, 쿠키객체의 값을 담는 해시테이블 객체이다.
  * 요청객체의 파라미터를 추상화 하여 Box 를 생성해 놓고 파라미터이름을 키로 해당 값을 원하는 데이타 타입으로 반환받는다.
@@ -294,33 +296,7 @@ public class Box extends HashMap<String, String[]> {
 		if (value.isEmpty()) {
 			return defaultValue;
 		}
-		StringBuilder result = new StringBuilder(value.length() * 2);
-		for (int i = 0; i < value.length(); i++) {
-			switch (value.charAt(i)) {
-			case '<':
-				result.append("&lt;");
-				break;
-			case '>':
-				result.append("&gt;");
-				break;
-			case '&':
-				result.append("&amp;");
-				break;
-			case '"':
-				result.append("&#34;");
-				break;
-			case '\'':
-				result.append("&#39;");
-				break;
-			case '%':
-				result.append("&#37;");
-				break;
-			default:
-				result.append(value.charAt(i));
-				break;
-			}
-		}
-		return result.toString();
+		return StringUtil.escapeHtmlSpecialChars(value);
 	}
 
 	/** 
