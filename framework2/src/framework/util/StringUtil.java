@@ -579,15 +579,6 @@ public class StringUtil {
 			case '%':
 				result.append("&#37;");
 				break;
-			case ';':
-				result.append("&#59;");
-				break;
-			case '(':
-				result.append("&#40;");
-				break;
-			case ')':
-				result.append("&#41;");
-				break;
 			case '&':
 				result.append("&amp;");
 				break;
