@@ -94,7 +94,7 @@ public class DaogenForMSSQL {
 			StringBuffer strPK = new StringBuffer();
 			strPK.append("SELECT COL.COLUMN_NAME  ");
 			strPK.append("FROM SYSOBJECTS CONS ");
-			strPK.append("	INNER JOIN INFORMATION_SCHEMA.KEY_COLUMN_USAGE COL ON CONS.NAME = COL.CONSTRAINT_NAME ");
+			strPK.append("	INNER JOIN INFORMATION_SCHEMA.KEY_COLUMN_USAGE COL ON CONS.NAME = COL.COLUMN_NAME ");
 			strPK.append("WHERE CONS.XTYPE = 'PK' ");
 			strPK.append("	AND COL.TABLE_NAME = '" + name.trim() + "' ");
 			strPK.append("ORDER BY COL.ORDINAL_POSITION ");

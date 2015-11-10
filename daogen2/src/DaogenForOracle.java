@@ -181,7 +181,7 @@ public class DaogenForOracle {
 				return "BigDecimal";
 			}
 		case Types.DATE:
-			return "Date";
+			return "String";
 		default:
 			return "String";
 		}
