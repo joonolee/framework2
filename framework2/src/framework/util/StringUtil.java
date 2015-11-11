@@ -576,14 +576,8 @@ public class StringUtil {
 			case '\'':
 				result.append("&#39;");
 				break;
-			case '%':
-				result.append("&#37;");
-				break;
 			case '&':
 				result.append("&amp;");
-				break;
-			case '+':
-				result.append("&#43;");
 				break;
 			default:
 				result.append(src.charAt(i));
