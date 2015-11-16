@@ -72,29 +72,6 @@ public class Box extends HashMap<String, String[]> {
 	}
 
 	/** 
-	 * 키(key)문자열과 매핑되어 있는 값(value)문자열을 리턴한다.
-	 * @param key 값을 찾기 위한 키 문자열
-	 * @return key에 매핑되어 있는 값
-	 */
-	public String get(String key) {
-		return get(key, "");
-	}
-
-	/** 
-	 * 키(key)문자열과 매핑되어 있는 값(value)문자열을 리턴한다.
-	 * @param key 값을 찾기 위한 키 문자열
-	 * @param defaultValue 값이 없을 때 리턴할 기본 값
-	 * @return key에 매핑되어 있는 값 또는 기본 값
-	 */
-	public String get(String key, String defaultValue) {
-		String[] value = super.get(key);
-		if (value == null || value.length == 0) {
-			return defaultValue;
-		}
-		return value[0];
-	}
-
-	/** 
 	 * 키(key)문자열과 매핑되어 있는 문자열 배열을 리턴한다.
 	 * @param key 값을 찾기 위한 키 문자열
 	 * @return key에 매핑되어 있는 값
@@ -133,7 +110,7 @@ public class Box extends HashMap<String, String[]> {
 	 * @return key에 매핑되어 있는 값 또는 기본 값
 	 */
 	public Boolean getBoolean(String key, Boolean defaultValue) {
-		String value = getString(key).trim();
+		String value = getRawString(key).trim();
 		if (value.isEmpty()) {
 			return defaultValue;
 		}
@@ -157,7 +134,7 @@ public class Box extends HashMap<String, String[]> {
 	 */
 	public Double getDouble(String key, Double defaultValue) {
 		try {
-			String value = getString(key).trim().replaceAll(",", "");
+			String value = getRawString(key).trim().replaceAll(",", "");
 			if (value.isEmpty()) {
 				return defaultValue;
 			}
@@ -184,7 +161,7 @@ public class Box extends HashMap<String, String[]> {
 	 */
 	public BigDecimal getBigDecimal(String key, BigDecimal defaultValue) {
 		try {
-			String value = getString(key).trim().replaceAll(",", "");
+			String value = getRawString(key).trim().replaceAll(",", "");
 			if (value.isEmpty()) {
 				return defaultValue;
 			}
@@ -211,7 +188,7 @@ public class Box extends HashMap<String, String[]> {
 	 */
 	public Float getFloat(String key, Float defaultValue) {
 		try {
-			String value = getString(key).trim().replaceAll(",", "");
+			String value = getRawString(key).trim().replaceAll(",", "");
 			if (value.isEmpty()) {
 				return defaultValue;
 			}
@@ -238,7 +215,7 @@ public class Box extends HashMap<String, String[]> {
 	 */
 	public Integer getInteger(String key, Integer defaultValue) {
 		try {
-			String value = getString(key).trim().replaceAll(",", "");
+			String value = getRawString(key).trim().replaceAll(",", "");
 			if (value.isEmpty()) {
 				return defaultValue;
 			}
@@ -265,7 +242,7 @@ public class Box extends HashMap<String, String[]> {
 	 */
 	public Long getLong(String key, Long defaultValue) {
 		try {
-			String value = getString(key).trim().replaceAll(",", "");
+			String value = getRawString(key).trim().replaceAll(",", "");
 			if (value.isEmpty()) {
 				return defaultValue;
 			}
@@ -292,11 +269,7 @@ public class Box extends HashMap<String, String[]> {
 	 * @return key에 매핑되어 있는 값 또는 기본 값
 	 */
 	public String getString(String key, String defaultValue) {
-		String value = get(key);
-		if (value.isEmpty()) {
-			return defaultValue;
-		}
-		return StringUtil.escapeHtmlSpecialChars(value);
+		return StringUtil.escapeHtmlSpecialChars(getRawString(key, defaultValue));
 	}
 
 	/** 
@@ -315,11 +288,11 @@ public class Box extends HashMap<String, String[]> {
 	 * @return key에 매핑되어 있는 값 또는 기본 값
 	 */
 	public String getRawString(String key, String defaultValue) {
-		String value = get(key);
-		if (value.isEmpty()) {
+		String[] value = super.get(key);
+		if (value == null || value.length == 0) {
 			return defaultValue;
 		}
-		return value;
+		return value[0];
 	}
 
 	/** 
@@ -338,7 +311,7 @@ public class Box extends HashMap<String, String[]> {
 	 * @return key에 매핑되어 있는 값 또는 기본 값
 	 */
 	public Date getDate(String key, Date defaultValue) {
-		String value = getString(key).trim().replaceAll("[^\\d]", "");
+		String value = getRawString(key).trim().replaceAll("[^\\d]", "");
 		if (value.isEmpty()) {
 			return defaultValue;
 		}
@@ -369,7 +342,7 @@ public class Box extends HashMap<String, String[]> {
 	 * @return key에 매핑되어 있는 값 또는 기본 값
 	 */
 	public Date getDate(String key, String format, Date defaultValue) {
-		String value = getString(key).trim();
+		String value = getRawString(key).trim();
 		if (value.isEmpty()) {
 			return defaultValue;
 		}
