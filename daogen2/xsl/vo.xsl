@@ -132,7 +132,7 @@ public class <xsl:value-of select="@class"/>VO extends ValueObject {
 	}
 
 	public Object[] getInsertValue() {
-		return new Object[] { <xsl:for-each select="columns/column[not(@insert)]"><xsl:if test='position()>1'>,</xsl:if>get<xsl:value-of select='@name'/>()</xsl:for-each> };
+		return new Object[] { <xsl:for-each select="columns/column[not(@insert) and not(@auto_increment)]"><xsl:if test='position()>1'>,</xsl:if>get<xsl:value-of select='@name'/>()</xsl:for-each> };
 	}
 
 	public Object[] getUpdateOnlyValue(String[] fields) {
