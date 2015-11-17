@@ -258,8 +258,30 @@ public class Box extends HashMap<String, String[]> {
 	 * @param key 값을 찾기 위한 키 문자열
 	 * @return key에 매핑되어 있는 값
 	 */
+	@Deprecated
+	public String get(String key) {
+		return getString(key);
+	}
+
+	/** 
+	 * 키(key)문자열과 매핑되어 있는 String 객체를 리턴한다.
+	 * 크로스사이트 스크립팅 공격 방지를 위해 &lt;, &gt; 치환을 수행한다.
+	 * @param key 값을 찾기 위한 키 문자열
+	 * @return key에 매핑되어 있는 값
+	 */
 	public String getString(String key) {
 		return getString(key, "");
+	}
+
+	/** 
+	 * 키(key)문자열과 매핑되어 있는 String 객체를 리턴한다.
+	 * @param key 값을 찾기 위한 키 문자열
+	 * @param defaultValue 값이 없을 때 리턴할 기본 값
+	 * @return key에 매핑되어 있는 값 또는 기본 값
+	 */
+	@Deprecated
+	public String get(String key, String defaultValue) {
+		return getString(key, defaultValue);
 	}
 
 	/** 
