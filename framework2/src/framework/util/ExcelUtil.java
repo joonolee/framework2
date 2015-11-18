@@ -1482,32 +1482,34 @@ public class ExcelUtil {
 		int colCount = sheet.getRow(0).getPhysicalNumberOfCells();
 		for (int i = 0; i < rowCount; i++) {
 			Row row = sheet.getRow(i);
-			Map<String, String> map = new HashMap<String, String>();
-			for (int j = 0; j < colCount; j++) {
-				Cell cell = row.getCell(j);
-				String item = "";
-				if (cell != null) {
-					switch (cell.getCellType()) {
-					case Cell.CELL_TYPE_BOOLEAN:
-					case Cell.CELL_TYPE_FORMULA:
-					case Cell.CELL_TYPE_STRING:
-						cell.setCellType(Cell.CELL_TYPE_STRING);
-						item = cell.getStringCellValue();
-						break;
-					case Cell.CELL_TYPE_NUMERIC:
-						if (DateUtil.isCellDateFormatted(cell)) {
-							Date date = cell.getDateCellValue();
-							item = dateFormat.format(date);
-						} else {
+			if (row != null) {
+				Map<String, String> map = new HashMap<String, String>();
+				for (int j = 0; j < colCount; j++) {
+					Cell cell = row.getCell(j);
+					String item = "";
+					if (cell != null) {
+						switch (cell.getCellType()) {
+						case Cell.CELL_TYPE_BOOLEAN:
+						case Cell.CELL_TYPE_FORMULA:
+						case Cell.CELL_TYPE_STRING:
 							cell.setCellType(Cell.CELL_TYPE_STRING);
 							item = cell.getStringCellValue();
+							break;
+						case Cell.CELL_TYPE_NUMERIC:
+							if (DateUtil.isCellDateFormatted(cell)) {
+								Date date = cell.getDateCellValue();
+								item = dateFormat.format(date);
+							} else {
+								cell.setCellType(Cell.CELL_TYPE_STRING);
+								item = cell.getStringCellValue();
+							}
+							break;
 						}
-						break;
 					}
+					map.put(String.valueOf(j), item);
 				}
-				map.put(String.valueOf(j), item);
+				mapList.add(map);
 			}
-			mapList.add(map);
 		}
 		return mapList;
 	}
