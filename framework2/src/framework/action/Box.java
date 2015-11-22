@@ -311,7 +311,7 @@ public class Box extends HashMap<String, String[]> {
 	 */
 	public String getRawString(String key, String defaultValue) {
 		String[] value = super.get(key);
-		if (value == null || value.length == 0) {
+		if (value == null || value.length == 0 || StringUtil.isEmpty(value[0])) {
 			return defaultValue;
 		}
 		return value[0];
