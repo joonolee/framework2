@@ -401,7 +401,7 @@ public class JsonUtil {
 		if (str == null) {
 			return "";
 		}
-		return str.replaceAll("\\\\", "\\\\\\\\").replaceAll("\"", "\\\\\"").replaceAll("\r\n", "\\\\n").replaceAll("\n", "\\\\n").replaceAll("\t", "\\\\t");
+		return str.replaceAll("\\\\", "\\\\\\\\").replaceAll("\"", "\\\\\"").replaceAll("\r\n", "\\\\n").replaceAll("\r", "\\\\n").replaceAll("\n", "\\\\n").replaceAll("\t", "\\\\t");
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////// Private ¸Þ¼Òµå

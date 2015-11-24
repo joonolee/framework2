@@ -484,7 +484,7 @@ public class DataTablesUtil {
 		if (str == null) {
 			return "";
 		}
-		return str.replaceAll("\\\\", "\\\\\\\\").replaceAll("\"", "\\\\\"").replaceAll("\r\n", "\\\\n").replaceAll("\n", "\\\\n");
+		return str.replaceAll("\\\\", "\\\\\\\\").replaceAll("\"", "\\\\\"").replaceAll("\r\n", "\\\\n").replaceAll("\r", "\\\\n").replaceAll("\n", "\\\\n").replaceAll("\t", "\\\\t");
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////// Private ¸Þ¼Òµå
