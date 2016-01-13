@@ -570,12 +570,6 @@ public class StringUtil {
 			case '>':
 				result.append("&gt;");
 				break;
-			case '"':
-				result.append("&quot;");
-				break;
-			case '\'':
-				result.append("&#39;");
-				break;
 			case '&':
 				result.append("&amp;");
 				break;
