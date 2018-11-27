@@ -149,7 +149,7 @@ public class ActionServlet extends HttpServlet {
 			if (dispatcher != null) {
 				dispatcher.forward(request, response);
 			} else {
-				response.setStatus(404);
+				response.sendError(404);
 				response.setContentType("text/plain;charset=utf-8");
 			}
 			return;
