@@ -17,15 +17,15 @@ import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletResponse;
 import javax.swing.ImageIcon;
 
-import nl.captcha.Captcha;
-import nl.captcha.gimpy.RippleGimpyRenderer;
-import nl.captcha.servlet.CaptchaServletUtil;
-
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
+
+import nl.captcha.Captcha;
+import nl.captcha.gimpy.RippleGimpyRenderer;
+import nl.captcha.servlet.CaptchaServletUtil;
 
 /**
  * 이미지 포맷 변경, 크기 변경시 이용할 수 있는 유틸리티 클래스이다.

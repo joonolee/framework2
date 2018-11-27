@@ -11,9 +11,9 @@ import java.util.Map;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
+import framework.config.Configuration;
 import net.spy.memcached.AddrUtil;
 import net.spy.memcached.MemcachedClient;
-import framework.config.Configuration;
 
 /**
  * Memcached 캐시 구현체 (http://memcached.org/)
@@ -84,7 +84,7 @@ public class Memcached extends AbstractCache {
 		} catch (Exception e) {
 			future.cancel(false);
 		}
-		return Collections.<String, Object> emptyMap();
+		return Collections.<String, Object>emptyMap();
 	}
 
 	@Override
