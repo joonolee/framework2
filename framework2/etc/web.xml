@@ -25,6 +25,39 @@
 
 	<!--
 	<filter>
+		<filter-name>ErrorPageFilter</filter-name>
+		<filter-class>framework.filter.ErrorPageFilter</filter-class>
+		<init-param>
+			<param-name>4xx</param-name>
+			<param-value>/errorpage/4xx.jsp</param-value>
+		</init-param>
+		<init-param>
+			<param-name>40x</param-name>
+			<param-value>/errorpage/40x.jsp</param-value>
+		</init-param>
+		<init-param>
+			<param-name>404</param-name>
+			<param-value>/errorpage/404.jsp</param-value>
+		</init-param>
+		<init-param>
+			<param-name>5xx</param-name>
+			<param-value>/errorpage/5xx.jsp</param-value>
+		</init-param>
+		<init-param>
+			<param-name>50x</param-name>
+			<param-value>/errorpage/50x.jsp</param-value>
+		</init-param>
+		<init-param>
+			<param-name>500</param-name>
+			<param-value>/errorpage/500.jsp</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>ErrorPageFilter</filter-name>
+		<url-pattern>*.do</url-pattern>
+	</filter-mapping>
+	
+	<filter>
 		<filter-name>CORSFilter</filter-name>
 		<filter-class>framework.filter.CORSFilter</filter-class>
 	</filter>
