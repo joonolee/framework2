@@ -1,4 +1,4 @@
-/** 
+/**
  * @(#)SelectConditionObject.java
  */
 package framework.db;
@@ -15,7 +15,7 @@ public class SelectConditionObject {
 
 	/**
 	 * 검색 조건으로 바인딩할 객체(Object)를 셋팅한다.
-	 * 
+	 *
 	 * @param obj 바인딩할 객체
 	 */
 	public void setObject(Object obj) {
@@ -24,7 +24,7 @@ public class SelectConditionObject {
 
 	/**
 	 * 검색 조건으로 바인딩할 int형 변수를 셋팅한다.
-	 * 
+	 *
 	 * @param i 바인딩할 int형 변수
 	 */
 	public void setInt(int i) {
@@ -33,7 +33,7 @@ public class SelectConditionObject {
 
 	/**
 	 * 검색 조건으로 바인딩할 long형 변수를 셋팅한다.
-	 * 
+	 *
 	 * @param l 바인딩할 long형 변수
 	 */
 	public void setLong(long l) {
@@ -42,7 +42,7 @@ public class SelectConditionObject {
 
 	/**
 	 * 검색 조건으로 바인딩할 double형 변수를 셋팅한다.
-	 * 
+	 *
 	 * @param d 바인딩할 double형 변수
 	 */
 	public void setDouble(double d) {
@@ -51,7 +51,7 @@ public class SelectConditionObject {
 
 	/**
 	 * 검색조건으로 바인딩 할 모든 파라미터를 오브젝트 배열로 리턴한다.
-	 * 
+	 *
 	 * @return 바인딩할 오브젝트 파라미터
 	 */
 	public Object[] getParameter() {

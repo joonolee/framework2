@@ -1,4 +1,4 @@
-/* 
+/*
  * @(#)MaSaferUtil.java
  */
 package framework.util;

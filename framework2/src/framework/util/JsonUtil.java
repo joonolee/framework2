@@ -1,4 +1,4 @@
-/* 
+/*
  * @(#)JsonUtil.java
  */
 package framework.util;
@@ -38,7 +38,7 @@ public class JsonUtil {
 	 * RecordSet을 JSON 형식으로 출력한다. JsonUtil.setRecordSet과 동일
 	 * <br>
 	 * ex) response로 rs를 JSON 형식으로 출력하는 경우: JsonUtil.render(response, rs)
-	 * 
+	 *
 	 * @param response 클라이언트로 응답할 Response 객체
 	 * @param rs JSON 형식으로 변환할 RecordSet 객체
 	 * @return 처리건수
@@ -53,7 +53,7 @@ public class JsonUtil {
 	 * RecordSet을 JSON 형식으로 출력한다.
 	 * <br>
 	 * ex) response로 rs를 JSON 형식으로 출력하는 경우: JsonUtil.setRecordSet(response, rs)
-	 * 
+	 *
 	 * @param response 클라이언트로 응답할 Response 객체
 	 * @param rs JSON 형식으로 변환할 RecordSet 객체
 	 * @return 처리건수
@@ -83,9 +83,9 @@ public class JsonUtil {
 	 * RecordSet을 Json 배열 형태로 변환한다. JsonUtil.format과 동일
 	 * <br>
 	 * ex) rs를 JSON 형식으로 변환하는 경우: String json = JsonUtil.render(rs)
-	 * 
+	 *
 	 * @param rs JSON 형식으로 변환할 RecordSet 객체
-	 * 
+	 *
 	 * @return JSON 형식으로 변환된 문자열
 	 * @throws ColumnNotFoundException ColumnNotFoundException
 	 */
@@ -97,9 +97,9 @@ public class JsonUtil {
 	 * RecordSet을 Json 배열 형태로 변환한다.
 	 * <br>
 	 * ex) rs를 JSON 형식으로 변환하는 경우: String json = JsonUtil.format(rs)
-	 * 
+	 *
 	 * @param rs JSON 형식으로 변환할 RecordSet 객체
-	 * 
+	 *
 	 * @return JSON 형식으로 변환된 문자열
 	 * @throws ColumnNotFoundException ColumnNotFoundException
 	 */
@@ -128,7 +128,7 @@ public class JsonUtil {
 	 * ResultSet을 JSON 형식으로 출력한다. JsonUtil.setResultSet과 동일
 	 * <br>
 	 * ex) response로 rs를 JSON 형식으로 출력하는 경우: JsonUtil.render(response, rs)
-	 * 
+	 *
 	 * @param response 클라이언트로 응답할 Response 객체
 	 * @param rs JSON 형식으로 변환할 ResultSet 객체, ResultSet 객체는 자동으로 close 된다.
 	 * @return 처리건수
@@ -143,7 +143,7 @@ public class JsonUtil {
 	 * ResultSet을 JSON 형식으로 출력한다.
 	 * <br>
 	 * ex) response로 rs를 JSON 형식으로 출력하는 경우: JsonUtil.setResultSet(response, rs)
-	 * 
+	 *
 	 * @param response 클라이언트로 응답할 Response 객체
 	 * @param rs JSON 형식으로 변환할 ResultSet 객체, ResultSet 객체는 자동으로 close 된다.
 	 * @return 처리건수
@@ -186,9 +186,9 @@ public class JsonUtil {
 	 * ResultSet을 Json 배열 형태로 변환한다. JsonUtil.format과 동일
 	 * <br>
 	 * ex) rs를 JSON 형식으로 변환하는 경우: String json = JsonUtil.render(rs)
-	 * 
+	 *
 	 * @param rs JSON 형식으로 변환할 ResultSet 객체
-	 * 
+	 *
 	 * @return JSON 형식으로 변환된 문자열
 	 * @throws SQLException SQLException
 	 */
@@ -200,9 +200,9 @@ public class JsonUtil {
 	 * ResultSet을 Json 배열 형태로 변환한다.
 	 * <br>
 	 * ex) rs를 JSON 형식으로 변환하는 경우: String json = JsonUtil.format(rs)
-	 * 
+	 *
 	 * @param rs JSON 형식으로 변환할 ResultSet 객체
-	 * 
+	 *
 	 * @return JSON 형식으로 변환된 문자열
 	 * @throws SQLException SQLException
 	 */
@@ -342,7 +342,7 @@ public class JsonUtil {
 
 	/**
 	 * JSON 문자열을 예쁘게 들여쓰기를 적용하여 정렬한다.
-	 * 
+	 *
 	 * @param json json 변환할 JSON 문자열
 	 * @return Object 형식으로 변환된 객체
 	 */
@@ -352,7 +352,7 @@ public class JsonUtil {
 
 	/**
 	 * JSON 문자열을 예쁘게 들여쓰기를 적용하여 정렬한다.
-	 * 
+	 *
 	 * @param json json json 변환할 JSON 문자열
 	 * @param indent 들여쓰기에 사용할 문자열
 	 * @return Object 형식으로 변환된 객체
@@ -394,7 +394,7 @@ public class JsonUtil {
 
 	/**
 	 * 자바스크립트상에 특수하게 인식되는 문자들을 JSON등에 사용하기 위해 변환하여준다.
-	 * 
+	 *
 	 * @param str 변환할 문자열
 	 * @return escape 된 문자열
 	 */
@@ -443,7 +443,7 @@ public class JsonUtil {
 
 	/**
 	 * JSON 용 Row 문자열 생성
-	 * @throws ColumnNotFoundException 
+	 * @throws ColumnNotFoundException
 	 */
 	private static String jsonRowStr(RecordSet rs, String[] colNms) throws ColumnNotFoundException {
 		StringBuilder buffer = new StringBuilder();

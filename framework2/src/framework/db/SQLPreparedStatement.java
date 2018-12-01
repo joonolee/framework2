@@ -1,4 +1,4 @@
-/* 
+/*
  * @(#)SQLPreparedStatement.java
  * Prepared Statement 를 이용하기 위한 객체
  */

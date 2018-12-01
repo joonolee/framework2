@@ -25,7 +25,7 @@ public class CryptUtil {
 
 	/**
 	 * 메시지를 MD5 알고리즘으로 해쉬한다.
-	 * 
+	 *
 	 * @param message 원본메시지
 	 * @return 해쉬된 문자열
 	 */
@@ -39,7 +39,7 @@ public class CryptUtil {
 
 	/**
 	 * 메시지를 SHA-1 알고리즘으로 해쉬한다.
-	 * 
+	 *
 	 * @param message 원본메시지
 	 * @return 해쉬된 문자열
 	 */
@@ -53,7 +53,7 @@ public class CryptUtil {
 
 	/**
 	 * 메시지를 SHA-256 알고리즘으로 해쉬한다.
-	 * 
+	 *
 	 * @param message 원본메시지
 	 * @return 해쉬된 문자열
 	 */
@@ -67,7 +67,7 @@ public class CryptUtil {
 
 	/**
 	 * 메시지를 SHA-512 알고리즘으로 해쉬한다.
-	 * 
+	 *
 	 * @param message 원본메시지
 	 * @return 해쉬된 문자열
 	 */
@@ -81,7 +81,7 @@ public class CryptUtil {
 
 	/**
 	 * 메시지를 BASE64 알고리즘으로 인코딩한다.
-	 * 
+	 *
 	 * @param message 원본메시지
 	 * @return 인코딩된 문자열
 	 */
@@ -91,7 +91,7 @@ public class CryptUtil {
 
 	/**
 	 * 메시지를 BASE64 알고리즘으로 디코딩한다.
-	 * 
+	 *
 	 * @param message 원본 메시지
 	 * @return 디코딩된 문자열
 	 */
@@ -101,9 +101,9 @@ public class CryptUtil {
 
 	/**
 	 * 메시지를 개인키를 이용하여 AES 알고리즘으로 암호화한다.
-	 * 
+	 *
 	 * @param message 원본메시지
-	 * @param privateKey 개인키 
+	 * @param privateKey 개인키
 	 * @return 암호화된 문자열
 	 */
 	public static String encryptAES(String message, String privateKey) {
@@ -119,9 +119,9 @@ public class CryptUtil {
 
 	/**
 	 * 메시지를 개인키를 이용하여 AES 알고리즘으로 복호화한다.
-	 *  
+	 *
 	 * @param message 원본메시지
-	 * @param privateKey 개인키 
+	 * @param privateKey 개인키
 	 * @return 복호화된 문자열
 	 */
 	public static String decryptAES(String message, String privateKey) {
@@ -137,9 +137,9 @@ public class CryptUtil {
 
 	/**
 	 * 메시지를 개인키를 이용하여 DES 알고리즘으로 암호화한다.
-	 * 
+	 *
 	 * @param message 원본메시지
-	 * @param privateKey 개인키 
+	 * @param privateKey 개인키
 	 * @return 암호화된 문자열
 	 */
 	public static String encryptDES(String message, String privateKey) {
@@ -155,9 +155,9 @@ public class CryptUtil {
 
 	/**
 	 * 메시지를 개인키를 이용하여 DES 알고리즘으로 복호화한다.
-	 *  
+	 *
 	 * @param message 원본메시지
-	 * @param privateKey 개인키 
+	 * @param privateKey 개인키
 	 * @return 복호화된 문자열
 	 */
 	public static String decryptDES(String message, String privateKey) {
@@ -173,7 +173,7 @@ public class CryptUtil {
 
 	/**
 	 * 해시알고리즘에서 사용하기 위한 솔트를 생성한다.
-	 * 
+	 *
 	 * @return 랜덤으로 생성된 20자리 솔트 문자열
 	 */
 	public static String randomSalt() {
@@ -187,7 +187,7 @@ public class CryptUtil {
 
 	/**
 	 * 메시지를 주어진 알고리즘으로 해쉬한다.
-	 * 
+	 *
 	 * @param message 원본메시지
 	 * @param algorithm 해쉬 알고리즘
 	 * @return 해쉬된 문자열
@@ -204,9 +204,9 @@ public class CryptUtil {
 
 	/**
 	 * 메시지를 솔트를 사용하여 주어진 알고리즘으로 해쉬한다.
-	 * 
+	 *
 	 * @param message 원본메시지
-	 * @param salt 솔트값 
+	 * @param salt 솔트값
 	 * @param algorithm 해쉬 알고리즘
 	 * @return 해쉬된 문자열
 	 */

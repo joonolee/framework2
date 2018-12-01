@@ -1,4 +1,4 @@
-/* 
+/*
  * @(#)SuperDaoSupport.java
  * 테이블을 CRUD 하는 DAO를 작성할때 상속받는 클래스
  */

@@ -1,4 +1,4 @@
-/* 
+/*
  * @(#)SQLBatchStatement.java
  * Statement의 Batch 처리를 이용하기 위한 객체
  */

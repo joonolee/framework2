@@ -1,4 +1,4 @@
-/* 
+/*
  * @(#)SQLStatement.java
  * Statement 를 이용하기 위한 객체
  */
@@ -130,6 +130,7 @@ public class SQLStatement extends DBStatement {
 		this._sql = newSql;
 	}
 
+	@Override
 	public String toString() {
 		return "SQL : " + getSQL();
 	}

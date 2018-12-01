@@ -1,4 +1,4 @@
-/** 
+/**
  * @(#)ActionServlet.java
  */
 package framework.action;
@@ -20,11 +20,11 @@ import org.apache.commons.logging.LogFactory;
 import framework.cache.Cache;
 import framework.util.StringUtil;
 
-/** 
+/**
  * 컨트롤러 역할을 하는 서블릿으로 모든 클라이언트의 요청을 받아 해당 액션을 실행한다.
  * 확장자가 (.do)로 실행되는 모든 요청을 이 서블릿이 처리하기 위하여 web.xml 파일에서 서블릿을 매핑하여야 하며
- * 서버 부팅시 한개의 객체를 생성해 놓는다.  
- * 요청에서 추출한 액션키로 action.properties에서 Action클래스를 찾아 객체를 생성하여 비지니스 프로세스를 실행한다. 
+ * 서버 부팅시 한개의 객체를 생성해 놓는다.
+ * 요청에서 추출한 액션키로 action.properties에서 Action클래스를 찾아 객체를 생성하여 비지니스 프로세스를 실행한다.
  */
 public class ActionServlet extends HttpServlet {
 	private static final long serialVersionUID = -6478697606075642071L;
@@ -33,9 +33,10 @@ public class ActionServlet extends HttpServlet {
 	/**
 	 * 서블릿 객체를 초기화 한다.
 	 * web.xml에 초기화 파라미터로 등록되어 있는 action-mapping 값을 찾아 리소스 번들을 생성하는 역할을 한다.
-	 * 
+	 *
 	 * @param config ServletConfig 객체
 	 */
+	@Override
 	public void init(ServletConfig config) throws ServletException {
 		super.init(config);
 		ResourceBundle bundle = null;
@@ -68,11 +69,11 @@ public class ActionServlet extends HttpServlet {
 
 	/**
 	 * 클라이언트가 Get 방식으로 요청할 경우 processRequest로 처리를 이관한다.
-	 * 
+	 *
 	 * @param request HTTP 클라이언트 요청객체
 	 * @param response HTTP 클라이언트 응답객체
-	 * 
-	 * @exception java.io.IOException ActionServlet에서 IO와 관련된 오류가 발생할 경우 
+	 *
+	 * @exception java.io.IOException ActionServlet에서 IO와 관련된 오류가 발생할 경우
 	 * @exception javax.servlet.ServletException 서블릿과 관련된 오류가 발생할 경우
 	 */
 	@Override
@@ -82,11 +83,11 @@ public class ActionServlet extends HttpServlet {
 
 	/**
 	 * 클라이언트가 Post 방식으로 요청할 경우 processRequest로 처리를 이관한다.
-	 * 
+	 *
 	 * @param request HTTP 클라이언트 요청객체
 	 * @param response HTTP 클라이언트 응답객체
-	 * 
-	 * @exception java.io.IOException ActionServlet에서 IO와 관련된 오류가 발생할 경우 
+	 *
+	 * @exception java.io.IOException ActionServlet에서 IO와 관련된 오류가 발생할 경우
 	 * @exception javax.servlet.ServletException 서블릿과 관련된 오류가 발생할 경우
 	 */
 	@Override
@@ -96,11 +97,11 @@ public class ActionServlet extends HttpServlet {
 
 	/**
 	 * 클라이언트가 Put 방식으로 요청할 경우 processRequest로 처리를 이관한다.
-	 * 
+	 *
 	 * @param request HTTP 클라이언트 요청객체
 	 * @param response HTTP 클라이언트 응답객체
-	 * 
-	 * @exception java.io.IOException ActionServlet에서 IO와 관련된 오류가 발생할 경우 
+	 *
+	 * @exception java.io.IOException ActionServlet에서 IO와 관련된 오류가 발생할 경우
 	 * @exception javax.servlet.ServletException 서블릿과 관련된 오류가 발생할 경우
 	 */
 	@Override
@@ -110,11 +111,11 @@ public class ActionServlet extends HttpServlet {
 
 	/**
 	 * 클라이언트가 Delete 방식으로 요청할 경우 processRequest로 처리를 이관한다.
-	 * 
+	 *
 	 * @param request HTTP 클라이언트 요청객체
 	 * @param response HTTP 클라이언트 응답객체
-	 * 
-	 * @exception java.io.IOException ActionServlet에서 IO와 관련된 오류가 발생할 경우 
+	 *
+	 * @exception java.io.IOException ActionServlet에서 IO와 관련된 오류가 발생할 경우
 	 * @exception javax.servlet.ServletException 서블릿과 관련된 오류가 발생할 경우
 	 */
 	@Override

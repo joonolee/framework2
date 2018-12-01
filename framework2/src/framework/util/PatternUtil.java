@@ -1,4 +1,4 @@
-/* 
+/*
  * @(#)PatternUtil.java
  */
 package framework.util;

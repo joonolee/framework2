@@ -1,4 +1,4 @@
-/* 
+/*
  * @(#)ImageUtil.java
  */
 package framework.util;
@@ -39,7 +39,7 @@ public class ImageUtil {
 	}
 
 	/**
-	 * 이미지를 리사이즈 한다. 
+	 * 이미지를 리사이즈 한다.
 	 * 소스 이미지 파일의 width, height 중 크기가 큰 쪽을 기준으로 하여 비율을 유지한채 이미지를 생성한다.
 	 * @param srcPath 소스 이미지 경로
 	 * @param destPath 대상 이미지 경로
@@ -53,7 +53,7 @@ public class ImageUtil {
 	}
 
 	/**
-	 * 이미지를 리사이즈 한다. 
+	 * 이미지를 리사이즈 한다.
 	 * 소스 이미지 파일의 width, height 중 크기가 큰 쪽을 기준으로 하여 비율을 유지한채 이미지를 생성한다.
 	 * @param srcFile 소스 이미지 파일
 	 * @param destFile 대상 이미지 파일
@@ -246,7 +246,7 @@ public class ImageUtil {
 	//////////////////////////////////////////////////////////////////////////////////////////Private 메소드
 
 	/**
-	 * 원본 이미지 사이즈와 리사이즈할 사이즈로 이미지 스케일 비율을 구한다. 
+	 * 원본 이미지 사이즈와 리사이즈할 사이즈로 이미지 스케일 비율을 구한다.
 	 * 크기가 큰 폭을 기준으로 동일 비율로 한다.
 	 * @param resizeWidth 리사이즈할 가로 사이즈
 	 * @param resizeHeight 리사이즈할 세로 사이즈

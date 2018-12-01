@@ -1,4 +1,4 @@
-/* 
+/*
  * @(#)RssUtil.java
  */
 package framework.util;
@@ -106,7 +106,7 @@ public class RssUtil {
 	 * 입력한 값으로 RssItem을 생성한다.
 	 * <br>
 	 * ex) titie, link, description, author, category, pubDate로 RssItem객체를 생성하는 경우: RssUtil.makeRssItem(title, link, description, author, category, pubDate)
-	 * 
+	 *
 	 * @param title 제목
 	 * @param link 링크(validator를 통과하기 위해서는 url에 앰퍼센드등은 엔터티표기를 사용하여야 함)
 	 * @param description 설명

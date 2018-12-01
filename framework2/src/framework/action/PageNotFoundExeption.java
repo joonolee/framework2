@@ -1,4 +1,4 @@
-/** 
+/**
  * @(#)PageNotFoundExeption.java
  */
 package framework.action;

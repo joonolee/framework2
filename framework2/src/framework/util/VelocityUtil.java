@@ -1,4 +1,4 @@
-/* 
+/*
  * @(#)VelocityUtil.java
  */
 package framework.util;
@@ -29,12 +29,12 @@ public class VelocityUtil {
 	}
 
 	/**
-	 * action.properties 파일에 설정된 key와 연결된 템플릿 파일에서 statement에 정의된 COMMAND의 문자열을 파라미터를 
+	 * action.properties 파일에 설정된 key와 연결된 템플릿 파일에서 statement에 정의된 COMMAND의 문자열을 파라미터를
 	 * 적용한 문자열을 생성한다. VelocityUtil.evalutate과 동일
 	 * <br>
 	 * Sql 문장생성 및 이메일 발송을 위한 템플릿 생성할때 응용할 수 있다.
 	 * @param servlet 서블릿 객체
-	 * @param key action.properties에 등록한 템플릿의 키 문자열 
+	 * @param key action.properties에 등록한 템플릿의 키 문자열
 	 * @param statement 문장식별 문자열
 	 * @param param 파라미터 Box 객체
 	 * @return 템플릿이 적용된 문자열
@@ -45,12 +45,12 @@ public class VelocityUtil {
 	}
 
 	/**
-	 * action.properties 파일에 설정된 key와 연결된 템플릿 파일에서 statement에 정의된 COMMAND의 문자열을 파라미터를 
+	 * action.properties 파일에 설정된 key와 연결된 템플릿 파일에서 statement에 정의된 COMMAND의 문자열을 파라미터를
 	 * 적용한 문자열을 생성한다.
 	 * <br>
 	 * Sql 문장생성 및 이메일 발송을 위한 템플릿 생성할때 응용할 수 있다.
 	 * @param servlet 서블릿 객체
-	 * @param key action.properties에 등록한 템플릿의 키 문자열 
+	 * @param key action.properties에 등록한 템플릿의 키 문자열
 	 * @param statement 문장식별 문자열
 	 * @param param 파라미터 Box 객체
 	 * @return 템플릿이 적용된 문자열
@@ -73,16 +73,16 @@ public class VelocityUtil {
 
 	/**
 	 * 템플릿파일을 읽어들인다.
-	 * @throws IOException 
+	 * @throws IOException
 	 */
 	private static String readTemplate(HttpServlet servlet, String fileName) throws IOException {
 		String pathFile = servlet.getServletContext().getRealPath(fileName);
 		return read(pathFile);
 	}
 
-	/** 
-	 * 파일의 path를 가지 파일명으로 파일 내용 읽어서 String으로 리턴한다 
-	 * @throws IOException 
+	/**
+	 * 파일의 path를 가지 파일명으로 파일 내용 읽어서 String으로 리턴한다
+	 * @throws IOException
 	 */
 	private static String read(String pathFile) throws IOException {
 		StringBuilder ta = new StringBuilder();

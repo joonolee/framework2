@@ -1,4 +1,4 @@
-/** 
+/**
  * @(#)Redis.java
  */
 package framework.cache;
@@ -29,7 +29,7 @@ public class Redis extends AbstractCache {
 	 */
 	private static Redis _uniqueInstance;
 
-	/** 
+	/**
 	 * 타임아웃 값 (ms)
 	 */
 	private static final int _TIMEOUT = 500;
@@ -52,9 +52,9 @@ public class Redis extends AbstractCache {
 		_pool = new ShardedJedisPool(new JedisPoolConfig(), shards);
 	}
 
-	/** 
+	/**
 	 * 객체의 인스턴스를 리턴해준다.
-	 * 
+	 *
 	 * @return Redis 객체의 인스턴스
 	 */
 	public synchronized static Redis getInstance() {

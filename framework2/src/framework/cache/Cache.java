@@ -1,4 +1,4 @@
-/** 
+/**
  * @(#)Cache.java
  */
 package framework.cache;
@@ -34,7 +34,7 @@ public class Cache {
 	private final static int DEFAULT_DURATION = 60 * 60 * 24 * 30;
 
 	/**
-	 * 생성자, 외부에서 객체를 인스턴스화 할 수 없도록 설정 
+	 * 생성자, 외부에서 객체를 인스턴스화 할 수 없도록 설정
 	 */
 	private Cache() {
 	}

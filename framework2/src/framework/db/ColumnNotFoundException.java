@@ -1,4 +1,4 @@
-/* 
+/*
  * @(#)ColumnNotFoundException.java
  * 데이타베이스에스 해당되는 컬럼이 없을때 발생시키는 예외
  */

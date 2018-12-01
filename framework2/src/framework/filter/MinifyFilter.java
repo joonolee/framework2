@@ -1,4 +1,4 @@
-/* 
+/*
  * @(#)MinifyFilter.java
  * HTML, JavaScript, CSS Minify filter
  */

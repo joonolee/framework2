@@ -1,4 +1,4 @@
-/** 
+/**
  * @(#)EhCache.java
  */
 package framework.cache;
@@ -43,9 +43,9 @@ public class EhCache extends AbstractCache {
 		_cache = _cacheManager.getCache(_CACHE_NAME);
 	}
 
-	/** 
+	/**
 	 * 객체의 인스턴스를 리턴해준다.
-	 * 
+	 *
 	 * @return EhCache 객체의 인스턴스
 	 */
 	public synchronized static EhCache getInstance() {

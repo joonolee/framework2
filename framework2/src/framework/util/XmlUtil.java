@@ -39,7 +39,7 @@ public class XmlUtil {
 	 * @param response 클라이언트로 응답할 Response 객체
 	 * @param rs xml 형식으로 변환할 RecordSet 객체
 	 * @param encoding 헤더에 포함될 인코딩
-	 * 
+	 *
 	 * @return 처리건수
 	 * @throws ColumnNotFoundException ColumnNotFoundException
 	 * @throws IOException IOException
@@ -56,7 +56,7 @@ public class XmlUtil {
 	 * @param response 클라이언트로 응답할 Response 객체
 	 * @param rs xml 형식으로 변환할 RecordSet 객체
 	 * @param encoding 헤더에 포함될 인코딩
-	 * 
+	 *
 	 * @return 처리건수
 	 * @throws ColumnNotFoundException ColumnNotFoundException
 	 * @throws IOException IOException
@@ -164,7 +164,7 @@ public class XmlUtil {
 	 * @param response 클라이언트로 응답할 Response 객체
 	 * @param rs xml 형식으로 변환할 ResultSet 객체, ResultSet 객체는 자동으로 close 된다.
 	 * @param encoding 헤더에 포함될 인코딩
-	 * 
+	 *
 	 * @return 처리건수
 	 * @throws SQLException SQLException
 	 * @throws IOException IOException
@@ -181,7 +181,7 @@ public class XmlUtil {
 	 * @param response 클라이언트로 응답할 Response 객체
 	 * @param rs xml 형식으로 변환할 ResultSet 객체, ResultSet 객체는 자동으로 close 된다.
 	 * @param encoding 헤더에 포함될 인코딩
-	 * 
+	 *
 	 * @return 처리건수
 	 * @throws SQLException SQLException
 	 * @throws IOException IOException
@@ -478,7 +478,7 @@ public class XmlUtil {
 
 	/**
 	 * xml item 문자열 생성
-	 * @throws ColumnNotFoundException 
+	 * @throws ColumnNotFoundException
 	 */
 	private static String xmlItemStr(RecordSet rs, String[] colNms) throws ColumnNotFoundException {
 		StringBuilder buffer = new StringBuilder();

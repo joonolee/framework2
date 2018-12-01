@@ -1,4 +1,4 @@
-/* 
+/*
  * @(#)ValidationUtil.java
  */
 package framework.util;
@@ -10,7 +10,7 @@ public class ValidationUtil {
 
 	/**
 	 * 주민등록번호/외국인등록번호 유효성 체크
-	 * 
+	 *
 	 * @param residentRegistrationNo 주민등록번호/외국인등록번호
 	 * @return 유효한 주민등록번호/외국인등록번호 형식 여부
 	 */
@@ -55,7 +55,7 @@ public class ValidationUtil {
 
 	/**
 	 * 주민등록번호/외국인등록번호 유효성 체크
-	 * 
+	 *
 	 * @param juminNo 주민등록번호/외국인등록번호
 	 * @return 유효한 주민등록번호/외국인등록번호 형식 여부
 	 */
@@ -64,8 +64,8 @@ public class ValidationUtil {
 	}
 
 	/**
-	 * 법인번호 유효성 체크 
-	 * 
+	 * 법인번호 유효성 체크
+	 *
 	 * @param corporationRegistrationNo 법인번호
 	 * @return 유효한 법인번호 형식 여부
 	 */
@@ -87,7 +87,7 @@ public class ValidationUtil {
 
 	/**
 	 * 사업자등록번호 유효성 체크
-	 * 
+	 *
 	 * @param businessRegistrationNo 사업자등록번호
 	 * @return 유효한 사업자등록번호 형식 여부
 	 */
@@ -107,7 +107,7 @@ public class ValidationUtil {
 
 	/**
 	 * 신용카드번호 유효성 체크
-	 * 
+	 *
 	 * @param creditCardNo 신용카드번호
 	 * @return 유효한 신용카드번호 형식 여부
 	 */
@@ -117,7 +117,7 @@ public class ValidationUtil {
 
 	/**
 	 * 여권번호 유효성 체크
-	 * 
+	 *
 	 * @param passportNo 여권번호
 	 * @return 유효한 여권번호 형식 여부
 	 */
@@ -127,7 +127,7 @@ public class ValidationUtil {
 
 	/**
 	 * 운전면허번호 유효성 체크
-	 * 
+	 *
 	 * @param driversLicenseNo 운전면허번호
 	 * @return 유효한 운전면허번호 형식 여부
 	 */
@@ -137,7 +137,7 @@ public class ValidationUtil {
 
 	/**
 	 * 휴대폰번호 유효성 체크
-	 * 
+	 *
 	 * @param cellphoneNo 휴대폰번호
 	 * @return 유효한 휴대폰번호 형식 여부
 	 */
@@ -147,7 +147,7 @@ public class ValidationUtil {
 
 	/**
 	 * 일반전화번호 유효성 체크
-	 * 
+	 *
 	 * @param telephoneNo 전화번호
 	 * @return 유효한 전화번호 형식 여부
 	 */
@@ -157,7 +157,7 @@ public class ValidationUtil {
 
 	/**
 	 * 건강보험번호 유효성 체크
-	 * 
+	 *
 	 * @param healthInsuranceNo 건강보험번호
 	 * @return 유효한 건강보험번호 형식 여부
 	 */
@@ -167,7 +167,7 @@ public class ValidationUtil {
 
 	/**
 	 * 계좌번호 유효성 체크
-	 * 
+	 *
 	 * @param bankAccountNo 은행계좌번호
 	 * @return 유효한 은행계좌번호 형식 여부
 	 */
@@ -177,7 +177,7 @@ public class ValidationUtil {
 
 	/**
 	 * 이메일주소 유효성 체크
-	 * 
+	 *
 	 * @param emailAddress 이메일주소
 	 * @return 유효한 이메일주소 형식 여부
 	 */
@@ -187,7 +187,7 @@ public class ValidationUtil {
 
 	/**
 	 * 아이피주소 유효성 체크
-	 * 
+	 *
 	 * @param ipAddress 아이피주소
 	 * @return 유효한 아이피주소 형식 여부
 	 */

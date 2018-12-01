@@ -1,4 +1,4 @@
-/* 
+/*
  * @(#)StringUtil.java
  */
 package framework.util;
@@ -27,10 +27,10 @@ public class StringUtil {
 	 * 특정 기호를 기준으로 스트링을 잘라서 배열로 반환하는 함수
 	 * <br>
 	 * ex) abc||def||efg : array[0]:"abc", array[1]:"def", array[2]:"efg"
-	 * 
+	 *
 	 * @param str 원본 문자열
 	 * @param token 토큰 문자열
-	 * 
+	 *
 	 * @return 토큰으로 분리된 문자열의 배열
 	 */
 	public static String[] tokenFn(String str, String token) {
@@ -62,10 +62,10 @@ public class StringUtil {
 	/**
 	 * 정해진 길이보다 문자열이 크면 문자열을 잘라서 ".."를 추가해 주는 기능.
 	 * 게시판 제목 같은 곳에서 사용됨.
-	 * 
+	 *
 	 * @param str 원본 문자열
 	 * @param len 유효 문자열 길이
-	 * 
+	 *
 	 * @return 유효문자열에 "..." 이 연결된 문자열
 	 */
 	public static String limitString(String str, int len) {
@@ -98,7 +98,7 @@ public class StringUtil {
 
 	/**
 	 * 스트링 타입의 날짜 데이타를 정해진 포맷으로 변환하는 함수
-	 * 
+	 *
 	 * <br>
 	 * ex1) StringUtil.nalDesign("20080101090000", 1): "2008-01-01"
 	 * <br>
@@ -113,10 +113,10 @@ public class StringUtil {
 	 * ex6) StringUtil.nalDesign("20080101090000", 6): "01-01 09:00"
 	 * <br>
 	 * ex7) StringUtil.nalDesign("20080101090000", 7): "2008년 01월 01일"
-	 * 
+	 *
 	 * @param str 원본 문자열
 	 * @param option 날짜 옵션
-	 * 
+	 *
 	 * @return 포맷된 날짜 문자열
 	 */
 	public static String nalDesign(String str, int option) {
@@ -146,11 +146,11 @@ public class StringUtil {
 
 	/**
 	 * 스트링의 특정 부분을 다른 기호로 변환하는 함수
-	 * 
+	 *
 	 * @param src 원본 문자열
 	 * @param oldstr 찾을 문자열
 	 * @param newstr 바꿀 문자열
-	 * 
+	 *
 	 * @return 찾을 문자열이 바꿀 문자열로 변환된 문자열
 	 */
 	public static String replaceStr(String src, String oldstr, String newstr) {
@@ -173,10 +173,10 @@ public class StringUtil {
 
 	/**
 	 * 스트링 타입의 바이트 단위를 사람이 읽기 좋은 형태로 변환(KByte, MByte, GByte)
-	 * 
+	 *
 	 * @param stringbyte 스트링으로 표기된 바이트 문자열
-	 * 
-	 * @return 사람이 읽기 좋은 형태의 문자열 
+	 *
+	 * @return 사람이 읽기 좋은 형태의 문자열
 	 */
 	public static String byteToHumanReadable(String stringbyte) {
 		double d = 0.0;
@@ -218,9 +218,9 @@ public class StringUtil {
 
 	/**
 	 * long 타입의 바이트 단위를 사람이 읽기 좋은 형태로 변환(KByte, MByte, GByte)
-	 * 
+	 *
 	 * @param longbyte long타입으로 표기된 바이트 값
-	 * 
+	 *
 	 * @return 사람이 읽기 좋은 형태의 문자열
 	 */
 	public static String byteToHumanReadable(long longbyte) {
@@ -260,11 +260,11 @@ public class StringUtil {
 
 	/**
 	 * 인자에 해당하는 스트링의 charter-set을 한글로 변환하는 함수
-	 * 
+	 *
 	 * @param str 원본 문자열
-	 * 
+	 *
 	 * @return 한글(EUC-KR)로 변환된 문자열
-	 * 
+	 *
 	 * @throws UnsupportedEncodingException UnsupportedEncodingException
 	 */
 	public static String convertKorean(String str) throws UnsupportedEncodingException {
@@ -273,11 +273,11 @@ public class StringUtil {
 
 	/**
 	 * 인자에 해당하는 스트링의 charter-set을 utf-8로 변환하는 함수
-	 * 
+	 *
 	 * @param str 원본 문자열
-	 * 
+	 *
 	 * @return 유니코드(UTF-8)로 변환된 문자열
-	 * 
+	 *
 	 * @throws UnsupportedEncodingException UnsupportedEncodingException
 	 */
 	public static String convertUTF8(String str) throws UnsupportedEncodingException {
@@ -286,9 +286,9 @@ public class StringUtil {
 
 	/**
 	 * int 타입의 숫자를 숫자형태(세자리마다 ,로 구분)로 변환하는 함수
-	 * 
+	 *
 	 * @param num 원본 int형 숫자
-	 * 
+	 *
 	 * @return 세자리마다 콤마(,)로 구분된 문자열
 	 */
 	public static String numberFormat(int num) {
@@ -297,9 +297,9 @@ public class StringUtil {
 
 	/**
 	 * long 타입의 숫자를 숫자형태(세자리마다 ,로 구분)로 변환하는 함수
-	 * 
+	 *
 	 * @param num 원본 long형 숫자
-	 * 
+	 *
 	 * @return 세자리마다 콤마(,)로 구분된 문자열
 	 */
 	public static String numberFormat(long num) {
@@ -308,9 +308,9 @@ public class StringUtil {
 
 	/**
 	 * 스트링 타입의 숫자를 숫자형태(세자리마다 ,로 구분)로 변환하는 함수
-	 * 
+	 *
 	 * @param str 원본 문자열
-	 * 
+	 *
 	 * @return 세자리마다 콤마(,)로 구분된 문자열
 	 */
 	public static String numberFormat(String str) {
@@ -323,9 +323,9 @@ public class StringUtil {
 
 	/**
 	 * 인자에 해당하는 스트링이 null이면 스트링 타입의 null("")로 변환하는 함수
-	 * 
+	 *
 	 * @param str 원본 문자열
-	 * 
+	 *
 	 * @return 널(null)값을 빈문자("") 로 변환한 문자열
 	 */
 	public static String nullToBlankString(String str) {
@@ -337,10 +337,10 @@ public class StringUtil {
 
 	/**
 	 * 첫번째 인자에 해당하는 스트링이 null이면 두번째 인자의 값을 반환하는 함수
-	 * 
+	 *
 	 * @param str1 원본 문자열
 	 * @param str2 스트링이 null 이면 리턴할 문자열
-	 * 
+	 *
 	 * @return 널(null)값을 두번째 인자의 값 문자열
 	 */
 	public static String null2Str(String str1, String str2) {
@@ -352,9 +352,9 @@ public class StringUtil {
 
 	/**
 	 * 오늘 날짜를 인자에 해당하는 형태로 가져오는 함수
-	 * 
+	 *
 	 * @param option 1 은 "2000-11-12", 2 는 "2000", 3 은 "11", 4 는 "12", 5 는 "20001112", 6 은 시, 7 은 분, 8 은 초, 9 는 요일별 정수전환, 10은 오늘이 몇번째 주인지
-	 * 
+	 *
 	 * @return 오늘날짜를 포맷한 문자열
 	 */
 	public static String makeToday(int option) {
@@ -417,11 +417,11 @@ public class StringUtil {
 
 	/**
 	 * 인자에 해당하는 날짜로부터 몇 일 이동한 날짜를 가져오는 함수
-	 * 
+	 *
 	 * @param curDate 기준 날짜
 	 * @param option 1은 day 만큼 이후의 날짜, 2는 day 만큼 이전의 날짜
 	 * @param day 이후, 이전으로 계산할 일자(일 단위)
-	 * 
+	 *
 	 * @return 변환된 문자열
 	 */
 	public static String moveDate(String curDate, int option, int day) {
@@ -457,7 +457,7 @@ public class StringUtil {
 	 * 인자에 해당하는 날짜와 현재 날짜의 간격이 interval에 포함되면 true, 포함되지 않으면 false를 반환하는 함수
 	 * interval 의 기본값은 1일로 설정된다.
 	 * @param regday 등록 날짜 문자열
-	 * 
+	 *
 	 * @return interval 보다 작으면 true, 같거나 크면 false
 	 */
 	public static boolean isNew(String regday) {
@@ -467,11 +467,11 @@ public class StringUtil {
 
 	/**
 	 * 인자에 해당하는 날짜와 현재 날짜의 간격이 interval에 포함되면 true, 포함되지 않으면 false를 반환하는 함수
-	 * 
+	 *
 	 * @param regday 등록 날짜 문자열
 	 * @param interval 비교할 시간 간격(일 단위)
-	 * 
-	 * @return interval 보다 작으면 true, 같거나 크면 false 
+	 *
+	 * @return interval 보다 작으면 true, 같거나 크면 false
 	 */
 	public static boolean isNew(String regday, int interval) {
 		Calendar today = Calendar.getInstance(TimeZone.getTimeZone("Asia/Seoul"));
@@ -553,8 +553,8 @@ public class StringUtil {
 	}
 
 	/**
-	 * html 특수문자를 일치하는 문자 엔티티로 변환하는 함수 
-	 * 
+	 * html 특수문자를 일치하는 문자 엔티티로 변환하는 함수
+	 *
 	 * @param src 원본문자열
 	 * @return html 특수문자가 escape 된 문자열
 	 */

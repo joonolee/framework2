@@ -1,4 +1,4 @@
-/** 
+/**
  * @(#)DBStatement.java
  */
 package framework.db;
@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-/** 
+/**
  * 모든 SQL 문장을 처리하는 클래스가 상속받아야 할 추상클래스이다.
  */
 public abstract class DBStatement {
@@ -20,7 +20,7 @@ public abstract class DBStatement {
 	 */
 	public abstract void close() throws SQLException;
 
-	/** 
+	/**
 	 * DBStatement 로거객체를 리턴한다.
 	 * 모든 로그는 해당 로거를 이용해서 출력하여야 한다.
 	 * <br>

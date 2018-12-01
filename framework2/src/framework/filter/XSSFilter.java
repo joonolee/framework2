@@ -1,4 +1,4 @@
-/* 
+/*
  * @(#)XSSFilter.java
  * Anti cross-site scripting (XSS) filter
  */

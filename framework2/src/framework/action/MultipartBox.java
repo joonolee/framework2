@@ -15,7 +15,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import framework.config.Configuration;
 
-/** 
+/**
  * Multipart 요청객체, 쿠키객체의 값을 담는 해시테이블 객체이다.
  * Multipart 요청객체의 파라미터를 추상화 하여 MultipartBox 를 생성해 놓고 파라미터이름을 키로 해당 값을 원하는 데이타 타입으로 반환받는다.
  */
@@ -32,13 +32,13 @@ public class MultipartBox extends Box {
 		this._fileItems = new ArrayList<FileItem>();
 	}
 
-	/** 
+	/**
 	 * Multipart 요청객체의 파라미터 이름과 값을 저장한 해시테이블을 생성한다.
 	 * <br>
 	 * ex) Multipart Request Box 객체를 얻는 경우: MultipartBox multipartBox = MultipartBox.getMultipartBox(request)
-	 * 
+	 *
 	 * @param request HTTP 클라이언트 요청객체
-	 * 
+	 *
 	 * @return 요청MultipartBox 객체
 	 */
 	@SuppressWarnings("unchecked")
@@ -94,7 +94,7 @@ public class MultipartBox extends Box {
 
 	/**
 	 * 파일아이템(FileItem)의 리스트 객체를 리턴한다.
-	 * 
+	 *
 	 * @return 파일아이템 리스트 객체
 	 */
 	public List<FileItem> getFileItems() {
@@ -104,7 +104,7 @@ public class MultipartBox extends Box {
 	//////////////////////////////////////////////////////////////////////////////////////////Private 메소드
 	/**
 	 * Multipart 파일업로드시 파일 아이템을 리스트에 추가한다.
-	 * 
+	 *
 	 * @param item 파일을 담고 있는 객체
 	 * @return 성공여부
 	 */
@@ -112,7 +112,7 @@ public class MultipartBox extends Box {
 		return _fileItems.add(item);
 	}
 
-	/** 
+	/**
 	 * 설정정보를 가지고 있는 객체를 생성하여 리턴한다.
 	 *
 	 * @return config.properties의 설정정보를 가지고 있는 객체

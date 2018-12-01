@@ -1,4 +1,4 @@
-/* 
+/*
  * @(#)ConnectionManager.java
  * 데이타베이스 컨넥션을 관리하는 클래스
  */
