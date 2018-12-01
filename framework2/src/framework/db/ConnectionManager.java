@@ -77,7 +77,7 @@ public class ConnectionManager {
 	public void connect() throws Exception {
 		setConnection(_dsMap.get(_dsName).getConnection());
 		if (getLogger().isDebugEnabled()) {
-			getLogger().debug("DB연결 성공! => " + _dsName);
+			getLogger().debug("DB연결 성공!: " + _dsName);
 		}
 	}
 
@@ -85,7 +85,7 @@ public class ConnectionManager {
 		DriverManager.registerDriver((Driver) Class.forName(jdbcDriver).newInstance());
 		setConnection(DriverManager.getConnection(url, userID, userPW));
 		if (getLogger().isDebugEnabled()) {
-			getLogger().debug("DB연결 성공! => " + url);
+			getLogger().debug("DB연결 성공!: " + url);
 		}
 	}
 
@@ -119,7 +119,7 @@ public class ConnectionManager {
 				getLogger().error("Connection close error!", e);
 			}
 			if (getLogger().isDebugEnabled()) {
-				getLogger().debug("DB연결 종료! => " + _dsName);
+				getLogger().debug("DB연결 종료!: " + _dsName);
 			}
 		} else {
 			if (getLogger().isDebugEnabled()) {

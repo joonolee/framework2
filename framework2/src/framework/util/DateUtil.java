@@ -1,3 +1,6 @@
+/*
+ * @(#)DateUtil.java
+ */
 package framework.util;
 
 import java.text.ParseException;
@@ -7,7 +10,6 @@ import java.util.Date;
 
 /**
  * 날짜관련 유틸리티 클래스이다.
- * @Author	: JCJ
  */
 public class DateUtil {
 

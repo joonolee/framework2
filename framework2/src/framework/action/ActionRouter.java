@@ -50,6 +50,8 @@ public class ActionRouter {
 	 * @param servlet 객체를 호출한 서블릿
 	 * @param request 클라이언트에서 요청된 Request객체
 	 * @param response 클라이언트로 응답할 Response객체
+	 * @throws ServletException ServletException
+	 * @throws IOException IOException
 	 */
 	public synchronized void route(GenericServlet servlet, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if (this._isForward) {
@@ -71,9 +73,9 @@ public class ActionRouter {
 	 * ActionRouter의 로거객체를 리턴한다.
 	 * 모든 로그는 해당 로거를 이용해서 출력하여야 한다.
 	 * <br>
-	 * ex1) 에러 정보를 출력할 경우 => getLogger().error("...에러메시지내용")
+	 * ex1) 에러 정보를 출력할 경우: getLogger().error("...에러메시지내용")
 	 * <br>
-	 * ex2) 디버그 정보를 출력할 경우 => getLogger().debug("...디버그메시지내용")
+	 * ex2) 디버그 정보를 출력할 경우: getLogger().debug("...디버그메시지내용")
 	 *
 	 * @return ActionRouter의 로거객체
 	 */

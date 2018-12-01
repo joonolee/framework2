@@ -38,7 +38,7 @@ public class VelocityUtil {
 	 * @param statement 문장식별 문자열
 	 * @param param 파라미터 Box 객체
 	 * @return 템플릿이 적용된 문자열
-	 * @throws Exception 
+	 * @throws Exception Exception
 	 */
 	public static String render(HttpServlet servlet, String key, String statement, Box param) throws Exception {
 		return evaluate(servlet, key, statement, param);
@@ -54,7 +54,7 @@ public class VelocityUtil {
 	 * @param statement 문장식별 문자열
 	 * @param param 파라미터 Box 객체
 	 * @return 템플릿이 적용된 문자열
-	 * @throws Exception 
+	 * @throws Exception Exception
 	 */
 	public static String evaluate(HttpServlet servlet, String key, String statement, Box param) throws Exception {
 		Velocity.init();

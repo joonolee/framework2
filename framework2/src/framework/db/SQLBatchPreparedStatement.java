@@ -80,7 +80,7 @@ public class SQLBatchPreparedStatement extends DBStatement {
 			if (getLogger().isDebugEnabled()) {
 				StringBuilder log = new StringBuilder();
 				log.append("@Sql Start (BATCH P_STATEMENT) FetchSize : " + pstmt.getFetchSize() + " Caller : " + _caller.getClass().getName() + "\n");
-				log.append("@Sql Command => \n" + getQueryString());
+				log.append("@Sql Command: \n" + getQueryString());
 				getLogger().debug(log.toString());
 			}
 			for (List<Object> params : _paramList) {

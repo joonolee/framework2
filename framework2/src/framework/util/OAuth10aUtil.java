@@ -121,9 +121,9 @@ public class OAuth10aUtil {
 
 	/**
 	 * 입력한 값으로 Provider을 생성한다.
-	 * @param requestTokenEndpointUrl
-	 * @param accessTokenEndpointUrl
-	 * @param authorizationWebsiteUrl
+	 * @param requestTokenEndpointUrl 요청 토큰 주소
+	 * @param accessTokenEndpointUrl 엑세스 토큰 주소
+	 * @param authorizationWebsiteUrl 인증 주소
 	 * @return Provider 객체
 	 */
 	public static Provider makeProvider(String requestTokenEndpointUrl, String accessTokenEndpointUrl, String authorizationWebsiteUrl) {

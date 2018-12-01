@@ -45,12 +45,12 @@ public abstract class Action {
 	 * 메소드명은 process 를 접두어로 하여 action값을 추가한 명칭이다.
 	 * 정의되지 않은 메소드를 호출할 경우 로그에 오류메시지가 기록되며 메소드 실행을 마친 후 데이타베이스 컨넥을 자동으로 닫아준다.
 	 * <br>
-	 * ex) action이 search 일때 => processSearch() 메소드가 호출된다.
+	 * ex) action이 search 일때: processSearch() 메소드가 호출된다.
 	 * 
 	 * @param servlet 서블릿 객체
 	 * @param request 클라이언트에서 요청된 Request객체
 	 * @param response 클라이언트로 응답할 Response객체
-	 * @throws Exception 
+	 * @throws Exception Exception
 	 */
 	public void execute(HttpServlet servlet, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		setServlet(servlet);
@@ -74,7 +74,7 @@ public abstract class Action {
 	 * 요청을 JSP페이지로 포워드(Forward) 한다.
 	 * 작성된 JSP페이지는  action.properties에 등록된다.
 	 * <br>
-	 * ex) 키가 search-jsp 인 JSP페이지로 포워딩 할 경우 => route("search-jsp")
+	 * ex) 키가 search-jsp 인 JSP페이지로 포워딩 할 경우: route("search-jsp")
 	 * 
 	 * @param key action.properties 파일에 등록된 JSP 페이지의 키
 	 */
@@ -91,9 +91,9 @@ public abstract class Action {
 	 * 요청을 JSP페이지로 포워드(Forward) 또는 재지향(Redirect) 한다.
 	 * 작성된 JSP페이지는  action.properties에 등록된다.
 	 * <br>
-	 * ex1) 키가 search-jsp 인 JSP페이지로 포워딩 할 경우 => route("search-jsp", true)
+	 * ex1) 키가 search-jsp 인 JSP페이지로 포워딩 할 경우: route("search-jsp", true)
 	 * <br>
-	 * ex2) 키가 search-jsp 인 JSP페이지로 재지향 할 경우 => route("search-jsp", false)
+	 * ex2) 키가 search-jsp 인 JSP페이지로 재지향 할 경우: route("search-jsp", false)
 	 * 
 	 * @param key action.properties 파일에 등록된 JSP 페이지의 키
 	 * @param isForward true이면 포워드(Forward), false 이면 재지향(Redirect)
@@ -111,7 +111,7 @@ public abstract class Action {
 	 * 요청을 JSP페이지로 재지향(Redirect) 한다.
 	 * 작성된 JSP페이지는  action.properties에 등록된다.
 	 * <br>
-	 * ex) 키가 search-jsp 인 JSP페이지로 재지향 할 경우 => redirect("search-jsp")
+	 * ex) 키가 search-jsp 인 JSP페이지로 재지향 할 경우: redirect("search-jsp")
 	 * 
 	 * @param key action.properties 파일에 등록된 JSP 페이지의 키
 	 */
@@ -236,7 +236,7 @@ public abstract class Action {
 	/** 
 	 * 세션객체에서 해당 키에 해당하는 오브젝트를 리턴한다.
 	 * <br>
-	 * ex) 세션에서 result라는 키로 오브젝트를 리턴받는 경우 => Object obj = getSessionAttribute("result")
+	 * ex) 세션에서 result라는 키로 오브젝트를 리턴받는 경우: Object obj = getSessionAttribute("result")
 	 *
 	 * @param key 세션객체의 조회키
 	 * @return 세션객체에서 얻어온 오브젝트
@@ -248,9 +248,9 @@ public abstract class Action {
 	/** 
 	 * 요청파라미터의 값을 담고 있는 해시테이블을 리턴한다.
 	 * <br>
-	 * ex1) [ name=홍길동 ]인 요청파라미터를 받아오는 경우 => String name = getInput().getString("name")
+	 * ex1) [ name=홍길동 ]인 요청파라미터를 받아오는 경우: String name = getInput().getString("name")
 	 * <br>
-	 * ex2) [ age=20 ]인 요청파라미터를 받아오는 경우 => Integer age = getInput().getInteger("age")
+	 * ex2) [ age=20 ]인 요청파라미터를 받아오는 경우: Integer age = getInput().getInteger("age")
 	 *
 	 * @return 요청파라미터의 값을 담는 해시테이블
 	 */
@@ -264,11 +264,9 @@ public abstract class Action {
 	/** 
 	 * Multipart 요청파라미터의 값을 담고 있는 해시테이블을 리턴한다.
 	 * <br>
-	 * ex1) [ name=홍길동 ]인 요청파라미터를 받아오는 경우 => String name = getMultipartInput().getString("name")
+	 * ex1) [ name=홍길동 ]인 요청파라미터를 받아오는 경우: String name = getMultipartInput().getString("name")
 	 * <br>
-	 * ex2) [ age=20 ]인 요청파라미터를 받아오는 경우 => Integer age = getMultipartInput().getInteger("age")
-	 * <br>
-	 * ex3) 전송된 파일를 받아오는 경우 => List<FileItem> files = getMultipartInput().getFileItems()
+	 * ex2) [ age=20 ]인 요청파라미터를 받아오는 경우: Integer age = getMultipartInput().getInteger("age")
 	 * 
 	 * @return 요청파라미터의 값을 담는 해시테이블
 	 */
@@ -282,9 +280,9 @@ public abstract class Action {
 	/** 
 	 * 쿠키값을 담고 있는 해시테이블을 리턴한다.
 	 * <br>
-	 * ex1) [ name=홍길동 ]인 쿠키를 받아오는 경우 => String name = getCookies().getString("name")
+	 * ex1) [ name=홍길동 ]인 쿠키를 받아오는 경우: String name = getCookies().getString("name")
 	 * <br>
-	 * ex2) [ age=20 ]인 쿠키를 받아오는 경우 => Integer age = getCookies().getInteger("age")
+	 * ex2) [ age=20 ]인 쿠키를 받아오는 경우: Integer age = getCookies().getInteger("age")
 	 *
 	 * @return 쿠키값을 담는 해시테이블
 	 */
@@ -298,7 +296,7 @@ public abstract class Action {
 	/** 
 	 * 응답객체의 PrintWriter 객체를 리턴한다.
 	 * <br>
-	 * ex) 응답에 Hello World 를 쓰는 경우 => getOut().println("Hello World!")
+	 * ex) 응답에 Hello World 를 쓰는 경우: getOut().println("Hello World!")
 	 *
 	 * @return 응답객체의 PrintWriter 객체
 	 */
@@ -316,9 +314,9 @@ public abstract class Action {
 	 * Action의 로거객체를 리턴한다.
 	 * 모든 로그는 해당 로거를 이용해서 출력하여야 한다.
 	 * <br>
-	 * ex1) 에러 정보를 출력할 경우 => getLogger().error("...에러메시지내용")
+	 * ex1) 에러 정보를 출력할 경우: getLogger().error("...에러메시지내용")
 	 * <br>
-	 * ex2) 디버그 정보를 출력할 경우 => getLogger().debug("...디버그메시지내용")
+	 * ex2) 디버그 정보를 출력할 경우: getLogger().debug("...디버그메시지내용")
 	 *
 	 * @return Action의 로거객체
 	 */
@@ -329,9 +327,9 @@ public abstract class Action {
 	/**
 	 * 응답객체를 클라이언트에게 전송하기 전에 컨텐츠타입을 설정한다. 
 	 * <br>
-	 * ex1) xml파일을 전송 하는 경우 => setContentType("text/xml; charset=utf-8")
+	 * ex1) xml파일을 전송 하는 경우: setContentType("text/xml; charset=utf-8")
 	 * <br>
-	 * ex2) 텍스트 파일을 전송하는 경우 => setContentType("text/plain; charset=euc-kr")
+	 * ex2) 텍스트 파일을 전송하는 경우: setContentType("text/plain; charset=euc-kr")
 	 *
 	 * @param contentType 응답객체에 설정할 컨텐츠 타입
 	 */
@@ -343,7 +341,7 @@ public abstract class Action {
 	 * 요청객체에 키,값 속성을 설정한다.
 	 * Action에서 처리한 결과를 뷰 로 넘길때 요청객체에 속성을 설정하여 라우팅한다.
 	 * <br>
-	 * ex) rs라는 RecordSet 객체를 result 라는 키로 요청객체에 설정하는 경우 => setAttribute("result", re) 
+	 * ex) rs라는 RecordSet 객체를 result 라는 키로 요청객체에 설정하는 경우: setAttribute("result", re) 
 	 *
 	 * @param key 속성의 키 문자열
 	 * @param value 속성의 값 객체
@@ -356,7 +354,7 @@ public abstract class Action {
 	 * 세션객체에 키,값 속성을 설정한다.
 	 * Action에서 처리한 결과를 세션에 저장한다.
 	 * <br>
-	 * ex) userinfo 라는 사용자정보객체를 userinfo 라는 키로 세션객체에 설정하는 경우 => setSessionAttribute("userinfo", userinfo)
+	 * ex) userinfo 라는 사용자정보객체를 userinfo 라는 키로 세션객체에 설정하는 경우: setSessionAttribute("userinfo", userinfo)
 	 *
 	 * @param key 속성의 키 문자열
 	 * @param value 속성의 값 객체

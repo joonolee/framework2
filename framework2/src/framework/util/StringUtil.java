@@ -3,6 +3,7 @@
  */
 package framework.util;
 
+import java.io.UnsupportedEncodingException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.StringTokenizer;
@@ -25,7 +26,7 @@ public class StringUtil {
 	/**
 	 * 특정 기호를 기준으로 스트링을 잘라서 배열로 반환하는 함수
 	 * <br>
-	 * ex) abc||def||efg -> array[0]:"abc", array[1]:"def", array[2]:"efg"
+	 * ex) abc||def||efg : array[0]:"abc", array[1]:"def", array[2]:"efg"
 	 * 
 	 * @param str 원본 문자열
 	 * @param token 토큰 문자열
@@ -99,19 +100,19 @@ public class StringUtil {
 	 * 스트링 타입의 날짜 데이타를 정해진 포맷으로 변환하는 함수
 	 * 
 	 * <br>
-	 * ex1) StringUtil.nalDesign("20080101090000", 1) => "2008-01-01"
+	 * ex1) StringUtil.nalDesign("20080101090000", 1): "2008-01-01"
 	 * <br>
-	 * ex2) StringUtil.nalDesign("20080101090000", 2) => "08-01-01 09:00"
+	 * ex2) StringUtil.nalDesign("20080101090000", 2): "08-01-01 09:00"
 	 * <br>
-	 * ex3) StringUtil.nalDesign("20080101090000", 3) => "09:00"
+	 * ex3) StringUtil.nalDesign("20080101090000", 3): "09:00"
 	 * <br>
-	 * ex4) StringUtil.nalDesign("20080101090000", 4) => "01-01"
+	 * ex4) StringUtil.nalDesign("20080101090000", 4): "01-01"
 	 * <br>
-	 * ex5) StringUtil.nalDesign("20080101090000", 5) => "08-01-01"
+	 * ex5) StringUtil.nalDesign("20080101090000", 5): "08-01-01"
 	 * <br>
-	 * ex6) StringUtil.nalDesign("20080101090000", 6) => "01-01 09:00"
+	 * ex6) StringUtil.nalDesign("20080101090000", 6): "01-01 09:00"
 	 * <br>
-	 * ex7) StringUtil.nalDesign("20080101090000", 7) => "2008년 01월 01일"
+	 * ex7) StringUtil.nalDesign("20080101090000", 7): "2008년 01월 01일"
 	 * 
 	 * @param str 원본 문자열
 	 * @param option 날짜 옵션
@@ -264,9 +265,9 @@ public class StringUtil {
 	 * 
 	 * @return 한글(EUC-KR)로 변환된 문자열
 	 * 
-	 * @exception java.io.UnsupportedEncodingException
+	 * @throws UnsupportedEncodingException UnsupportedEncodingException
 	 */
-	public static String convertKorean(String str) throws java.io.UnsupportedEncodingException {
+	public static String convertKorean(String str) throws UnsupportedEncodingException {
 		return new String(str.getBytes("iso-8859-1"), "EUC-KR");
 	}
 
@@ -277,9 +278,9 @@ public class StringUtil {
 	 * 
 	 * @return 유니코드(UTF-8)로 변환된 문자열
 	 * 
-	 * @exception java.io.UnsupportedEncodingException
+	 * @throws UnsupportedEncodingException UnsupportedEncodingException
 	 */
-	public static String convertUTF8(String str) throws java.io.UnsupportedEncodingException {
+	public static String convertUTF8(String str) throws UnsupportedEncodingException {
 		return new String(str.getBytes("iso-8859-1"), "utf-8");
 	}
 

@@ -57,7 +57,7 @@ public class SQLStatement extends DBStatement {
 			if (getLogger().isDebugEnabled()) {
 				StringBuilder log = new StringBuilder();
 				log.append("@Sql Start (STATEMENT) FetchSize : " + stmt.getFetchSize() + " Caller : " + _caller.getClass().getName() + "\n");
-				log.append("@Sql Command => \n" + getSQL());
+				log.append("@Sql Command: \n" + getSQL());
 				getLogger().debug(log.toString());
 			}
 			_rs = new RecordSet(stmt.executeQuery(getSQL()), currPage, pageSize);
@@ -95,7 +95,7 @@ public class SQLStatement extends DBStatement {
 			if (getLogger().isDebugEnabled()) {
 				StringBuilder log = new StringBuilder();
 				log.append("@Sql Start (STATEMENT) FetchSize : " + stmt.getFetchSize() + " Caller : " + _caller.getClass().getName() + "\n");
-				log.append("@Sql Command => \n" + getSQL());
+				log.append("@Sql Command: \n" + getSQL());
 				getLogger().debug(log.toString());
 			}
 			_upCnt = stmt.executeUpdate(getSQL());

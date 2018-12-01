@@ -35,7 +35,7 @@ public class MultipartBox extends Box {
 	/** 
 	 * Multipart 요청객체의 파라미터 이름과 값을 저장한 해시테이블을 생성한다.
 	 * <br>
-	 * ex) Multipart Request Box 객체를 얻는 경우 => MultipartBox multipartBox = MultipartBox.getMultipartBox(request)
+	 * ex) Multipart Request Box 객체를 얻는 경우: MultipartBox multipartBox = MultipartBox.getMultipartBox(request)
 	 * 
 	 * @param request HTTP 클라이언트 요청객체
 	 * 

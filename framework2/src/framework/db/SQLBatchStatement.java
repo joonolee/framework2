@@ -62,7 +62,7 @@ public class SQLBatchStatement extends DBStatement {
 			if (getLogger().isDebugEnabled()) {
 				StringBuilder log = new StringBuilder();
 				log.append("@Sql Start (BATCH STATEMENT) FetchSize : " + stmt.getFetchSize() + " Caller : " + _caller.getClass().getName() + "\n");
-				log.append("@Sql Command => \n" + getSQL());
+				log.append("@Sql Command: \n" + getSQL());
 				getLogger().debug(log.toString());
 			}
 			for (int i = 0, size = _sqlList.size(); i < size; i++) {

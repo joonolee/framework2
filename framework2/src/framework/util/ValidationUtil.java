@@ -11,8 +11,8 @@ public class ValidationUtil {
 	/**
 	 * 주민등록번호/외국인등록번호 유효성 체크
 	 * 
-	 * @param residentRegistrationNo
-	 * @return
+	 * @param residentRegistrationNo 주민등록번호/외국인등록번호
+	 * @return 유효한 주민등록번호/외국인등록번호 형식 여부
 	 */
 	public static boolean isResidentRegistrationNo(String residentRegistrationNo) {
 		String juminNo = residentRegistrationNo.replaceAll("[^0-9]", "");
@@ -56,8 +56,8 @@ public class ValidationUtil {
 	/**
 	 * 주민등록번호/외국인등록번호 유효성 체크
 	 * 
-	 * @param juminNo
-	 * @return
+	 * @param juminNo 주민등록번호/외국인등록번호
+	 * @return 유효한 주민등록번호/외국인등록번호 형식 여부
 	 */
 	public static boolean isJuminNo(String juminNo) {
 		return isResidentRegistrationNo(juminNo);
@@ -66,8 +66,8 @@ public class ValidationUtil {
 	/**
 	 * 법인번호 유효성 체크 
 	 * 
-	 * @param corporationRegistrationNo
-	 * @return
+	 * @param corporationRegistrationNo 법인번호
+	 * @return 유효한 법인번호 형식 여부
 	 */
 	public static boolean isCorporationRegistrationNo(String corporationRegistrationNo) {
 		String corpRegNo = corporationRegistrationNo.replaceAll("[^0-9]", "");
@@ -88,8 +88,8 @@ public class ValidationUtil {
 	/**
 	 * 사업자등록번호 유효성 체크
 	 * 
-	 * @param businessRegistrationNo
-	 * @return
+	 * @param businessRegistrationNo 사업자등록번호
+	 * @return 유효한 사업자등록번호 형식 여부
 	 */
 	public static boolean isBusinessRegistrationNo(String businessRegistrationNo) {
 		String bizRegNo = businessRegistrationNo.replaceAll("[^0-9]", "");
@@ -108,8 +108,8 @@ public class ValidationUtil {
 	/**
 	 * 신용카드번호 유효성 체크
 	 * 
-	 * @param creditCardNo
-	 * @return
+	 * @param creditCardNo 신용카드번호
+	 * @return 유효한 신용카드번호 형식 여부
 	 */
 	public static boolean isCreditCardNo(String creditCardNo) {
 		return PatternUtil.matchCreditCardNo(creditCardNo).find();
@@ -118,8 +118,8 @@ public class ValidationUtil {
 	/**
 	 * 여권번호 유효성 체크
 	 * 
-	 * @param passportNo
-	 * @return
+	 * @param passportNo 여권번호
+	 * @return 유효한 여권번호 형식 여부
 	 */
 	public static boolean isPassportNo(String passportNo) {
 		return PatternUtil.matchPassportNo(passportNo).find();
@@ -128,8 +128,8 @@ public class ValidationUtil {
 	/**
 	 * 운전면허번호 유효성 체크
 	 * 
-	 * @param driversLicenseNo
-	 * @return
+	 * @param driversLicenseNo 운전면허번호
+	 * @return 유효한 운전면허번호 형식 여부
 	 */
 	public static boolean isDriversLicenseNo(String driversLicenseNo) {
 		return PatternUtil.matchDriversLicenseNo(driversLicenseNo).find();
@@ -138,8 +138,8 @@ public class ValidationUtil {
 	/**
 	 * 휴대폰번호 유효성 체크
 	 * 
-	 * @param cellphoneNo
-	 * @return
+	 * @param cellphoneNo 휴대폰번호
+	 * @return 유효한 휴대폰번호 형식 여부
 	 */
 	public static boolean isCellphoneNo(String cellphoneNo) {
 		return PatternUtil.matchCellphoneNo(cellphoneNo).find();
@@ -148,8 +148,8 @@ public class ValidationUtil {
 	/**
 	 * 일반전화번호 유효성 체크
 	 * 
-	 * @param telephoneNo
-	 * @return
+	 * @param telephoneNo 전화번호
+	 * @return 유효한 전화번호 형식 여부
 	 */
 	public static boolean isTelephoneNo(String telephoneNo) {
 		return PatternUtil.matchTelephoneNo(telephoneNo).find();
@@ -158,8 +158,8 @@ public class ValidationUtil {
 	/**
 	 * 건강보험번호 유효성 체크
 	 * 
-	 * @param healthInsuranceNo
-	 * @return
+	 * @param healthInsuranceNo 건강보험번호
+	 * @return 유효한 건강보험번호 형식 여부
 	 */
 	public static boolean isHealthInsuranceNo(String healthInsuranceNo) {
 		return PatternUtil.matchHealthInsuranceNo(healthInsuranceNo).find();
@@ -168,8 +168,8 @@ public class ValidationUtil {
 	/**
 	 * 계좌번호 유효성 체크
 	 * 
-	 * @param bankAccountNo
-	 * @return
+	 * @param bankAccountNo 은행계좌번호
+	 * @return 유효한 은행계좌번호 형식 여부
 	 */
 	public static boolean isBankAccountNo(String bankAccountNo) {
 		return PatternUtil.matchBankAccountNo(bankAccountNo).find();
@@ -178,8 +178,8 @@ public class ValidationUtil {
 	/**
 	 * 이메일주소 유효성 체크
 	 * 
-	 * @param emailAddress
-	 * @return
+	 * @param emailAddress 이메일주소
+	 * @return 유효한 이메일주소 형식 여부
 	 */
 	public static boolean isEmailAddress(String emailAddress) {
 		return PatternUtil.matchEmailAddress(emailAddress).find();
@@ -188,8 +188,8 @@ public class ValidationUtil {
 	/**
 	 * 아이피주소 유효성 체크
 	 * 
-	 * @param ipAddress
-	 * @return
+	 * @param ipAddress 아이피주소
+	 * @return 유효한 아이피주소 형식 여부
 	 */
 	public static boolean isIPAddress(String ipAddress) {
 		return PatternUtil.matchIPAddress(ipAddress).find();

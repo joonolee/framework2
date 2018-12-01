@@ -35,7 +35,7 @@ public class Box extends HashMap<String, String[]> {
 	/** 
 	 * 요청객체의 파라미터 이름과 값을 저장한 해시테이블을 생성한다.
 	 * <br>
-	 * ex) request Box 객체를 얻는 경우 => Box box = Box.getBox(request)
+	 * ex) request Box 객체를 얻는 경우: Box box = Box.getBox(request)
 	 * 
 	 * @param request HTTP 클라이언트 요청객체
 	 * 
@@ -53,7 +53,7 @@ public class Box extends HashMap<String, String[]> {
 	/** 
 	 * 요청객체의 쿠키 이름과 값을 저장한 해시테이블을 생성한다.
 	 * <br>
-	 * ex) cookie Box 객체를 얻는 경우 => Box box = Box.getBoxFromCookie(request)
+	 * ex) cookie Box 객체를 얻는 경우: Box box = Box.getBoxFromCookie(request)
 	 * 
 	 * @param request HTTP 클라이언트 요청객체
 	 * 
