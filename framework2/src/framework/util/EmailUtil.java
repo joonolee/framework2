@@ -88,7 +88,7 @@ public class EmailUtil {
 	 * 보내는 SMTP 서버 인증을 통하여 전자메일을 발송한다.
 	 * <br>
 	 * ex) receiver@xxx.co.kr 가 sender@xxx.co.kr 에게 메일을 보내는 경우: EmailUtil.sendMailAuth("mail.xxx.co.kr", "25", "id", "password", "제목", "내용", "receiver@xxx.co.kr", "sender@xxx.co.kr", "홍길동", "euc-kr");
-
+	
 	 * @param smtpHost 보내는 SMTP 서버주소
 	 * @param smtpPort 보내는 SMTP 포트
 	 * @param smtpUser 보내는 SMTP 서버 인증아이디
@@ -111,7 +111,7 @@ public class EmailUtil {
 	 * 보내는 SMTP 서버 인증을 통하여 전자메일을 발송한다. (보안연결-SSL 이 필요할때)
 	 * <br>
 	 * ex) receiver@xxx.co.kr 가 sender@xxx.co.kr 에게 메일을 보내는 경우: EmailUtil.sendMailAuthSSL("mail.xxx.co.kr", "465", "id", "password", "제목", "내용", "receiver@xxx.co.kr", "sender@xxx.co.kr", "홍길동", "euc-kr");
-
+	
 	 * @param smtpHost 보내는 SMTP 서버주소
 	 * @param smtpPort 보내는 SMTP 포트
 	 * @param smtpUser 보내는 SMTP 서버 인증아이디
@@ -134,7 +134,7 @@ public class EmailUtil {
 	 * 보내는 SMTP 서버 인증을 통하여 전자메일을 발송한다.
 	 * <br>
 	 * ex) receiver@xxx.co.kr 가 sender@xxx.co.kr 에게 메일을 보내는 경우: EmailUtil.sendMailAuth("mail.xxx.co.kr", "25", "id", "password", "제목", "내용", "receiver@xxx.co.kr", "sender@xxx.co.kr", "홍길동", "euc-kr", new File[] { f1, f2 });
-
+	
 	 * @param smtpHost 보내는 SMTP 서버주소
 	 * @param smtpPort 보내는 SMTP 포트
 	 * @param smtpUser 보내는 SMTP 서버 인증아이디
@@ -199,7 +199,7 @@ public class EmailUtil {
 	 * 보내는 SMTP 서버 인증없이 전자메일을 발송한다.
 	 * <br>
 	 * ex) receiver@xxx.co.kr 가 sender@xxx.co.kr 에게 메일을 보내는 경우: EmailUtil.sendMailNoAuth("mail.xxx.co.kr", "25", "제목", "내용", "receiver@xxx.co.kr", "sender@xxx.co.kr", "홍길동");
-
+	
 	 * @param smtpHost 보내는 SMTP 서버주소
 	 * @param smtpPort 보내는 SMTP 포트
 	 * @param subject 메일제목
@@ -219,7 +219,7 @@ public class EmailUtil {
 	 * 보내는 SMTP 서버 인증없이 전자메일을 발송한다. (보안연결-SSL 이 필요할때)
 	 * <br>
 	 * ex) receiver@xxx.co.kr 가 sender@xxx.co.kr 에게 메일을 보내는 경우: EmailUtil.sendMailNoAuthSSL("mail.xxx.co.kr", "465", "제목", "내용", "receiver@xxx.co.kr", "sender@xxx.co.kr", "홍길동");
-
+	
 	 * @param smtpHost 보내는 SMTP 서버주소
 	 * @param smtpPort 보내는 SMTP 포트
 	 * @param subject 메일제목
@@ -239,7 +239,7 @@ public class EmailUtil {
 	 * 보내는 SMTP 서버 인증없이 전자메일을 발송한다.
 	 * <br>
 	 * ex) receiver@xxx.co.kr 가 sender@xxx.co.kr 에게 메일을 보내는 경우: EmailUtil.sendMailNoAuth("mail.xxx.co.kr", "25", "제목", "내용", "receiver@xxx.co.kr", "sender@xxx.co.kr", "홍길동", "euc-kr");
-
+	
 	 * @param smtpHost 보내는 SMTP 서버주소
 	 * @param smtpPort 보내는 SMTP 포트
 	 * @param subject 메일제목
@@ -260,7 +260,7 @@ public class EmailUtil {
 	 * 보내는 SMTP 서버 인증없이 전자메일을 발송한다. (보안연결-SSL 이 필요할때)
 	 * <br>
 	 * ex) receiver@xxx.co.kr 가 sender@xxx.co.kr 에게 메일을 보내는 경우: EmailUtil.sendMailNoAuthSSL("mail.xxx.co.kr", "465", "제목", "내용", "receiver@xxx.co.kr", "sender@xxx.co.kr", "홍길동", "euc-kr");
-
+	
 	 * @param smtpHost 보내는 SMTP 서버주소
 	 * @param smtpPort 보내는 SMTP 포트
 	 * @param subject 메일제목
@@ -281,7 +281,7 @@ public class EmailUtil {
 	 * 보내는 SMTP 서버 인증없이 전자메일을 발송한다.
 	 * <br>
 	 * ex) receiver@xxx.co.kr 가 sender@xxx.co.kr 에게 메일을 보내는 경우: EmailUtil.sendMailNoAuth("mail.xxx.co.kr", "25", "제목", "내용", "receiver@xxx.co.kr", "sender@xxx.co.kr", "홍길동", "euc-kr", new File[] { f1, f2 });
-
+	
 	 * @param smtpHost 보내는 SMTP 서버주소
 	 * @param smtpPort 보내는 SMTP 포트
 	 * @param subject 메일제목
@@ -308,7 +308,7 @@ public class EmailUtil {
 	 * 보내는 SMTP 서버 인증없이 전자메일을 발송한다. (보안연결-SSL 이 필요할때)
 	 * <br>
 	 * ex) receiver@xxx.co.kr 가 sender@xxx.co.kr 에게 메일을 보내는 경우: EmailUtil.sendMailNoAuthSSL("mail.xxx.co.kr", "465", "제목", "내용", "receiver@xxx.co.kr", "sender@xxx.co.kr", "홍길동", "euc-kr", new File[] { f1, f2 });
-
+	
 	 * @param smtpHost 보내는 SMTP 서버주소
 	 * @param smtpPort 보내는 SMTP 포트
 	 * @param subject 메일제목
